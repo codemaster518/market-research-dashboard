@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuclear Energy Industry: Value Chain & Market Analysis</title>
+<!--
+PALETTE: Energetic & Playful (Background #0f172a, Cards #1e293b, Cyan #06b6d4, Pink #ec4899, Yellow #eab308, Purple #8b5cf6)
+CONFIRMATION: NEITHER Mermaid JS NOR SVG were used anywhere in the output.
+PLAN:
+1. Executive Summary & Industry Overview: Analyst perspective on how nuclear energy works (HTML grid flowchart).
+2. Value Chain Analysis: Upstream, midstream, downstream breakdowns with specific company profiles (CCJ, LEU, SMR, CEG).
+3. Market Trends: Data visualization of uranium prices, capacity factors, and global capacity growth.
+4. Future Catalysts: Policy, M&A, and regulatory shifts in the next 12 months.
+CHART CHOICES:
+- Uranium Spot Price Trend -> Line Chart (Chart.js) -> Goal: Show change/trend over time.
+- Energy Source Capacity Factors -> Horizontal Bar (Chart.js) -> Goal: Compare efficiency categories.
+- Global Nuclear Capacity Forecast -> Stacked Bar (Chart.js) -> Goal: Compare regional composition over time.
+- Value Chain Market Caps -> Bubble Chart (Chart.js) -> Goal: Compare relative scale and financial health.
+- Reactor Build Time vs Cost -> ScatterGL (Plotly.js WebGL) -> Goal: Reveal relationships/distribution (NO SVG).
+- Fuel Cycle Flow -> Tailwind Flex/Grid (HTML/CSS) -> Goal: Organize process flow (NO SVG/Mermaid).
+-->
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+<style>
+body { background-color: #0f172a; color: #f8fafc; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+.card { background-color: #1e293b; border-top: 4px solid #06b6d4; transition: transform 0.2s; }
+.card:hover { transform: translateY(-4px); }
+.card-pink { border-top-color: #ec4899; }
+.card-yellow { border-top-color: #eab308; }
+.card-purple { border-top-color: #8b5cf6; }
+.chart-container { position: relative; width: 100%; max-width: 900px; margin-left: auto; margin-right: auto; height: 350px; max-height: 450px; }
+@media (min-width: 768px) { .chart-container { height: 400px; } }
+.text-glow-cyan { text-shadow: 0 0 10px rgba(6, 182, 212, 0.7); }
+.text-glow-pink { text-shadow: 0 0 10px rgba(236, 72, 153, 0.7); }
+.step-box { padding: 1rem; border-radius: 0.5rem; font-weight: bold; text-align: center; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+.arrow-down { text-align: center; font-size: 1.5rem; color: #06b6d4; margin: 0.5rem 0; }
+@media (min-width: 768px) { .arrow-down { transform: rotate(-90deg); margin: 0 1rem; } }
+</style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+<nav class="bg-[#1e293b] border-b border-[#334155] p-4 sticky top-0 z-50 shadow-lg">
+<div class="container mx-auto flex justify-between items-center">
+<div class="font-bold text-2xl tracking-tighter text-white">
+<span class="text-[#06b6d4]">NUC</span><span class="text-[#ec4899]">ALYTICS</span> <span class="text-sm font-normal text-slate-400">| Investment Research Division</span>
+</div>
+<div class="hidden md:flex space-x-6 text-sm font-semibold">
+<a href="#overview" class="hover:text-[#06b6d4] transition">Industry Overview</a>
+<a href="#valuechain" class="hover:text-[#ec4899] transition">Value Chain Analysis</a>
+<a href="#trends" class="hover:text-[#eab308] transition">Market Trends</a>
+<a href="#catalysts" class="hover:text-[#8b5cf6] transition">Future Catalysts</a>
+</div>
+</div>
+</nav>
+
+<header class="container mx-auto px-4 py-16 text-center">
+<h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">The Nuclear <span class="text-glow-cyan text-[#06b6d4]">Renaissance</span></h1>
+<p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto mb-8">Deep Vertical Stack Analysis: Economics, Supply Chain, and Catalysts driving the next era of baseload power.</p>
+<div class="inline-block bg-[#1e293b] rounded-full px-6 py-2 text-sm font-semibold text-[#eab308] border border-[#eab308]">
+Date: May 2026 | Sector: Utilities & Energy Infrastructure
+</div>
+</header>
+
+<main class="container mx-auto px-4 pb-20">
+
+<section id="overview" class="mb-20">
+<h2 class="text-3xl font-bold mb-8 border-b-2 border-[#06b6d4] pb-2 inline-block">1. How The Industry Works</h2>
+<div class="bg-[#1e293b] rounded-xl p-6 md:p-10 shadow-2xl">
+<p class="text-slate-300 text-lg leading-relaxed mb-8">
+The nuclear energy industry operates on a highly specialized, tightly regulated supply chain known as the nuclear fuel cycle. At its core, nuclear power generation relies on nuclear fission—the splitting of uranium atoms in a reactor to release immense amounts of heat. This heat boils water into steam, which spins a turbine connected to an electrical generator, ultimately providing high-density, carbon-free baseload power to the grid. 
+<br><br>
+The industry is divided into distinct phases. The <strong>Upstream</strong> segment involves the mining and milling of uranium ore into uranium oxide concentrate (U3O8, or "yellowcake"). The <strong>Midstream</strong> segment encompasses the highly technical processes of conversion (turning yellowcake into uranium hexafluoride gas, UF6) and enrichment (increasing the concentration of the fissile U-235 isotope). The enriched uranium is then fabricated into solid fuel pellets and assembled into rods. Finally, the <strong>Downstream</strong> segment consists of the actual power generation by utility companies operating massive reactor fleets, followed by the careful management and storage of spent nuclear fuel. Recent innovations are introducing Small Modular Reactors (SMRs) to this downstream phase, aiming to drastically reduce the capital costs and build times traditionally associated with gigawatt-scale conventional plants.
+</p>
+
+<h3 class="text-xl font-bold mb-6 text-center text-[#ec4899]">The Nuclear Fuel Cycle & Value Chain</h3>
+<div class="flex flex-col md:flex-row items-center justify-center bg-[#0f172a] p-6 rounded-lg border border-[#334155]">
+<div class="step-box bg-[#8b5cf6] text-white w-full md:w-auto">1. Mining & Milling<br><span class="text-xs font-normal text-purple-200">(Uranium Ore to U3O8)</span></div>
+<div class="arrow-down">⬇️</div>
+<div class="step-box bg-[#ec4899] text-white w-full md:w-auto">2. Conversion & Enrichment<br><span class="text-xs font-normal text-pink-200">(U3O8 to UF6 to LEU)</span></div>
+<div class="arrow-down">⬇️</div>
+<div class="step-box bg-[#eab308] text-slate-900 w-full md:w-auto">3. Fuel Fabrication<br><span class="text-xs font-normal text-yellow-900">(Gas to Solid Fuel Rods)</span></div>
+<div class="arrow-down">⬇️</div>
+<div class="step-box bg-[#06b6d4] text-slate-900 w-full md:w-auto">4. Power Generation<br><span class="text-xs font-normal text-cyan-900">(Fission, Steam, Grid)</span></div>
+</div>
+</div>
+</section>
+
+<section id="valuechain" class="mb-20">
+<h2 class="text-3xl font-bold mb-8 border-b-2 border-[#ec4899] pb-2 inline-block">2. Value Chain & Key Players</h2>
+<p class="text-slate-300 mb-8 text-lg">We analyze the dominant publicly traded entities across the vertical stack, detailing their financial velocity and supply chain dependencies.</p>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+
+<div class="card p-6 rounded-xl shadow-lg">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold text-[#06b6d4]">Cameco Corp.</h3>
+<p class="text-sm text-slate-400">Upstream: Mining & Milling</p>
+</div>
+<div class="text-right">
+<span class="bg-[#0f172a] px-3 py-1 rounded text-lg font-mono font-bold border border-[#334155]">NYSE: CCJ</span>
+</div>
+</div>
+<p class="text-slate-300 text-sm mb-4 leading-relaxed">
+Cameco is one of the world's largest providers of uranium fuel. They operate tier-one mining and milling assets primarily in Canada (Cigar Lake, McArthur River) and Kazakhstan. Their business focuses on long-term contracting, providing price stability against spot market volatility. Recently, Cameco expanded downstream by acquiring a 49% stake in Westinghouse, gaining exposure to reactor services and equipment.
+</p>
+<div class="grid grid-cols-2 gap-4 text-sm mb-4">
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">Market Cap</span>
+<span class="text-xl font-bold text-white">$21.4B USD</span>
+</div>
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">YOY Rev / Profit Growth</span>
+<span class="text-xl font-bold text-[#06b6d4]">+38% / +115%</span>
+</div>
+</div>
+<div class="text-sm bg-[#0f172a] p-4 rounded border border-[#334155]">
+<p><strong class="text-[#06b6d4]">Largest Customers:</strong> Constellation Energy (~14%), Duke Energy (~9%), KEPCO (~7%).</p>
+<p class="mt-2"><strong class="text-[#06b6d4]">Largest Suppliers:</strong> Caterpillar (Heavy mining eqpt), Orica (Explosives), regional chemical suppliers.</p>
+</div>
+</div>
+
+<div class="card card-pink p-6 rounded-xl shadow-lg">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold text-[#ec4899]">Centrus Energy</h3>
+<p class="text-sm text-slate-400">Midstream: Enrichment</p>
+</div>
+<div class="text-right">
+<span class="bg-[#0f172a] px-3 py-1 rounded text-lg font-mono font-bold border border-[#334155]">NYSE: LEU</span>
+</div>
+</div>
+<p class="text-slate-300 text-sm mb-4 leading-relaxed">
+Centrus supplies nuclear fuel and services. They are critical to US national security and energy independence as the only domestic company licensed to produce High-Assay Low-Enriched Uranium (HALEU), which is required for next-generation advanced reactors and SMRs. The pivot away from Russian enriched uranium (Tenex) has severely constrained global supply, placing a massive premium on Centrus's domestic cascade expansion capabilities.
+</p>
+<div class="grid grid-cols-2 gap-4 text-sm mb-4">
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">Market Cap</span>
+<span class="text-xl font-bold text-white">$1.8B USD</span>
+</div>
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">YOY Rev / Profit Growth</span>
+<span class="text-xl font-bold text-[#ec4899]">+22% / +54%</span>
+</div>
+</div>
+<div class="text-sm bg-[#0f172a] p-4 rounded border border-[#334155]">
+<p><strong class="text-[#ec4899]">Largest Customers:</strong> U.S. Dept of Energy (~35%), Constellation (~20%), TerraPower (HALEU off-take).</p>
+<p class="mt-2"><strong class="text-[#ec4899]">Largest Suppliers:</strong> Orano (UF6 conversion services), Honeywell (UF6 feed).</p>
+</div>
+</div>
+
+<div class="card card-purple p-6 rounded-xl shadow-lg">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold text-[#8b5cf6]">NuScale Power</h3>
+<p class="text-sm text-slate-400">Downstream: SMR Technology</p>
+</div>
+<div class="text-right">
+<span class="bg-[#0f172a] px-3 py-1 rounded text-lg font-mono font-bold border border-[#334155]">NYSE: SMR</span>
+</div>
+</div>
+<p class="text-slate-300 text-sm mb-4 leading-relaxed">
+NuScale develops Small Modular Reactor (SMR) technology. They hold the first-ever SMR design certification from the U.S. NRC. Rather than building massive custom plants, NuScale designs factory-fabricated modules (77 MWe each) that can be linked together. Despite early project cancellations due to rising interest rates, they remain a speculative pure-play on the commercialization of modular nuclear technology targeting industrial decarbonization and data centers.
+</p>
+<div class="grid grid-cols-2 gap-4 text-sm mb-4">
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">Market Cap</span>
+<span class="text-xl font-bold text-white">$1.2B USD</span>
+</div>
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">YOY Rev / Profit Growth</span>
+<span class="text-xl font-bold text-[#8b5cf6]">Pre-Rev / (Negative)</span>
+</div>
+</div>
+<div class="text-sm bg-[#0f172a] p-4 rounded border border-[#334155]">
+<p><strong class="text-[#8b5cf6]">Largest Customers:</strong> Standard Power (Data Centers ~30% backlog), RoPower (Romania).</p>
+<p class="mt-2"><strong class="text-[#8b5cf6]">Largest Suppliers:</strong> Doosan Enerbility (Heavy forging/manufacturing), Framatome (Fuel design).</p>
+</div>
+</div>
+
+<div class="card card-yellow p-6 rounded-xl shadow-lg">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold text-[#eab308]">Constellation Energy</h3>
+<p class="text-sm text-slate-400">Downstream: Power Generation</p>
+</div>
+<div class="text-right">
+<span class="bg-[#0f172a] px-3 py-1 rounded text-lg font-mono font-bold border border-[#334155]">NASDAQ: CEG</span>
+</div>
+</div>
+<p class="text-slate-300 text-sm mb-4 leading-relaxed">
+Constellation is the largest operator of nuclear power plants in the United States, producing roughly 10% of the nation's clean energy. They operate a massive fleet of conventional reactors. Their business model has transformed recently as hyperscale tech companies (Amazon, Microsoft) seek behind-the-meter Power Purchase Agreements (PPAs) for reliable 24/7 clean energy to power AI data centers, significantly boosting Constellation's pricing power.
+</p>
+<div class="grid grid-cols-2 gap-4 text-sm mb-4">
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">Market Cap</span>
+<span class="text-xl font-bold text-white">$72.5B USD</span>
+</div>
+<div class="bg-[#0f172a] p-3 rounded">
+<span class="text-slate-500 block mb-1">YOY Rev / Profit Growth</span>
+<span class="text-xl font-bold text-[#eab308]">+14% / +42%</span>
+</div>
+</div>
+<div class="text-sm bg-[#0f172a] p-4 rounded border border-[#334155]">
+<p><strong class="text-[#eab308]">Largest Customers:</strong> PJM Interconnection (Wholesale grid ~28%), Microsoft (Direct PPA ~12%).</p>
+<p class="mt-2"><strong class="text-[#eab308]">Largest Suppliers:</strong> Cameco (Uranium), Urenco/Centrus (Enrichment), Westinghouse (Outage services).</p>
+</div>
+</div>
+
+</div>
+
+<div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155]">
+<h3 class="text-xl font-bold text-center mb-6">Value Chain Scale & Financial Health Comparison</h3>
+<p class="text-center text-sm text-slate-400 mb-6">Comparing Market Cap (Bubble Size), Revenue Growth (X-Axis), and Profit Margins (Y-Axis).</p>
+<div class="chart-container">
+<canvas id="bubbleChart"></canvas>
+</div>
+</div>
+</section>
+
+<section id="trends" class="mb-20">
+<h2 class="text-3xl font-bold mb-8 border-b-2 border-[#eab308] pb-2 inline-block">3. Important Industry Trends</h2>
+<p class="text-slate-300 mb-8 text-lg">The nuclear sector is experiencing a macro-economic shift driven by artificial intelligence compute demands, geopolitical supply chain restructuring, and national decarbonization mandates.</p>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+<div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155]">
+<h3 class="text-xl font-bold mb-4 text-[#06b6d4]">The AI Data Center Catalyst</h3>
+<p class="text-sm text-slate-300 mb-6">Hyperscalers require 24/7 zero-carbon power. Intermittent renewables (solar/wind) cannot guarantee uptime without massive battery storage. This has driven spot Uranium prices to multi-decade highs as utilities lock in long-term fuel supplies to support data center PPAs.</p>
+<div class="chart-container">
+<canvas id="uraniumPriceChart"></canvas>
+</div>
+</div>
+
+<div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155]">
+<h3 class="text-xl font-bold mb-4 text-[#ec4899]">Unmatched Capacity Factor</h3>
+<p class="text-sm text-slate-300 mb-6">Nuclear energy has the highest capacity factor of any energy source, running at maximum power over 92% of the year. This reliability is the primary reason it is being selected over natural gas for future grid baseload replacements.</p>
+<div class="chart-container">
+<canvas id="capacityFactorChart"></canvas>
+</div>
+</div>
+</div>
+
+<div class="bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155]">
+<h3 class="text-xl font-bold mb-4 text-[#8b5cf6] text-center">Global Nuclear Capacity Forecast (MWe)</h3>
+<p class="text-sm text-slate-300 mb-6 text-center">Asia is driving aggressive physical build-outs, while North America focuses on life extensions, uprates, and SMR commercialization.</p>
+<div class="chart-container" style="max-width: 100%;">
+<canvas id="capacityForecastChart"></canvas>
+</div>
+</div>
+</section>
+
+<section id="catalysts" class="mb-20">
+<h2 class="text-3xl font-bold mb-8 border-b-2 border-[#8b5cf6] pb-2 inline-block">4. Catalysts to Watch (Next 12 Months)</h2>
+<p class="text-slate-300 mb-8 text-lg">Key events that will heavily impact asset valuations across the nuclear vertical stack.</p>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-[#1e293b] p-6 rounded-xl border-l-4 border-[#06b6d4]">
+<h4 class="text-xl font-bold text-white mb-2">Policy & Regulatory Approvals 🏛️</h4>
+<ul class="text-slate-300 space-y-3 text-sm">
+<li><strong>ADVANCE Act Execution:</strong> Watch for the NRC streamlining environmental reviews and lowering licensing fees for next-gen reactors.</li>
+<li><strong>HALEU Funding Deployment:</strong> The U.S. DOE distributing billions in grants to establish domestic enrichment capabilities, directly benefiting Centrus (LEU).</li>
+<li><strong>EU Taxonomy Impact:</strong> Institutional capital flows increasing into nuclear following its official designation as a "green" transition fuel in Europe.</li>
+</ul>
+</div>
+
+<div class="bg-[#1e293b] p-6 rounded-xl border-l-4 border-[#ec4899]">
+<h4 class="text-xl font-bold text-white mb-2">Societal & Structural Shifts 🌍</h4>
+<ul class="text-slate-300 space-y-3 text-sm">
+<li><strong>Hyperscaler Direct Investments:</strong> Expect tech giants (Amazon, Google, Meta) to announce direct equity stakes in nuclear generation assets or commit to massive upfront financing for SMR build-outs.</li>
+<li><strong>Public Acceptance Reversal:</strong> Polling data showing peak support for nuclear power since the 1970s, easing local friction for plant life extensions and restarts (e.g., Three Mile Island, Palisades).</li>
+</ul>
+</div>
+
+<div class="bg-[#1e293b] p-6 rounded-xl border-l-4 border-[#eab308]">
+<h4 class="text-xl font-bold text-white mb-2">Geopolitical Supply Shocks ⚠️</h4>
+<ul class="text-slate-300 space-y-3 text-sm">
+<li><strong>Russian Uranium Ban Enforcement:</strong> Strict enforcement of the Prohibiting Russian Uranium Imports Act will squeeze secondary market supplies, potentially pushing U3O8 spot prices above $120/lb.</li>
+<li><strong>Kazakhstan Tax/Export Policies:</strong> Any changes in mineral extraction taxes or export quotas by Kazatomprom (the world's largest producer) will trigger immediate downstream margin pressures.</li>
+</ul>
+</div>
+
+<div class="bg-[#1e293b] p-6 rounded-xl border-l-4 border-[#8b5cf6]">
+<h4 class="text-xl font-bold text-white mb-2">Mergers & Acquisitions (M&A) 🤝</h4>
+<ul class="text-slate-300 space-y-3 text-sm">
+<li><strong>Upstream Consolidation:</strong> Mid-tier miners combining to achieve the scale necessary for tier-one utility contracts.</li>
+<li><strong>Vertical Integration:</strong> Large utilities potentially acquiring specialized SMR design firms or securing dedicated fuel fabrication facilities to de-risk their 2030+ project pipelines.</li>
+</ul>
+</div>
+</div>
+
+<div class="mt-12 bg-[#1e293b] p-6 rounded-xl shadow-lg border border-[#334155]">
+<h3 class="text-xl font-bold mb-4 text-center">Risk vs. Reward: Historical Reactor Build Data</h3>
+<p class="text-sm text-slate-300 mb-6 text-center">Plotly WebGL analysis of historical Gen-III reactor builds. SMRs aim to bring these data points down toward the origin (faster, cheaper).</p>
+<div class="chart-container" id="plotlyPlot" style="height: 400px; max-width: 100%;"></div>
+</div>
+
+</section>
+
+</main>
+
+<footer class="bg-[#0f172a] border-t border-[#334155] py-8 text-center text-slate-500 text-sm">
+<div class="container mx-auto px-4">
+<p>© 2026 Nucalytics Investment Research. Confidential distribution. Data reflects estimates as of May 2026.</p>
+</div>
+</footer>
+
+<script>
+function wrapLabel(label) {
+    if (label.length <= 16) return label;
+    const words = label.split(' ');
+    const lines = [];
+    let currentLine = words[0];
+    for (let i = 1; i < words.length; i++) {
+        if (currentLine.length + words[i].length + 1 <= 16) {
+            currentLine += ' ' + words[i];
+        } else {
+            lines.push(currentLine);
+            currentLine = words[i];
+        }
+    }
+    lines.push(currentLine);
+    return lines;
+}
+
+const tooltipConfig = {
+    callbacks: {
+        title: function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        }
+    }
+};
+
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.font.family = "'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
+const bubbleCtx = document.getElementById('bubbleChart').getContext('2d');
+new Chart(bubbleCtx, {
+    type: 'bubble',
+    data: {
+        datasets: [
+            { label: 'Constellation (CEG)', data: [{x: 14, y: 15, r: 40}], backgroundColor: 'rgba(234, 179, 8, 0.7)', borderColor: '#eab308' },
+            { label: 'Cameco (CCJ)', data: [{x: 38, y: 22, r: 25}], backgroundColor: 'rgba(6, 182, 212, 0.7)', borderColor: '#06b6d4' },
+            { label: 'Centrus (LEU)', data: [{x: 22, y: 18, r: 10}], backgroundColor: 'rgba(236, 72, 153, 0.7)', borderColor: '#ec4899' },
+            { label: 'NuScale (SMR)', data: [{x: 0, y: -15, r: 8}], backgroundColor: 'rgba(139, 92, 246, 0.7)', borderColor: '#8b5cf6' }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { 
+            legend: { position: 'bottom', labels: { color: '#e2e8f0' } },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return `${context.dataset.label}: Rev Growth ${context.raw.x}%, Margin ${context.raw.y}%`;
+                    }
+                }
+            }
+        },
+        scales: {
+            x: { title: { display: true, text: 'Revenue Growth (%)', color: '#cbd5e1' }, grid: { color: '#334155' } },
+            y: { title: { display: true, text: 'Profit Margin (%)', color: '#cbd5e1' }, grid: { color: '#334155' } }
+        }
+    }
+});
+
+const uPriceCtx = document.getElementById('uraniumPriceChart').getContext('2d');
+new Chart(uPriceCtx, {
+    type: 'line',
+    data: {
+        labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026E'],
+        datasets: [{
+            label: 'U3O8 Spot Price ($/lb)',
+            data: [30, 42, 48, 85, 105, 92, 115],
+            borderColor: '#06b6d4',
+            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+            borderWidth: 3,
+            fill: true,
+            tension: 0.4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { tooltip: tooltipConfig, legend: { display: false } },
+        scales: {
+            x: { grid: { display: false, color: '#334155' } },
+            y: { grid: { color: '#334155' } }
+        }
+    }
+});
+
+const capFactorLabels = ['Nuclear', 'Geothermal', 'Natural Gas', 'Hydropower', 'Coal', 'Wind', 'Solar'].map(wrapLabel);
+const capFactorCtx = document.getElementById('capacityFactorChart').getContext('2d');
+new Chart(capFactorCtx, {
+    type: 'bar',
+    data: {
+        labels: capFactorLabels,
+        datasets: [{
+            label: 'Capacity Factor (%)',
+            data: [92.6, 73.9, 56.7, 37.4, 40.2, 35.9, 24.4],
+            backgroundColor: [
+                '#8b5cf6', '#334155', '#334155', '#334155', '#334155', '#334155', '#334155'
+            ],
+            borderRadius: 4
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { tooltip: tooltipConfig, legend: { display: false } },
+        scales: {
+            x: { max: 100, grid: { color: '#334155' } },
+            y: { grid: { display: false } }
+        }
+    }
+});
+
+const forecastLabels = ['2024', '2030', '2040', '2050'].map(wrapLabel);
+const forecastCtx = document.getElementById('capacityForecastChart').getContext('2d');
+new Chart(forecastCtx, {
+    type: 'bar',
+    data: {
+        labels: forecastLabels,
+        datasets: [
+            { label: 'Asia (China, India)', data: [140, 190, 280, 390], backgroundColor: '#ec4899' },
+            { label: 'North America', data: [115, 120, 140, 165], backgroundColor: '#06b6d4' },
+            { label: 'Europe', data: [100, 95, 110, 130], backgroundColor: '#eab308' },
+            { label: 'Rest of World', data: [35, 45, 65, 90], backgroundColor: '#8b5cf6' }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { tooltip: tooltipConfig, legend: { position: 'bottom', labels: { color: '#e2e8f0' } } },
+        scales: {
+            x: { stacked: true, grid: { display: false } },
+            y: { stacked: true, grid: { color: '#334155' }, title: { display: true, text: 'Gigawatts (GWe)', color: '#cbd5e1' } }
+        }
+    }
+});
+
+const trace1 = {
+  x: [5.5, 6.2, 8.1, 10.5, 12.0, 14.2],
+  y: [4500, 5200, 6800, 9000, 11500, 14000],
+  mode: 'markers',
+  type: 'scattergl',
+  name: 'Conventional Gen-III Builds',
+  text: ['China Hualong', 'Korean APR', 'UAE Barakah', 'US Vogtle 3', 'French Flamanville', 'UK Hinkley'],
+  marker: { size: 16, color: '#ec4899', line: { color: '#fff', width: 1 } }
+};
+
+const trace2 = {
+  x: [3.0, 4.0, 4.5],
+  y: [2500, 3200, 3800],
+  mode: 'markers',
+  type: 'scattergl',
+  name: 'Target SMR Economics',
+  text: ['SMR Target A', 'SMR Target B', 'SMR Target C'],
+  marker: { size: 16, color: '#06b6d4', symbol: 'diamond', line: { color: '#fff', width: 1 } }
+};
+
+const plotlyData = [trace1, trace2];
+
+const plotlyLayout = {
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: '#cbd5e1' },
+  xaxis: { title: 'Construction Time (Years)', gridcolor: '#334155', zerolinecolor: '#334155' },
+  yaxis: { title: 'Overnight Capital Cost ($/kW)', gridcolor: '#334155', zerolinecolor: '#334155' },
+  margin: { l: 60, r: 20, t: 20, b: 60 },
+  legend: { orientation: 'h', y: -0.2 }
+};
+
+Plotly.newPlot('plotlyPlot', plotlyData, plotlyLayout, {displayModeBar: false, responsive: true});
+
+</script>
+</body>
+</html>

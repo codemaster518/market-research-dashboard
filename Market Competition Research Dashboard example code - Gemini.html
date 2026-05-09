@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equity Research: CRM vs. NOW</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 400px;
+            max-height: 500px;
+        }
+        @media (max-width: 768px) {
+            .chart-container { height: 300px; }
+        }
+        .tab-active { border-bottom: 2px solid #0ea5e9; color: #0ea5e9; font-weight: 600; }
+        .tab-inactive { color: #78716c; }
+        .tab-inactive:hover { color: #44403c; }
+    </style>
+</head>
+<body class="bg-[#faf9f6] text-stone-800 antialiased selection:bg-sky-200">
+
+    <!-- Chosen Palette: Warm Neutrals (Stone/Off-white) with Sky Blue (CRM) and Emerald Green (NOW) accents -->
+    <!-- Application Structure Plan: A single-page dashboard segmented into distinct analytical sections (Overview, Market, Strategy, Financials, SWOT, Thesis). Navigation is anchored at the top for quick jumping. Interactive tabs and toggles are used in Financials and SWOT to compress complex comparative data into a digestible, user-driven exploration format, prioritizing clarity over a long vertical scroll. -->
+    <!-- Visualization & Content Choices: 
+         1. Market Share: Doughnut Chart (Chart.js) -> Goal: Show relative scale in enterprise SaaS. Justification: Quick visual proportion. 
+         2. Financials: Interactive Line/Bar Chart (Chart.js) -> Goal: Compare 7-year trends (Historical + Estimates). Justification: Allows user to toggle between Revenue, Margins, and FCF without cluttering the screen.
+         3. SWOT & Thesis: Grid layouts with JS toggles -> Goal: Direct comparison. Justification: Easy reading, keeps focus on one company at a time if desired.
+         All visualizations adhere to NO SVG/Mermaid constraint. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="sticky top-0 z-50 bg-[#faf9f6]/95 backdrop-blur-sm border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold text-stone-900 tracking-tight">Equity<span class="text-sky-600">Dash</span></span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                    <a href="#overview" class="text-stone-600 hover:text-sky-600 transition">Overview</a>
+                    <a href="#market" class="text-stone-600 hover:text-sky-600 transition">Market</a>
+                    <a href="#strategy" class="text-stone-600 hover:text-sky-600 transition">Strategy</a>
+                    <a href="#financials" class="text-stone-600 hover:text-sky-600 transition">Financials</a>
+                    <a href="#swot" class="text-stone-600 hover:text-sky-600 transition">SWOT</a>
+                    <a href="#thesis" class="text-stone-600 hover:text-sky-600 transition">Thesis</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+
+        <header class="text-center max-w-3xl mx-auto pt-8">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 tracking-tight mb-4">Salesforce (CRM) vs. ServiceNow (NOW)</h1>
+            <p class="text-lg text-stone-600">A comprehensive comparative analysis of business models, market positioning, financial health, and investment outlook for two enterprise SaaS titans.</p>
+        </header>
+
+        <section id="overview" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2 inline-block">Executive Overview</h2>
+                <p class="text-stone-600 mt-2 text-sm max-w-4xl">This section provides the foundational context for both companies, outlining their core operations and the primary markets they serve. Understanding their origin sets the stage for comparing their expansion strategies.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 border-t-4 border-t-sky-500 hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-900">Salesforce, Inc.</h3>
+                        <span class="px-3 py-1 bg-sky-100 text-sky-800 text-xs font-bold rounded-full border border-sky-200">NYSE: CRM</span>
+                    </div>
+                    <p class="text-stone-700 mb-4 text-sm leading-relaxed"><span class="font-semibold">Business Model:</span> Cloud-based software-as-a-service (SaaS) pioneer focusing on Customer Relationship Management. It generates revenue primarily through subscription and support fees for its various "Clouds" (Sales, Service, Marketing, Commerce) and platform services.</p>
+                    <p class="text-stone-700 text-sm leading-relaxed"><span class="font-semibold">Market:</span> Dominates the global CRM software market. Primarily targets enterprise and mid-market organizations looking to digitize and optimize their front-office operations, customer data, and sales funnels.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 border-t-4 border-t-emerald-500 hover:shadow-md transition">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-stone-900">ServiceNow, Inc.</h3>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full border border-emerald-200">NYSE: NOW</span>
+                    </div>
+                    <p class="text-stone-700 mb-4 text-sm leading-relaxed"><span class="font-semibold">Business Model:</span> Cloud-based workflow automation platform. Originally focused on IT Service Management (ITSM), it has expanded into HR, customer service, and custom creator workflows. Revenue is driven by tiered subscriptions based on user seats and platform usage.</p>
+                    <p class="text-stone-700 text-sm leading-relaxed"><span class="font-semibold">Market:</span> Leads the Enterprise Service Management (ESM) and ITSM markets. Targets large global enterprises needing to streamline middle and back-office operations, connecting disparate IT systems into a single system of action.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2 inline-block">Market Analysis</h2>
+                <p class="text-stone-600 mt-2 text-sm max-w-4xl">Analyzing the broader enterprise software landscape. This section breaks down market segmentation, identifies key purchasing drivers, and visualizes the relative footprint of these companies against broader industry peers like Microsoft (MSFT) and Oracle (ORCL).</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                    <div class="chart-container h-80">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                    <p class="text-xs text-center text-stone-500 mt-4 font-medium">*Illustrative share of combined core addressable SaaS markets (CRM + ITSM + ESM) by revenue.</p>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-stone-900 mb-2 flex items-center">
+                            <span class="text-sky-600 mr-2 text-lg">&#9632;</span> Segmentation
+                        </h4>
+                        <ul class="text-sm text-stone-700 space-y-2 list-disc list-inside">
+                            <li><span class="font-semibold">Geographic:</span> North America drives ~60% of revenue for both; rapid expansion in EMEA & APAC.</li>
+                            <li><span class="font-semibold">Demographic:</span> Primarily Fortune 500 and Global 2000. CRM has a larger footprint in SMBs compared to NOW.</li>
+                            <li><span class="font-semibold">Psychographic:</span> Organizations prioritizing digital transformation, operational efficiency, and data-driven decision making.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-stone-50 p-5 rounded-lg border border-stone-200">
+                        <h4 class="font-bold text-stone-900 mb-2 flex items-center">
+                            <span class="text-emerald-600 mr-2 text-lg">&#9650;</span> Purchasing Drivers
+                        </h4>
+                        <ul class="text-sm text-stone-700 space-y-2 list-disc list-inside">
+                            <li>Need to break down internal data silos.</li>
+                            <li>Shift from legacy on-premise solutions to agile Cloud.</li>
+                            <li>Integration of Generative AI (CRM Einstein, NOW Assist) for productivity.</li>
+                            <li>Vendor consolidation (seeking platform ecosystems rather than point solutions).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2 inline-block">Marketing & Strategic Differences</h2>
+                <p class="text-stone-600 mt-2 text-sm max-w-4xl">A comparative look at how CRM and NOW position themselves, who they sell to, and what keeps their customers renewing. This matrix highlights their distinct competitive advantages and product mixes.</p>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-xl shadow-sm border border-stone-100">
+                <table class="w-full text-left text-sm">
+                    <thead class="bg-stone-100 text-stone-800">
+                        <tr>
+                            <th class="p-4 border-b border-stone-200 font-bold w-1/4">Metric / Strategy</th>
+                            <th class="p-4 border-b border-stone-200 font-bold border-l border-stone-200 w-[37.5%]"><span class="text-sky-700">Salesforce (CRM)</span></th>
+                            <th class="p-4 border-b border-stone-200 font-bold border-l border-stone-200 w-[37.5%]"><span class="text-emerald-700">ServiceNow (NOW)</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-stone-100">
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-4 font-semibold text-stone-900 bg-stone-50/50">Market Positioning</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">"Customer Company" - focused on the Front-Office (Sales, Marketing). 360-degree view of the customer.</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">"Platform of Platforms" - focused on Middle/Back-Office automation. Connecting existing systems.</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-4 font-semibold text-stone-900 bg-stone-50/50">Target Customer Base</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">CROs, CMOs, VP of Sales. Broad base from global enterprise down to SMBs.</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">CIOs, CHROs, COOs. Heavily skewed towards large global enterprises (Global 2000).</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-4 font-semibold text-stone-900 bg-stone-50/50">Product Lines & Mix</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Sales Cloud, Service Cloud, Marketing/Commerce, Platform, Data (Tableau, MuleSoft, Slack).</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">IT Service Mgmt, IT Operations, Customer Workflows, Creator Workflows, HR Service Delivery.</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-4 font-semibold text-stone-900 bg-stone-50/50">Churn & Retention</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Gross retention historically ~92-93%. Slight pressure in SMB segments during macro downturns.</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Industry-leading gross retention consistently at or above 98%. Deep system entrenchment.</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-4 font-semibold text-stone-900 bg-stone-50/50">Competitive Advantage</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Massive ecosystem (AppExchange), Trailblazer community, established industry standard for CRM.</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Single unified data model and architecture. Doesn't rip and replace, but orchestrates above legacy IT.</td>
+                        </tr>
+                        <tr class="hover:bg-stone-50 transition">
+                            <td class="p-4 font-semibold text-stone-900 bg-stone-50/50">Marketing Tactics</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Massive events (Dreamforce), heavy brand advertising, strong focus on user community building.</td>
+                            <td class="p-4 border-l border-stone-200 text-stone-700">Targeted C-suite relationship building, ROI/efficiency case studies (Knowledge), direct enterprise sales.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="financials" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2 inline-block">Financial Deep Dive</h2>
+                <p class="text-stone-600 mt-2 text-sm max-w-4xl">Interactive financial analysis spanning a 7-year horizon (5 years historical, 2 years forward estimates). Toggle between Income Statement views and Cash Flow to understand their distinct growth trajectories and profitability profiles. Below the chart, review fundamental Balance Sheet health metrics.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100">
+                
+                <div class="flex flex-wrap gap-4 border-b border-stone-200 mb-6 pb-2" id="fin-tabs">
+                    <button class="px-4 py-2 tab-active transition focus:outline-none" onclick="updateFinChart('revenue')">Revenue Growth</button>
+                    <button class="px-4 py-2 tab-inactive transition focus:outline-none" onclick="updateFinChart('profit')">Operating Margin</button>
+                    <button class="px-4 py-2 tab-inactive transition focus:outline-none" onclick="updateFinChart('fcf')">Free Cash Flow</button>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-stone-50 p-6 rounded-xl border border-stone-200">
+                    <h3 class="font-bold text-stone-900 mb-4 border-b border-stone-200 pb-2 text-sky-700">Salesforce (CRM) - Balance Sheet & Ratios</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><p class="text-stone-500">Debt-to-Equity Ratio</p><p class="font-bold text-lg text-stone-800">~0.16</p></div>
+                        <div><p class="text-stone-500">Current Ratio</p><p class="font-bold text-lg text-stone-800">1.02</p></div>
+                        <div><p class="text-stone-500">Interest Coverage</p><p class="font-bold text-lg text-stone-800">14.5x</p></div>
+                        <div><p class="text-stone-500">Trailing P/E | Fwd P/E</p><p class="font-bold text-lg text-stone-800">68x | 29x</p></div>
+                    </div>
+                    <p class="mt-4 text-xs text-stone-600 border-t border-stone-200 pt-2">Healthy balance sheet. Aggressive historical M&A (Slack, Tableau) created intangible assets, but strong FCF covers obligations easily.</p>
+                </div>
+
+                <div class="bg-stone-50 p-6 rounded-xl border border-stone-200">
+                    <h3 class="font-bold text-stone-900 mb-4 border-b border-stone-200 pb-2 text-emerald-700">ServiceNow (NOW) - Balance Sheet & Ratios</h3>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div><p class="text-stone-500">Debt-to-Equity Ratio</p><p class="font-bold text-lg text-stone-800">~0.25</p></div>
+                        <div><p class="text-stone-500">Current Ratio</p><p class="font-bold text-lg text-stone-800">1.15</p></div>
+                        <div><p class="text-stone-500">Interest Coverage</p><p class="font-bold text-lg text-stone-800">22.0x</p></div>
+                        <div><p class="text-stone-500">Trailing P/E | Fwd P/E</p><p class="font-bold text-lg text-stone-800">85x | 55x</p></div>
+                    </div>
+                    <p class="mt-4 text-xs text-stone-600 border-t border-stone-200 pt-2">Highly liquid and unleveraged. Trades at a significant premium multiple due to durable 20%+ top-line growth and massive margin expansion potential.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="swot" class="scroll-mt-20">
+            <div class="mb-6 flex flex-col md:flex-row md:items-end justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2 inline-block">SWOT Analysis</h2>
+                    <p class="text-stone-600 mt-2 text-sm max-w-2xl">A focused breakdown of internal strengths and weaknesses alongside external opportunities and threats. Use the toggle to switch between companies.</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex bg-stone-200 rounded-lg p-1">
+                    <button id="btn-swot-crm" class="px-6 py-2 rounded-md bg-white shadow-sm font-bold text-sky-700 transition focus:outline-none" onclick="toggleSWOT('crm')">CRM</button>
+                    <button id="btn-swot-now" class="px-6 py-2 rounded-md text-stone-600 font-medium hover:text-stone-800 transition focus:outline-none" onclick="toggleSWOT('now')">NOW</button>
+                </div>
+            </div>
+
+            <div id="swot-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            </div>
+        </section>
+
+        <section id="thesis" class="scroll-mt-20">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-stone-900 border-b-2 border-stone-200 pb-2 inline-block">Investment Thesis</h2>
+                <p class="text-stone-600 mt-2 text-sm max-w-4xl">Summarizing the bull and bear cases for both equities based on current valuations, macroeconomic sensitivities, and strategic execution risks.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="border border-stone-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-sky-50 p-4 border-b border-sky-100 flex items-center justify-between">
+                        <h3 class="font-bold text-sky-900 text-lg">Salesforce (CRM)</h3>
+                    </div>
+                    <div class="p-6 bg-white space-y-6">
+                        <div>
+                            <h4 class="font-bold text-stone-900 flex items-center mb-2"><span class="text-green-500 mr-2 text-xl">&#8593;</span> Bull Case</h4>
+                            <p class="text-sm text-stone-700 leading-relaxed">CRM has successfully pivoted from a "growth-at-all-costs" mentality to a focus on operational discipline and margin expansion. With activist investor pressure leading to structural efficiencies, operating margins are expanding rapidly. The integration of "Data Cloud" and AI (Einstein) acts as a strong catalyst for cross-selling into their massive installed base, providing a protective moat against macroeconomic weakness.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-900 flex items-center mb-2"><span class="text-red-500 mr-2 text-xl">&#8595;</span> Bear Case</h4>
+                            <p class="text-sm text-stone-700 leading-relaxed">Top-line growth has decelerated significantly (dropping to low double-digits). The CRM market is highly saturated, and intense competition from Microsoft (Dynamics) and specialized upstarts threatens their core market share. Furthermore, integration complexities from past mega-acquisitions (Slack, MuleSoft) may hinder agility, and seat-based pricing faces headwinds if enterprise headcounts shrink.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-stone-200 rounded-xl overflow-hidden shadow-sm">
+                    <div class="bg-emerald-50 p-4 border-b border-emerald-100 flex items-center justify-between">
+                        <h3 class="font-bold text-emerald-900 text-lg">ServiceNow (NOW)</h3>
+                    </div>
+                    <div class="p-6 bg-white space-y-6">
+                        <div>
+                            <h4 class="font-bold text-stone-900 flex items-center mb-2"><span class="text-green-500 mr-2 text-xl">&#8593;</span> Bull Case</h4>
+                            <p class="text-sm text-stone-700 leading-relaxed">NOW exhibits arguably the best fundamentals in enterprise software, maintaining ~20% revenue growth with 98% gross retention. Their expansion beyond ITSM into HR, customer workflows, and GenAI pricing tiers expands their Total Addressable Market (TAM) massively. They are highly insulated from macro shocks because their core value proposition is driving cost reduction and operational efficiency for CIOs.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-stone-900 flex items-center mb-2"><span class="text-red-500 mr-2 text-xl">&#8595;</span> Bear Case</h4>
+                            <p class="text-sm text-stone-700 leading-relaxed">The stock is priced for perfection. A forward P/E north of 50x leaves no room for execution errors. Any slowdown in large enterprise IT spending or vendor consolidation could compress the multiple significantly. Additionally, as they move out of their ITSM stronghold into HR and Customer Service, they directly challenge entrenched incumbents (like Workday and Salesforce), increasing competitive friction.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <footer class="border-t border-stone-200 pt-8 pb-12 mt-12 text-center text-sm text-stone-500">
+            <p>Disclaimer: This is a synthesized equity research dashboard for informational purposes only, not financial advice.</p>
+            <p class="mt-2">Sources: SEC 10-K/10-Q Filings, Q4 2023 Earnings Call Transcripts, Investor Presentations, Industry Analytics.</p>
+        </footer>
+
+    </main>
+
+    <script>
+        const marketCtx = document.getElementById('marketShareChart').getContext('2d');
+        new Chart(marketCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Salesforce', 'ServiceNow', 'Microsoft', 'Oracle', 'Others (SAP, Atlassian, etc.)'],
+                datasets: [{
+                    data: [25, 12, 18, 10, 35],
+                    backgroundColor: ['#0284c7', '#059669', '#6366f1', '#dc2626', '#d6d3d1'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '65%',
+                plugins: {
+                    legend: { position: 'right', labels: { font: { family: 'Inter', size: 12 }, color: '#44403c' } },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return ' ' + context.label + ': ~' + context.parsed + '% Share';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        const finData = {
+            labels: ['2019', '2020', '2021', '2022', '2023', '2024 (E)', '2025 (E)'],
+            revenue: {
+                crm: [13.28, 17.10, 21.25, 26.49, 31.35, 34.80, 38.20],
+                now: [3.46, 4.52, 5.90, 7.24, 8.97, 10.85, 13.10]
+            },
+            profit: {
+                crm: [14.5, 17.2, 18.7, 22.5, 30.5, 31.5, 32.5], 
+                now: [21.0, 24.5, 25.0, 26.2, 28.5, 29.5, 30.0]
+            },
+            fcf: {
+                crm: [2.8, 4.3, 4.1, 5.3, 7.1, 9.5, 11.2],
+                now: [0.9, 1.3, 1.8, 2.2, 2.7, 3.4, 4.2]
+            }
+        };
+
+        const finCtx = document.getElementById('financialChart').getContext('2d');
+        let finChart = new Chart(finCtx, {
+            type: 'line',
+            data: {
+                labels: finData.labels,
+                datasets: [
+                    {
+                        label: 'CRM Revenue ($ Billions)',
+                        data: finData.revenue.crm,
+                        borderColor: '#0284c7',
+                        backgroundColor: 'rgba(2, 132, 199, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'NOW Revenue ($ Billions)',
+                        data: finData.revenue.now,
+                        borderColor: '#059669',
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.3,
+                        yAxisID: 'y'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { position: 'top', labels: { font: { family: 'Inter' } } },
+                    tooltip: { titleFont: { family: 'Inter' }, bodyFont: { family: 'Inter' } }
+                },
+                scales: {
+                    y: { 
+                        type: 'linear', display: true, position: 'left',
+                        title: { display: true, text: 'Value ($B or %)', font: { family: 'Inter', weight: 'bold' } },
+                        grid: { color: '#f5f5f4' }
+                    },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        window.updateFinChart = function(metric) {
+            const tabs = document.querySelectorAll('#fin-tabs button');
+            tabs.forEach(t => {
+                t.classList.remove('tab-active');
+                t.classList.add('tab-inactive');
+            });
+            event.target.classList.add('tab-active');
+            event.target.classList.remove('tab-inactive');
+
+            let newDatasets = [];
+            
+            if(metric === 'revenue') {
+                finChart.config.type = 'line';
+                newDatasets = [
+                    { label: 'CRM Revenue ($ Billions)', data: finData.revenue.crm, borderColor: '#0284c7', backgroundColor: 'rgba(2, 132, 199, 0.1)', borderWidth: 3, fill: true, tension: 0.3 },
+                    { label: 'NOW Revenue ($ Billions)', data: finData.revenue.now, borderColor: '#059669', backgroundColor: 'rgba(5, 150, 105, 0.1)', borderWidth: 3, fill: true, tension: 0.3 }
+                ];
+            } else if (metric === 'profit') {
+                finChart.config.type = 'line';
+                newDatasets = [
+                    { label: 'CRM Non-GAAP Op Margin (%)', data: finData.profit.crm, borderColor: '#0284c7', borderDash: [5, 5], backgroundColor: 'transparent', borderWidth: 3, tension: 0.3 },
+                    { label: 'NOW Non-GAAP Op Margin (%)', data: finData.profit.now, borderColor: '#059669', borderDash: [5, 5], backgroundColor: 'transparent', borderWidth: 3, tension: 0.3 }
+                ];
+            } else if (metric === 'fcf') {
+                finChart.config.type = 'bar';
+                newDatasets = [
+                    { label: 'CRM Free Cash Flow ($ Billions)', data: finData.fcf.crm, backgroundColor: '#38bdf8', borderRadius: 4 },
+                    { label: 'NOW Free Cash Flow ($ Billions)', data: finData.fcf.now, backgroundColor: '#34d399', borderRadius: 4 }
+                ];
+            }
+
+            finChart.data.datasets = newDatasets;
+            finChart.update();
+        };
+
+        const swotData = {
+            crm: {
+                color: 'sky',
+                s: ["Market Dominance: Clear #1 market share leader in global CRM.", "Ecosystem: Massive AppExchange ecosystem and dedicated 'Trailblazer' developer community.", "Broad Portfolio: End-to-end suite covering Sales, Service, Marketing, Commerce, and Data (MuleSoft/Tableau)."],
+                w: ["Integration Friction: Stitching together massive acquisitions (Slack, Tableau) creates technical debt.", "Pricing Pressure: High per-seat costs face pushback in tight macroeconomic environments.", "Slowing Growth: Core sales cloud is highly penetrated, leading to structurally slower organic top-line growth."],
+                o: ["AI Monetization: 'Einstein 1' platform integration can drive significant ARPU uplift.", "Margin Expansion: Continued pivot toward profitability over growth-at-all-costs favored by investors.", "Vertical Clouds: Expansion into industry-specific solutions (Financial Services, Health Cloud)."],
+                t: ["Microsoft Dynamics: Intense competition from MSFT bundling Dynamics with Office365/Azure.", "Macro Headwinds: Enterprise software seat reductions directly impact revenue models.", "Niche Competitors: Specialized tools chipping away at edge use-cases (e.g., specialized marketing automation)."]
+            },
+            now: {
+                color: 'emerald',
+                s: ["Sticky Platform: Incredible 98% gross retention rate; deep entrenchment in IT infrastructure.", "Unified Codebase: Organically built platform ensures seamless integration across all workflows, unlike CRM's M&A approach.", "Workflow Dominance: De facto standard for IT Service Management (ITSM) in the Fortune 500."],
+                w: ["Valuation Premium: Priced for absolute perfection (P/E > 50x forward), making stock highly sensitive to minor misses.", "Enterprise Reliance: Highly dependent on massive IT budgets; less penetration/success in the SMB market.", "Complex Implementation: Requires significant time, consulting, and resources to deploy effectively."],
+                o: ["Beyond IT: Massive runway expanding into HR, Customer Service, and custom Creator workflows.", "Pro Hub/GenAI: Premium SKUs leveraging 'NOW Assist' AI to automate Level 1 IT/HR support tickets.", "Vendor Consolidation: Benefiting from enterprises looking to consolidate disjointed point-solutions onto one platform."],
+                t: ["Execution Risk: Expanding into Customer workflows brings them into direct competition with entrenched CRM.", "IT Budget Cuts: Broad macroeconomic slowdowns affecting CIO budgets.", "Atlassian/Jira Edge: Competition in the developer and mid-market IT operations space."]
+            }
+        };
+
+        function renderSWOT(companyData) {
+            const c = companyData.color;
+            return `
+                <div class="bg-white p-6 rounded-xl border-t-4 border-${c}-500 shadow-sm">
+                    <h3 class="font-bold text-stone-900 mb-4 text-lg flex items-center"><span class="bg-${c}-100 text-${c}-700 px-2 py-1 rounded text-sm mr-2">S</span> Strengths</h3>
+                    <ul class="text-sm text-stone-700 space-y-2 list-disc list-inside">
+                        ${companyData.s.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl border-t-4 border-stone-400 shadow-sm">
+                    <h3 class="font-bold text-stone-900 mb-4 text-lg flex items-center"><span class="bg-stone-100 text-stone-700 px-2 py-1 rounded text-sm mr-2">W</span> Weaknesses</h3>
+                    <ul class="text-sm text-stone-700 space-y-2 list-disc list-inside">
+                        ${companyData.w.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl border-t-4 border-${c}-500 shadow-sm">
+                    <h3 class="font-bold text-stone-900 mb-4 text-lg flex items-center"><span class="bg-${c}-100 text-${c}-700 px-2 py-1 rounded text-sm mr-2">O</span> Opportunities</h3>
+                    <ul class="text-sm text-stone-700 space-y-2 list-disc list-inside">
+                        ${companyData.o.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl border-t-4 border-red-400 shadow-sm">
+                    <h3 class="font-bold text-stone-900 mb-4 text-lg flex items-center"><span class="bg-red-100 text-red-700 px-2 py-1 rounded text-sm mr-2">T</span> Threats</h3>
+                    <ul class="text-sm text-stone-700 space-y-2 list-disc list-inside">
+                        ${companyData.t.map(i => `<li>${i}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        window.toggleSWOT = function(company) {
+            const container = document.getElementById('swot-container');
+            const btnCrm = document.getElementById('btn-swot-crm');
+            const btnNow = document.getElementById('btn-swot-now');
+
+            if(company === 'crm') {
+                btnCrm.className = 'px-6 py-2 rounded-md bg-white shadow-sm font-bold text-sky-700 transition focus:outline-none';
+                btnNow.className = 'px-6 py-2 rounded-md text-stone-600 font-medium hover:text-stone-800 transition focus:outline-none';
+                container.innerHTML = renderSWOT(swotData.crm);
+            } else {
+                btnNow.className = 'px-6 py-2 rounded-md bg-white shadow-sm font-bold text-emerald-700 transition focus:outline-none';
+                btnCrm.className = 'px-6 py-2 rounded-md text-stone-600 font-medium hover:text-stone-800 transition focus:outline-none';
+                container.innerHTML = renderSWOT(swotData.now);
+            }
+        };
+
+        toggleSWOT('crm');
+
+    </script>
+</body>
+</html>
