@@ -944,7 +944,7 @@ body {
 // ═══════════════════════════════════════════════════════════════════
 const DB = {
 
-  industries: ["Neocloud", "Agentic AI", "EV Batteries", "Crude Tankers", "Oilfield Services", "Electronic Instruments", "Enterprise Networking", "Nuclear Energy"],
+  industries: ["Neocloud", "Agentic AI", "EV Batteries", "Crude Tankers", "Oilfield Services", "Electronic Instruments", "Enterprise Networking", "Nuclear Energy", "Helium"],
 
   // ── Marketing Research Comparisons ──────────────────────────────
   marketingReports: [
@@ -953,328 +953,285 @@ const DB = {
       label: "Salesforce vs ServiceNow",
       tickers: ["CRM", "NOW"],
       date: "May 2026",
-      fullReport: `<div class="report-wrap mkt-report">
+      richReport: {
+        getHtml: function(p) {
+          var crmColor = '#00bcd4', nowColor = '#10b981';
+          return '<div class="cr-wrap">' +
 
-  <!-- 1. Company Overviews -->
-  <div class="r-section">1. Company Overviews</div>
-  <div class="r-compare">
-    <div class="r-compare-col">
-      <div class="r-col-label">Salesforce <span class="r-col-ticker">NYSE: CRM</span></div>
-      <p>Founded 1999 by Marc Benioff. World&#39;s leading CRM platform with $37.9B in FY2025 revenue. Core products span Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud, Tableau, MuleSoft, and Slack. Revenue is 94% subscription-based. Now pivoting aggressively toward AI with its <strong>Agentforce</strong> platform — autonomous AI agents embedded across its suite.</p>
-      <p style="margin-top:8px;font-size:11.5px;color:#6a92a0">Source: <a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Announces-Fourth-Quarter-and-Fiscal-Year-2025-Results/default.aspx" target="_blank">investor.salesforce.com</a> | SEC EDGAR CRM 10-K FY2025</p>
-    </div>
-    <div class="r-compare-col">
-      <div class="r-col-label">ServiceNow <span class="r-col-ticker">NYSE: NOW</span></div>
-      <p>Founded 2004 by Fred Luddy. Dominant enterprise workflow automation platform with $13.3B in FY2025 revenue, growing ~21% YoY. The "Now Platform" started as ITSM and expanded into HR, Legal, Procurement, and Finance. Revenue is >98% recurring. Rapidly deploying AI agents ("Now Assist") across its workflow layer.</p>
-      <p style="margin-top:8px;font-size:11.5px;color:#6a92a0">Source: <a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-Board-of-Directors-Authorizes-Additional-5B-for-Share-Repurchase-Program/default.aspx" target="_blank">newsroom.servicenow.com</a> | SEC EDGAR NOW 10-K FY2025</p>
-    </div>
-  </div>
+          '<div class="cr-page-hdr">' +
+            '<div class="cr-title">Salesforce (CRM) vs. ServiceNow (NOW)</div>' +
+            '<div class="cr-subtitle">Equity Research Comparison &bull; Enterprise SaaS &bull; May 2026</div>' +
+          '</div>' +
 
-  <!-- 2. Market Analysis -->
-  <div class="r-section">2. Market Analysis</div>
-  <div class="r-subsection">Market Segmentation &amp; Size</div>
-  <div class="r-compare">
-    <div class="r-compare-col">
-      <div class="r-col-label">CRM Market — Salesforce</div>
-      <ul>
-        <li><strong>Geographic:</strong> N. America ~55%, Europe ~25%, APAC ~15%, RoW ~5%</li>
-        <li><strong>By company size:</strong> Enterprise = largest spend; SMB = high volume, lower ACV</li>
-        <li><strong>By industry:</strong> Financial Services, Tech, Retail, Healthcare, Manufacturing</li>
-        <li><strong>By function:</strong> Sales automation, Customer service, Marketing, Analytics</li>
-        <li><strong>TAM:</strong> ~$100B in 2025; projected $129B by 2028</li>
-        <li><strong>Salesforce share:</strong> <strong>20.7% global</strong> — #1 for 12 consecutive years; $21.6B in CRM revenue vs. top 4 competitors combined</li>
-      </ul>
-    </div>
-    <div class="r-compare-col">
-      <div class="r-col-label">ITSM / Workflow Market — ServiceNow</div>
-      <ul>
-        <li><strong>Geographic:</strong> N. America ~50%, Europe ~30%, APAC ~15%, RoW ~5%</li>
-        <li><strong>By company size:</strong> Heavily skewed to enterprises with 10,000+ employees</li>
-        <li><strong>By industry:</strong> Technology, Financial Services, Government, Healthcare, Telecom</li>
-        <li><strong>By function:</strong> ITSM (60% of ACV), HR workflows, Customer workflows, Finance/Legal</li>
-        <li><strong>TAM:</strong> ITSM ~$15.6B by 2026; ServiceNow&#39;s expanded platform TAM claim: $500B+</li>
-        <li><strong>ServiceNow share:</strong> <strong>44.4% ITSM</strong> — undisputed market leader</li>
-      </ul>
-    </div>
-  </div>
+          // ── 1. Executive Overview ──
+          '<div class="cr-section-hdr">1. Executive Overview</div>' +
+          '<div class="cr-section-desc">Core business models and market positions for both companies.</div>' +
+          '<div class="cr-grid-2">' +
+            '<div class="cr-co-card" style="border-top-color:#00bcd4">' +
+              '<div class="cr-co-hdr"><span class="cr-co-name">Salesforce, Inc.</span><span class="cr-ticker-badge" style="background:#e0f4f8;color:#006b80">NYSE: CRM</span></div>' +
+              '<div class="cr-co-body">' +
+                '<p><strong>Business Model:</strong> World\'s leading CRM platform with $37.9B in FY2025 revenue. Core products: Sales Cloud, Service Cloud, Marketing Cloud, Commerce Cloud, Tableau, MuleSoft, and Slack. Revenue 94% subscription-based. Pivoting toward AI with <strong>Agentforce</strong> — autonomous AI agents embedded across its suite.</p>' +
+                '<p style="margin-top:8px"><strong>Market:</strong> Dominates global CRM with 20.7% share — #1 for 12 consecutive years. Targets enterprise and mid-market organizations.</p>' +
+                '<p style="margin-top:8px;font-size:11px;color:#6a92a0"><a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Announces-Fourth-Quarter-and-Fiscal-Year-2025-Results/default.aspx" target="_blank" style="color:#00bcd4">investor.salesforce.com</a> | SEC EDGAR CRM 10-K FY2025</p>' +
+              '</div>' +
+            '</div>' +
+            '<div class="cr-co-card" style="border-top-color:#10b981">' +
+              '<div class="cr-co-hdr"><span class="cr-co-name">ServiceNow, Inc.</span><span class="cr-ticker-badge" style="background:#d1fae5;color:#065f46">NYSE: NOW</span></div>' +
+              '<div class="cr-co-body">' +
+                '<p><strong>Business Model:</strong> Dominant enterprise workflow automation platform with $13.3B in FY2025 revenue, growing ~21% YoY. Started as ITSM, expanded into HR, Legal, Procurement, Finance. Revenue &gt;98% recurring. Deploying AI agents ("Now Assist") across its workflow layer.</p>' +
+                '<p style="margin-top:8px"><strong>Market:</strong> Leads ITSM with 44.4% share. Targets large global enterprises. TAM claim: $500B+ as it expands beyond IT.</p>' +
+                '<p style="margin-top:8px;font-size:11px;color:#6a92a0"><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-Board-of-Directors-Authorizes-Additional-5B-for-Share-Repurchase-Program/default.aspx" target="_blank" style="color:#10b981">newsroom.servicenow.com</a> | SEC EDGAR NOW 10-K FY2025</p>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
 
-  <div class="r-subsection">Customers &amp; Purchasing Drivers</div>
-  <div class="r-compare">
-    <div class="r-compare-col">
-      <div class="r-col-label">Salesforce Customer Profile</div>
-      <ul>
-        <li>150,000 customers worldwide; 9 of 10 Fortune 500 companies</li>
-        <li><strong>Buyer persona:</strong> VP Sales, CMO, Chief Revenue Officer</li>
-        <li><strong>Purchase drivers:</strong> Pipeline visibility, AI-assisted selling, ecosystem breadth (7,000+ AppExchange apps), integration capability, and vendor trust built over 25 years</li>
-      </ul>
-    </div>
-    <div class="r-compare-col">
-      <div class="r-col-label">ServiceNow Customer Profile</div>
-      <ul>
-        <li>8,100+ enterprise accounts; 2,109 customers with ACV &gt;$1M</li>
-        <li><strong>Buyer persona:</strong> CIO, CISO, CHRO</li>
-        <li><strong>Purchase drivers:</strong> IT ticket reduction ROI, compliance mandates, operational efficiency, platform consolidation — and the near-impossibility of replacing the platform once embedded</li>
-      </ul>
-    </div>
-  </div>
-  <div class="r-sources"><div class="r-sources-title">Sources</div><ul>
-    <li><a href="https://www.salesforce.com/news/stories/idc-crm-market-share-ranking-2025/" target="_blank">Salesforce #1 CRM IDC Market Share Report 2025 — salesforce.com</a></li>
-    <li><a href="https://cyntexa.com/blog/servicenow-statistics/" target="_blank">ServiceNow Statistics 2026 — cyntexa.com</a></li>
-    <li><a href="https://6sense.com/tech/it-service/servicenow-itsm-market-share" target="_blank">ServiceNow ITSM Market Share — 6sense.com</a></li>
-    <li><a href="https://www.mordorintelligence.com/industry-reports/information-technology-service-management-market" target="_blank">ITSM Market Size &amp; Share Analysis — mordorintelligence.com</a></li>
-  </ul></div>
+          // ── 2. Market Analysis ──
+          '<div class="cr-section-hdr">2. Market Analysis</div>' +
+          '<div class="cr-stat-cards">' +
+            '<div class="cr-stat"><div class="cr-stat-lbl">CRM TAM (2025)</div><div class="cr-stat-crm">~$100B</div></div>' +
+            '<div class="cr-stat"><div class="cr-stat-lbl">CRM Market Share</div><div class="cr-stat-crm">20.7% Global #1</div></div>' +
+            '<div class="cr-stat"><div class="cr-stat-lbl">ITSM TAM</div><div class="cr-stat-now">~$15.6B (2026E)</div></div>' +
+            '<div class="cr-stat"><div class="cr-stat-lbl">ITSM Market Share</div><div class="cr-stat-now">44.4% Global #1</div></div>' +
+          '</div>' +
+          '<div class="cr-grid-2">' +
+            '<div class="cr-card">' +
+              '<div style="font-size:12.5px;font-weight:700;color:#00bcd4;margin-bottom:8px">Salesforce — Customer Profile</div>' +
+              '<ul style="font-size:12px;color:#374151;padding-left:14px;line-height:1.7;margin:0">' +
+                '<li>150,000 customers worldwide; 9 of 10 Fortune 500</li>' +
+                '<li><strong>Buyer:</strong> VP Sales, CMO, Chief Revenue Officer</li>' +
+                '<li><strong>Geographic:</strong> N. America ~55%, Europe ~25%, APAC ~15%, RoW ~5%</li>' +
+                '<li><strong>Drivers:</strong> Pipeline visibility, AI-assisted selling, ecosystem breadth (7,000+ AppExchange apps)</li>' +
+              '</ul>' +
+            '</div>' +
+            '<div class="cr-card">' +
+              '<div style="font-size:12.5px;font-weight:700;color:#10b981;margin-bottom:8px">ServiceNow — Customer Profile</div>' +
+              '<ul style="font-size:12px;color:#374151;padding-left:14px;line-height:1.7;margin:0">' +
+                '<li>8,100+ enterprise accounts; 2,109 customers with ACV &gt;$1M</li>' +
+                '<li><strong>Buyer:</strong> CIO, CISO, CHRO</li>' +
+                '<li><strong>Geographic:</strong> N. America ~50%, Europe ~30%, APAC ~15%, RoW ~5%</li>' +
+                '<li><strong>Drivers:</strong> IT ticket reduction ROI, compliance, operational efficiency, platform consolidation</li>' +
+              '</ul>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cr-sources"><div class="cr-sources-title">Sources</div><ul>' +
+            '<li><a href="https://www.salesforce.com/news/stories/idc-crm-market-share-ranking-2025/" target="_blank">Salesforce #1 CRM IDC Market Share 2025</a></li>' +
+            '<li><a href="https://cyntexa.com/blog/servicenow-statistics/" target="_blank">ServiceNow Statistics 2026 — cyntexa.com</a></li>' +
+            '<li><a href="https://6sense.com/tech/it-service/servicenow-itsm-market-share" target="_blank">ServiceNow ITSM Market Share — 6sense.com</a></li>' +
+          '</ul></div>' +
 
-  <!-- 3. Marketing Differences -->
-  <div class="r-section">3. Marketing Differences</div>
-  <table class="r-table">
-    <tr><th>Dimension</th><th>Salesforce (CRM)</th><th>ServiceNow (NOW)</th></tr>
-    <tr><td><strong>Positioning</strong></td><td>"The #1 AI CRM" — customer-facing revenue growth, external relationships</td><td>"AI Platform for Business Transformation" — internal operational efficiency</td></tr>
-    <tr><td><strong>Customer Base</strong></td><td>150,000 customers; broad SMB to enterprise; high volume, variable deal size</td><td>~8,100 enterprise-only accounts; narrow but very high ACV (~$1.6M avg)</td></tr>
-    <tr><td><strong>Suppliers</strong></td><td>AWS (primary), Google Cloud, Azure; Dun &amp; Bradstreet for data enrichment</td><td>AWS, Azure; NVIDIA for AI compute; Accenture, Deloitte, KPMG as SI partners</td></tr>
-    <tr><td><strong>Product Lines</strong></td><td>Sales, Service, Marketing, Commerce, Tableau, MuleSoft, Slack, Agentforce</td><td>IT workflows (ITSM/ITOM/ITAM), HR, Customer, Creator (low-code), Now Assist AI</td></tr>
-    <tr><td><strong>Differentiation</strong></td><td>Breadth of suite; AppExchange ecosystem (7,000+ apps); 25+ yr customer data moat</td><td>Depth of workflow ownership; cross-dept process control; near-impossible to rip out</td></tr>
-    <tr><td><strong>Churn</strong></td><td>~90% gross retention; NRR ~110–115%</td><td>&gt;99% gross retention — among lowest in enterprise SaaS; NRR ~125%+</td></tr>
-    <tr><td><strong>Competitive Advantage</strong></td><td>Brand dominance, ecosystem lock-in, Agentforce AI momentum</td><td>Platform stickiness — replacing Now Platform requires enterprise-wide re-implementation</td></tr>
-    <tr><td><strong>Marketing Tactics</strong></td><td>Dreamforce (~40K attendees), Trailhead certifications, heavy digital/content, partner-led sales</td><td>Knowledge conference, Gartner Magic Quadrant dominance, CIO-direct sales, SI partner ecosystem</td></tr>
-  </table>
-  <div class="r-sources"><div class="r-sources-title">Sources</div><ul>
-    <li><a href="https://www.tikr.com/blog/salesforce-vs-servicenow-which-enterprise-software-stock-wins-over-the-next-5-years" target="_blank">Salesforce vs ServiceNow Investment Comparison — tikr.com</a></li>
-    <li><a href="https://www.salesforceben.com/salesforce-vs-servicenow-the-battle-for-itsm-and-crm-heats-up/" target="_blank">Salesforce vs ServiceNow: The Battle for ITSM and CRM — salesforceben.com</a></li>
-    <li><a href="https://www.gartner.com/reviews/market/application-platforms-reviews/compare/salesforce-vs-servicenow" target="_blank">Gartner Peer Insights: Salesforce vs ServiceNow 2026</a></li>
-  </ul></div>
+          // ── 3. Strategy & Marketing Differences ──
+          '<div class="cr-section-hdr">3. Marketing &amp; Strategic Differences</div>' +
+          '<div class="cr-card">' +
+            '<table class="cr-compare-table">' +
+              '<thead><tr><th>Dimension</th><th style="color:#7dd4e8">Salesforce (CRM)</th><th style="color:#6ee7b7">ServiceNow (NOW)</th></tr></thead>' +
+              '<tbody>' +
+                '<tr><td>Positioning</td><td>"The #1 AI CRM" — customer-facing revenue growth, external relationships</td><td>"AI Platform for Business Transformation" — internal operational efficiency</td></tr>' +
+                '<tr><td>Customer Base</td><td>150,000 customers; broad SMB to enterprise; high volume, variable deal size</td><td>~8,100 enterprise-only accounts; narrow but very high ACV (~$1.6M avg)</td></tr>' +
+                '<tr><td>Suppliers</td><td>AWS (primary), Google Cloud, Azure; Dun &amp; Bradstreet for data enrichment</td><td>AWS, Azure; NVIDIA for AI compute; Accenture, Deloitte, KPMG as SI partners</td></tr>' +
+                '<tr><td>Product Lines</td><td>Sales, Service, Marketing, Commerce, Tableau, MuleSoft, Slack, Agentforce</td><td>IT workflows (ITSM/ITOM/ITAM), HR, Customer, Creator (low-code), Now Assist AI</td></tr>' +
+                '<tr><td>Churn / Retention</td><td>~90% gross retention; NRR ~110–115%</td><td>&gt;99% gross retention — among lowest in enterprise SaaS; NRR ~125%+</td></tr>' +
+                '<tr><td>Competitive Moat</td><td>Brand dominance, AppExchange ecosystem lock-in, Agentforce AI momentum</td><td>Platform stickiness — replacing Now Platform requires enterprise-wide re-implementation</td></tr>' +
+                '<tr><td>Marketing Tactics</td><td>Dreamforce (~40K attendees), Trailhead certifications, heavy digital/content</td><td>Knowledge conference, Gartner Magic Quadrant dominance, CIO-direct sales</td></tr>' +
+              '</tbody>' +
+            '</table>' +
+          '</div>' +
+          '<div class="cr-sources" style="margin-top:10px"><div class="cr-sources-title">Sources</div><ul>' +
+            '<li><a href="https://www.tikr.com/blog/salesforce-vs-servicenow-which-enterprise-software-stock-wins-over-the-next-5-years" target="_blank">Salesforce vs ServiceNow Comparison — tikr.com</a></li>' +
+            '<li><a href="https://www.gartner.com/reviews/market/application-platforms-reviews/compare/salesforce-vs-servicenow" target="_blank">Gartner Peer Insights: CRM vs NOW 2026</a></li>' +
+          '</ul></div>' +
 
-  <!-- 4. Financial Analysis -->
-  <div class="r-section">4. Financial Analysis</div>
-  <div class="r-subsection">Balance Sheet Health</div>
-  <div class="r-compare">
-    <div class="r-compare-col">
-      <div class="r-col-label">Salesforce (CRM)</div>
-      <table class="r-table">
-        <tr><td>Total Assets</td><td>$112.3B</td></tr>
-        <tr><td>Total Debt</td><td>$14.4B</td></tr>
-        <tr><td>Cash &amp; Equivalents</td><td>~$13.0B</td></tr>
-        <tr><td>Total Equity</td><td>$59.1B</td></tr>
-        <tr><td>Debt-to-Equity</td><td>~0.24x ✓</td></tr>
-        <tr><td>Interest Coverage</td><td>&gt;10x (OCF $13.1B) ✓</td></tr>
-      </table>
-      <p class="r-note">Debt reflects major acquisitions (Slack $27.7B, Tableau $15.7B) but is comfortably covered by $13.1B operating cash flow.</p>
-    </div>
-    <div class="r-compare-col">
-      <div class="r-col-label">ServiceNow (NOW)</div>
-      <table class="r-table">
-        <tr><td>Total Assets</td><td>~$22.0B</td></tr>
-        <tr><td>Total Debt</td><td>$2.43B</td></tr>
-        <tr><td>Cash &amp; Equivalents</td><td>$5.18B</td></tr>
-        <tr><td>Net Cash Position</td><td>+$2.75B ✓</td></tr>
-        <tr><td>Debt-to-Equity</td><td>~0.32x ✓</td></tr>
-        <tr><td>Interest Coverage</td><td>&gt;20x (OCF $5.4B) ✓</td></tr>
-      </table>
-      <p class="r-note">Net cash positive. Generates $3.11 in operating cash for every $1 of GAAP net income — exceptionally capital-efficient.</p>
-    </div>
-  </div>
+          // ── 4. Financial Analysis ──
+          '<div class="cr-section-hdr">4. Financial Deep Dive</div>' +
+          '<div class="cr-card">' +
+            '<div class="cr-fin-tabs">' +
+              '<button class="cr-fin-tab act" id="' + p + '-t1" onclick="crFinTab(\'' + p + '\',\'rev\',this)">Revenue</button>' +
+              '<button class="cr-fin-tab" id="' + p + '-t2" onclick="crFinTab(\'' + p + '\',\'margin\',this)">Operating Margin</button>' +
+              '<button class="cr-fin-tab" id="' + p + '-t3" onclick="crFinTab(\'' + p + '\',\'fcf\',this)">Free Cash Flow</button>' +
+            '</div>' +
+            '<div class="cr-chart-box"><canvas id="' + p + '-finChart"></canvas></div>' +
+          '</div>' +
 
-  <div class="r-subsection">Income Statement — 5-Year History &amp; Forward Estimates</div>
-  <div class="r-fin-label">Salesforce (CRM) — Fiscal Year ends January 31</div>
-  <table class="r-table">
-    <tr><th>Year</th><th>Revenue</th><th>Rev Growth</th><th>Net Income</th><th>Net Margin</th><th>Op Margin</th></tr>
-    <tr><td>FY2021</td><td>$21.25B</td><td>—</td><td>~$0.1B</td><td>~0.5%</td><td>2.1%</td></tr>
-    <tr><td>FY2022</td><td>$26.49B</td><td>+24.7%</td><td>~$1.4B</td><td>5.3%</td><td>2.1%</td></tr>
-    <tr><td>FY2023</td><td>$31.35B</td><td>+18.4%</td><td>~$0.2B*</td><td>0.6%</td><td>3.3%</td></tr>
-    <tr><td>FY2024</td><td>$34.86B</td><td>+11.2%</td><td>$4.1B</td><td>11.8%</td><td>14.4%</td></tr>
-    <tr><td>FY2025</td><td>$37.90B</td><td>+8.7%</td><td>$6.0B</td><td>15.8%</td><td>19.0%</td></tr>
-    <tr><td>FY2026E</td><td>~$41.5B</td><td>~+9.5%</td><td>~$7.1B</td><td>~17%</td><td>~21%</td></tr>
-    <tr><td>FY2027E</td><td>~$45.4B</td><td>~+9.4%</td><td>~$8.2B</td><td>~18%</td><td>~23%</td></tr>
-  </table>
-  <p class="r-note">*FY2023 net income suppressed by ~$4.5B goodwill impairment (Slack). &nbsp;Trailing P/E: ~23.6x &nbsp;|&nbsp; Forward P/E: ~13.8x</p>
+          // Balance sheet cards
+          '<div class="cr-grid-2" style="margin-top:12px">' +
+            '<div class="cr-card">' +
+              '<div style="font-size:12.5px;font-weight:700;color:#00bcd4;border-bottom:1px solid #e5eef3;padding-bottom:6px;margin-bottom:10px">Salesforce (CRM) — Balance Sheet</div>' +
+              '<table class="cr-data-table"><tbody>' +
+                '<tr><td>Total Assets</td><td><strong>$112.3B</strong></td></tr>' +
+                '<tr><td>Total Debt</td><td><strong>$14.4B</strong></td></tr>' +
+                '<tr><td>Cash &amp; Equivalents</td><td><strong>~$13.0B</strong></td></tr>' +
+                '<tr><td>Debt-to-Equity</td><td><strong>~0.24x ✓</strong></td></tr>' +
+                '<tr><td>Interest Coverage</td><td><strong>&gt;10x ✓</strong></td></tr>' +
+                '<tr><td>Trailing P/E | Fwd P/E</td><td><strong>~23.6x | ~13.8x</strong></td></tr>' +
+              '</tbody></table>' +
+              '<p class="cr-note">Debt reflects major acquisitions (Slack $27.7B, Tableau $15.7B) — comfortably covered by $13.1B operating cash flow.</p>' +
+            '</div>' +
+            '<div class="cr-card">' +
+              '<div style="font-size:12.5px;font-weight:700;color:#10b981;border-bottom:1px solid #e5eef3;padding-bottom:6px;margin-bottom:10px">ServiceNow (NOW) — Balance Sheet</div>' +
+              '<table class="cr-data-table"><tbody>' +
+                '<tr><td>Total Assets</td><td><strong>~$22.0B</strong></td></tr>' +
+                '<tr><td>Total Debt</td><td><strong>$2.43B</strong></td></tr>' +
+                '<tr><td>Cash &amp; Equivalents</td><td><strong>$5.18B</strong></td></tr>' +
+                '<tr><td>Net Cash Position</td><td><strong>+$2.75B ✓</strong></td></tr>' +
+                '<tr><td>Debt-to-Equity</td><td><strong>~0.32x ✓</strong></td></tr>' +
+                '<tr><td>Trailing P/E | Fwd P/E</td><td><strong>~54.8x | ~21.5x</strong></td></tr>' +
+              '</tbody></table>' +
+              '<p class="cr-note">Net cash positive. Generates $3.11 in operating cash for every $1 of GAAP net income — exceptionally capital-efficient.</p>' +
+            '</div>' +
+          '</div>' +
 
-  <div class="r-fin-label" style="margin-top:18px">ServiceNow (NOW) — Calendar Year ends December 31</div>
-  <table class="r-table">
-    <tr><th>Year</th><th>Revenue</th><th>Rev Growth</th><th>Net Income</th><th>Net Margin</th><th>Op Margin</th></tr>
-    <tr><td>2021</td><td>$5.90B</td><td>—</td><td>~$0.24B</td><td>4.1%</td><td>~5%</td></tr>
-    <tr><td>2022</td><td>$7.25B</td><td>+22.9%</td><td>~$0.40B</td><td>5.5%</td><td>~8%</td></tr>
-    <tr><td>2023</td><td>$8.97B</td><td>+23.7%</td><td>$1.73B</td><td>19.3%</td><td>~13%</td></tr>
-    <tr><td>2024</td><td>$10.98B</td><td>+22.4%</td><td>$1.43B</td><td>13.0%</td><td>12.4%</td></tr>
-    <tr><td>2025</td><td>$13.28B</td><td>+20.9%</td><td>$1.75B</td><td>13.2%</td><td>13.7%</td></tr>
-    <tr><td>2026E</td><td>~$15.7B</td><td>~+18.1%</td><td>~$2.4B</td><td>~15%</td><td>~16%</td></tr>
-    <tr><td>2027E</td><td>~$18.6B</td><td>~+18.5%</td><td>~$3.2B</td><td>~17%</td><td>~19%</td></tr>
-  </table>
-  <p class="r-note">2024 net income decline reflects step-up in R&amp;D and AI infrastructure spend. &nbsp;Trailing P/E: ~54.8x &nbsp;|&nbsp; Forward P/E: ~21.5x</p>
+          // Income statement tables
+          '<div style="margin-top:14px">' +
+            '<div class="cr-co-badge" style="background:#e0f4f8;color:#006b80">CRM — Income Statement (FY ends Jan 31)</div>' +
+            '<div class="cr-card" style="padding:12px">' +
+              '<table class="cr-data-table"><thead><tr><th>Year</th><th>Revenue</th><th>Rev Growth</th><th>Net Income</th><th>Net Margin</th><th>Op Margin</th></tr></thead><tbody>' +
+                '<tr><td>FY2021</td><td>$21.25B</td><td>—</td><td>~$0.1B</td><td>~0.5%</td><td>2.1%</td></tr>' +
+                '<tr><td>FY2022</td><td>$26.49B</td><td>+24.7%</td><td>~$1.4B</td><td>5.3%</td><td>2.1%</td></tr>' +
+                '<tr><td>FY2023</td><td>$31.35B</td><td>+18.4%</td><td>~$0.2B*</td><td>0.6%</td><td>3.3%</td></tr>' +
+                '<tr><td>FY2024</td><td>$34.86B</td><td>+11.2%</td><td>$4.1B</td><td>11.8%</td><td>14.4%</td></tr>' +
+                '<tr><td>FY2025</td><td>$37.90B</td><td>+8.7%</td><td>$6.0B</td><td>15.8%</td><td>19.0%</td></tr>' +
+                '<tr><td>FY2026E</td><td>~$41.5B</td><td>~+9.5%</td><td>~$7.1B</td><td>~17%</td><td>~21%</td></tr>' +
+                '<tr><td>FY2027E</td><td>~$45.4B</td><td>~+9.4%</td><td>~$8.2B</td><td>~18%</td><td>~23%</td></tr>' +
+              '</tbody></table>' +
+              '<p class="cr-note">*FY2023 net income suppressed by ~$4.5B goodwill impairment (Slack).</p>' +
+            '</div>' +
+          '</div>' +
+          '<div style="margin-top:10px">' +
+            '<div class="cr-co-badge" style="background:#d1fae5;color:#065f46">NOW — Income Statement (CY ends Dec 31)</div>' +
+            '<div class="cr-card" style="padding:12px">' +
+              '<table class="cr-data-table"><thead><tr><th>Year</th><th>Revenue</th><th>Rev Growth</th><th>Net Income</th><th>Net Margin</th><th>Op Margin</th></tr></thead><tbody>' +
+                '<tr><td>2021</td><td>$5.90B</td><td>—</td><td>~$0.24B</td><td>4.1%</td><td>~5%</td></tr>' +
+                '<tr><td>2022</td><td>$7.25B</td><td>+22.9%</td><td>~$0.40B</td><td>5.5%</td><td>~8%</td></tr>' +
+                '<tr><td>2023</td><td>$8.97B</td><td>+23.7%</td><td>$1.73B</td><td>19.3%</td><td>~13%</td></tr>' +
+                '<tr><td>2024</td><td>$10.98B</td><td>+22.4%</td><td>$1.43B</td><td>13.0%</td><td>12.4%</td></tr>' +
+                '<tr><td>2025</td><td>$13.28B</td><td>+20.9%</td><td>$1.75B</td><td>13.2%</td><td>13.7%</td></tr>' +
+                '<tr><td>2026E</td><td>~$15.7B</td><td>~+18.1%</td><td>~$2.4B</td><td>~15%</td><td>~16%</td></tr>' +
+                '<tr><td>2027E</td><td>~$18.6B</td><td>~+18.5%</td><td>~$3.2B</td><td>~17%</td><td>~19%</td></tr>' +
+              '</tbody></table>' +
+              '<p class="cr-note">2024 net income decline reflects step-up in R&amp;D and AI infrastructure spend.</p>' +
+            '</div>' +
+          '</div>' +
+          '<div class="cr-sources" style="margin-top:10px"><div class="cr-sources-title">Sources</div><ul>' +
+            '<li><a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Announces-Fourth-Quarter-and-Fiscal-Year-2025-Results/default.aspx" target="_blank">Salesforce FY2025 Full Year Results</a></li>' +
+            '<li><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-Board-of-Directors-Authorizes-Additional-5B-for-Share-Repurchase-Program/default.aspx" target="_blank">ServiceNow FY2025 Full Year Results</a></li>' +
+            '<li><a href="https://www.macrotrends.net/stocks/charts/CRM/salesforce/free-cash-flow" target="_blank">Salesforce Historical FCF — macrotrends.net</a></li>' +
+            '<li><a href="https://www.macrotrends.net/stocks/charts/NOW/servicenow/revenue" target="_blank">ServiceNow Historical Revenue — macrotrends.net</a></li>' +
+          '</ul></div>' +
 
-  <div class="r-subsection">Cash Flow (5-Year)</div>
-  <div class="r-compare">
-    <div class="r-compare-col">
-      <div class="r-col-label">Salesforce (CRM) — Free Cash Flow</div>
-      <table class="r-table">
-        <tr><th>Year</th><th>FCF</th><th>OCF</th></tr>
-        <tr><td>FY2021</td><td>~$3.7B</td><td>~$4.3B</td></tr>
-        <tr><td>FY2022</td><td>~$5.0B</td><td>~$5.8B</td></tr>
-        <tr><td>FY2023</td><td>~$6.3B</td><td>~$7.1B</td></tr>
-        <tr><td>FY2024</td><td>$9.5B</td><td>$10.2B</td></tr>
-        <tr><td>FY2025</td><td>$12.4B</td><td>$13.1B</td></tr>
-      </table>
-      <p class="r-note">FCF margin ~33% | +30.9% YoY growth | $9.3B returned to shareholders in FY2025</p>
-    </div>
-    <div class="r-compare-col">
-      <div class="r-col-label">ServiceNow (NOW) — Free Cash Flow</div>
-      <table class="r-table">
-        <tr><th>Year</th><th>FCF</th><th>OCF</th></tr>
-        <tr><td>2021</td><td>~$1.3B</td><td>~$1.6B</td></tr>
-        <tr><td>2022</td><td>~$1.9B</td><td>~$2.3B</td></tr>
-        <tr><td>2023</td><td>~$2.7B</td><td>~$3.1B</td></tr>
-        <tr><td>2024</td><td>~$3.4B</td><td>~$4.0B</td></tr>
-        <tr><td>2025</td><td>$4.6B</td><td>$5.4B</td></tr>
-      </table>
-      <p class="r-note">FCF margin ~35% (slightly superior) | +34% YoY | $3.11 OCF per $1 GAAP net income</p>
-    </div>
-  </div>
-  <div class="r-sources"><div class="r-sources-title">Sources</div><ul>
-    <li><a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Announces-Fourth-Quarter-and-Fiscal-Year-2025-Results/default.aspx" target="_blank">Salesforce FY2025 Full Year Results — investor.salesforce.com</a></li>
-    <li><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-Board-of-Directors-Authorizes-Additional-5B-for-Share-Repurchase-Program/default.aspx" target="_blank">ServiceNow FY2025 Full Year Results — newsroom.servicenow.com</a></li>
-    <li><a href="https://www.macrotrends.net/stocks/charts/CRM/salesforce/free-cash-flow" target="_blank">Salesforce Historical Free Cash Flow — macrotrends.net</a></li>
-    <li><a href="https://www.macrotrends.net/stocks/charts/NOW/servicenow/revenue" target="_blank">ServiceNow Historical Revenue — macrotrends.net</a></li>
-    <li><a href="https://www.gurufocus.com/term/forward-pe-ratio/CRM" target="_blank">Salesforce Forward P/E Ratio — gurufocus.com</a></li>
-    <li><a href="https://www.gurufocus.com/term/forward-pe-ratio/NOW" target="_blank">ServiceNow Forward P/E Ratio — gurufocus.com</a></li>
-  </ul></div>
+          // ── 5. SWOT ──
+          '<div class="cr-section-hdr">5. SWOT Analysis</div>' +
+          '<div class="cr-swot-toggle">' +
+            '<button class="cr-swot-btn act" id="' + p + '-sb-crm" onclick="crSwot(\'' + p + '\',\'crm\')">CRM</button>' +
+            '<button class="cr-swot-btn" id="' + p + '-sb-now" onclick="crSwot(\'' + p + '\',\'now\')">NOW</button>' +
+          '</div>' +
+          '<div id="' + p + '-swot-container" class="cr-swot-grid"></div>' +
 
-  <!-- 5. SWOT Analysis -->
-  <div class="r-section">5. SWOT Analysis</div>
+          // ── 6. Investment Thesis ──
+          '<div class="cr-section-hdr">6. Investment Thesis</div>' +
+          '<div class="cr-thesis-grid">' +
+            '<div class="cr-thesis-co">' +
+              '<div class="cr-thesis-hdr" style="background:#e0f4f8;color:#006b80">Salesforce (CRM)</div>' +
+              '<div class="cr-thesis-body">' +
+                '<div class="cr-case"><div class="cr-case-hdr bull">&#8593; Bull Case</div><p>CRM is a rare large-cap combining accelerating profitability with credible AI monetization. Sub-14x forward P/E against analyst consensus targets makes it a compelling value play in enterprise software. Agentforce re-accelerating revenue growth toward 12–15% would trigger significant re-rating.</p></div>' +
+                '<div class="cr-case"><div class="cr-case-hdr bear">&#8595; Bear Case</div><p>Core CRM maturing at 9% growth. Microsoft\'s AI-bundled Dynamics 365 is an existential pricing threat. The $9.3B returned to shareholders in FY2025 signals a company running short of high-return reinvestment opportunities. Without Agentforce scaling quickly, CRM trades like a slow-growth software business.</p></div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="cr-thesis-co">' +
+              '<div class="cr-thesis-hdr" style="background:#d1fae5;color:#065f46">ServiceNow (NOW)</div>' +
+              '<div class="cr-thesis-body">' +
+                '<div class="cr-case"><div class="cr-case-hdr bull">&#8593; Bull Case</div><p>NOW is the most compelling compounder in enterprise SaaS: 20%+ growth, 99%+ gross retention, $4.6B FCF, and a $30B 2030 revenue target management calls the "bear case." AI workflow position may be stronger than Salesforce\'s — AI agents deploy at the workflow layer first, and NOW controls that layer.</p></div>' +
+                '<div class="cr-case"><div class="cr-case-hdr bear">&#8595; Bear Case</div><p>Priced for perfection at 55x trailing earnings on a 13% net margin. Any macro-driven IT freeze, competitive pressure from Microsoft or Salesforce, or AI monetization disappointment could cause severe multiple compression.</p></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
 
-  <div class="swot-company-wrap">
-    <div class="swot-company-label">Salesforce, Inc. (NYSE: CRM)</div>
-    <div class="swot-grid">
-      <div class="swot-cell swot-s">
-        <div class="swot-cell-title">&#9679; Strengths</div>
-        <ul>
-          <li>Undisputed CRM leader — 20.7% global share, #1 for 12 years; 9/10 Fortune 500 customers</li>
-          <li>Explosive margin expansion — operating margin surged from 2% (FY22) to 19% (FY25); FCF of $12.4B</li>
-          <li>Agentforce AI momentum — $1.4B ARR in Q3 FY26, +114% YoY on combined AI + Data Cloud</li>
-        </ul>
-      </div>
-      <div class="swot-cell swot-w">
-        <div class="swot-cell-title">&#9679; Weaknesses</div>
-        <ul>
-          <li>Revenue growth decelerating — from 25% (FY22) to 9% (FY25); maturation concerns rising</li>
-          <li>Fragmented product portfolio — Slack, MuleSoft, Tableau integrations remain complex for clients</li>
-          <li>High sales &amp; marketing spend (~44% of revenue) with intensifying competition from all sides</li>
-        </ul>
-      </div>
-      <div class="swot-cell swot-o">
-        <div class="swot-cell-title">&#9679; Opportunities</div>
-        <ul>
-          <li>Agentforce upsell — massive AI monetization potential across 150,000 existing customers</li>
-          <li>Data Cloud — proprietary customer data platform as a durable AI competitive moat</li>
-          <li>ITSM expansion — entering IT workflow market, directly challenging ServiceNow (NOW)</li>
-        </ul>
-      </div>
-      <div class="swot-cell swot-t">
-        <div class="swot-cell-title">&#9679; Threats</div>
-        <ul>
-          <li>Microsoft (MSFT) Dynamics + Copilot — AI CRM bundled into existing enterprise contracts</li>
-          <li>Growth expectations gap — 15%+ revenue acceleration requires Agentforce to scale quickly</li>
-          <li>ServiceNow (NOW) encroachment into customer-facing workflows and service automation</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+          // ── 7. Summary Scorecard ──
+          '<div class="cr-section-hdr">Summary Scorecard</div>' +
+          '<div class="cr-card" style="padding:12px">' +
+            '<table class="cr-score-table"><thead><tr><th>Metric</th><th>Salesforce (CRM)</th><th>ServiceNow (NOW)</th></tr></thead><tbody>' +
+              '<tr><td>Revenue (Latest FY)</td><td>$37.9B (FY2025)</td><td>$13.3B (FY2025)</td></tr>' +
+              '<tr><td>Revenue Growth</td><td>+8.7%</td><td>+20.9%</td></tr>' +
+              '<tr><td>Gross Margin</td><td>77.2%</td><td>77.5%</td></tr>' +
+              '<tr><td>Operating Margin</td><td>19.0%</td><td>13.7%</td></tr>' +
+              '<tr><td>Net Margin</td><td>15.8%</td><td>13.2%</td></tr>' +
+              '<tr><td>Free Cash Flow</td><td>$12.4B (+31% YoY)</td><td>$4.6B (+34% YoY)</td></tr>' +
+              '<tr><td>Debt-to-Equity</td><td>~0.24x</td><td>~0.32x</td></tr>' +
+              '<tr><td>Trailing P/E</td><td>~23.6x</td><td>~54.8x</td></tr>' +
+              '<tr><td>Forward P/E</td><td>~13.8x</td><td>~21.5x</td></tr>' +
+              '<tr><td>Primary Market Share</td><td>20.7% CRM (Global #1)</td><td>44.4% ITSM (Global #1)</td></tr>' +
+              '<tr><td>Customer Count</td><td>150,000</td><td>8,100+ enterprise</td></tr>' +
+              '<tr><td>Gross Retention</td><td>~90%</td><td>&gt;99%</td></tr>' +
+              '<tr><td>FCF Margin</td><td>~33%</td><td>~35%</td></tr>' +
+            '</tbody></table>' +
+          '</div>' +
 
-  <div class="swot-company-wrap" style="margin-top:20px">
-    <div class="swot-company-label">ServiceNow, Inc. (NYSE: NOW)</div>
-    <div class="swot-grid">
-      <div class="swot-cell swot-s">
-        <div class="swot-cell-title">&#9679; Strengths</div>
-        <ul>
-          <li>Exceptional stickiness — gross retention &gt;99%; replacing Now Platform requires enterprise-wide re-implementation across IT, HR, Legal, Operations</li>
-          <li>Superior growth — 20–21% annual revenue growth; 2,109 accounts with ACV &gt;$1M</li>
-          <li>AI-native position — 150% QoQ growth in AI deals; surpassed 1,000 AI customers in 2025</li>
-        </ul>
-      </div>
-      <div class="swot-cell swot-w">
-        <div class="swot-cell-title">&#9679; Weaknesses</div>
-        <ul>
-          <li>Valuation premium — trailing P/E ~55x; any growth miss could cause severe multiple compression</li>
-          <li>Narrow enterprise focus — 85%+ revenue from 10,000+ employee firms; no SMB penetration</li>
-          <li>Net margin lag — 13.2% vs CRM&#39;s 16% despite similar gross margins (~77%); heavy AI R&amp;D spend</li>
-        </ul>
-      </div>
-      <div class="swot-cell swot-o">
-        <div class="swot-cell-title">&#9679; Opportunities</div>
-        <ul>
-          <li>TAM expansion — financial workflows, legal, supply chain, manufacturing all under-penetrated</li>
-          <li>AI pricing power — Now Assist sold as premium add-on with strong customer willingness to pay</li>
-          <li>Government &amp; regulated sectors — growing U.S. federal and European public sector footprint</li>
-        </ul>
-      </div>
-      <div class="swot-cell swot-t">
-        <div class="swot-cell-title">&#9679; Threats</div>
-        <ul>
-          <li>Salesforce (CRM) and Microsoft (MSFT) entering ITSM — reducing platform switching incentives</li>
-          <li>Execution risk — CEO&#39;s $30B by 2030 target requires sustained 20%+ growth; macro vulnerability</li>
-          <li>Concentration risk — loss of a few large government or financial services contracts is material</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+          '<div class="cr-sources" style="margin-top:10px"><div class="cr-sources-title">Sources</div><ul>' +
+            '<li><a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Announces-Fourth-Quarter-and-Fiscal-Year-2025-Results/default.aspx" target="_blank">Salesforce FY2025 Q4 &amp; Full Year Results</a></li>' +
+            '<li><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-Board-of-Directors-Authorizes-Additional-5B-for-Share-Repurchase-Program/default.aspx" target="_blank">ServiceNow FY2025 Full Year Results</a></li>' +
+            '<li><a href="https://www.salesforce.com/news/stories/idc-crm-market-share-ranking-2025/" target="_blank">Salesforce #1 CRM IDC Market Share 2025</a></li>' +
+            '<li><a href="https://247wallst.com/investing/2026/04/24/cheap-salesforce-vs-expensive-servicenow-which-stock-is-a-better-buy-today/" target="_blank">Cheap Salesforce vs Expensive ServiceNow — 247wallst.com</a></li>' +
+            '<li><a href="https://www.gurufocus.com/term/forward-pe-ratio/CRM" target="_blank">Salesforce Forward P/E — gurufocus.com</a></li>' +
+            '<li><a href="https://cyntexa.com/blog/servicenow-statistics/" target="_blank">ServiceNow Statistics 2026 — cyntexa.com</a></li>' +
+          '</ul></div>' +
 
-  <!-- 6. Investment Thesis -->
-  <div class="r-section">6. Investment Thesis</div>
-  <div class="r-compare">
-    <div class="r-compare-col">
-      <div class="r-col-label">Salesforce (CRM)</div>
-      <div class="r-thesis-block r-bull">
-        <div class="r-thesis-label">&#9650; Bull Case</div>
-        <p>CRM is a rare large-cap software stock combining accelerating profitability with credible AI monetization. Sub-14x forward P/E against a ~$278 analyst consensus target (~50% upside) makes it one of the most compelling value plays in enterprise software. If Agentforce re-accelerates revenue growth toward 12–15%, the stock re-rates significantly.</p>
-      </div>
-      <div class="r-thesis-block r-bear" style="margin-top:10px">
-        <div class="r-thesis-label">&#9660; Bear Case</div>
-        <p>Core CRM is maturing at 9% growth. Microsoft&#39;s AI-bundled Dynamics 365 is an existential pricing threat. The $9.3B returned to shareholders in FY2025 signals a company running short of high-return reinvestment opportunities. Without Agentforce proving out at scale, CRM trades like a slow-growth software business.</p>
-      </div>
-    </div>
-    <div class="r-compare-col">
-      <div class="r-col-label">ServiceNow (NOW)</div>
-      <div class="r-thesis-block r-bull">
-        <div class="r-thesis-label">&#9650; Bull Case</div>
-        <p>NOW is the most compelling compounder in enterprise SaaS: 20%+ growth, 99%+ gross retention, $4.6B FCF, and a $30B 2030 revenue target management calls the "bear case." Its AI workflow position may be stronger than Salesforce&#39;s — AI agents deploy at the workflow layer first, and NOW controls that layer across IT, HR, Legal, and Finance for thousands of global enterprises.</p>
-      </div>
-      <div class="r-thesis-block r-bear" style="margin-top:10px">
-        <div class="r-thesis-label">&#9660; Bear Case</div>
-        <p>Priced for perfection at 55x trailing earnings on a 13% net margin. Any macro-driven IT freeze, competitive pressure from Microsoft or Salesforce, or AI monetization disappointment could cause severe multiple compression. The 2030 growth story requires flawless execution for four straight years.</p>
-      </div>
-    </div>
-  </div>
+          '</div>'; // end cr-wrap
+        },
 
-  <!-- Summary Scorecard -->
-  <div class="r-section">Summary Scorecard</div>
-  <table class="r-table">
-    <tr><th>Metric</th><th>Salesforce (CRM)</th><th>ServiceNow (NOW)</th></tr>
-    <tr><td>Revenue (Latest FY)</td><td>$37.9B (FY2025)</td><td>$13.3B (FY2025)</td></tr>
-    <tr><td>Revenue Growth</td><td>+8.7%</td><td>+20.9%</td></tr>
-    <tr><td>Gross Margin</td><td>77.2%</td><td>77.5%</td></tr>
-    <tr><td>Operating Margin</td><td>19.0%</td><td>13.7%</td></tr>
-    <tr><td>Net Margin</td><td>15.8%</td><td>13.2%</td></tr>
-    <tr><td>Free Cash Flow</td><td>$12.4B (+31% YoY)</td><td>$4.6B (+34% YoY)</td></tr>
-    <tr><td>Debt-to-Equity</td><td>~0.24x</td><td>~0.32x</td></tr>
-    <tr><td>Trailing P/E</td><td>~23.6x</td><td>~54.8x</td></tr>
-    <tr><td>Forward P/E</td><td>~13.8x</td><td>~21.5x</td></tr>
-    <tr><td>Primary Market Share</td><td>20.7% CRM (Global #1)</td><td>44.4% ITSM (Global #1)</td></tr>
-    <tr><td>Customer Count</td><td>150,000</td><td>8,100+ enterprise</td></tr>
-    <tr><td>Gross Retention</td><td>~90%</td><td>&gt;99%</td></tr>
-    <tr><td>FCF Margin</td><td>~33%</td><td>~35%</td></tr>
-  </table>
-
-  <div class="r-sources"><div class="r-sources-title">Sources</div><ul>
-    <li><a href="https://investor.salesforce.com/news/news-details/2025/Salesforce-Announces-Fourth-Quarter-and-Fiscal-Year-2025-Results/default.aspx" target="_blank">Salesforce FY2025 Q4 &amp; Full Year Results — investor.salesforce.com</a></li>
-    <li><a href="https://newsroom.servicenow.com/press-releases/details/2026/ServiceNow-Reports-Fourth-Quarter-and-Full-Year-2025-Financial-Results-Board-of-Directors-Authorizes-Additional-5B-for-Share-Repurchase-Program/default.aspx" target="_blank">ServiceNow FY2025 Full Year Results — newsroom.servicenow.com</a></li>
-    <li><a href="https://www.salesforce.com/news/stories/idc-crm-market-share-ranking-2025/" target="_blank">Salesforce #1 CRM IDC Market Share 2025 — salesforce.com</a></li>
-    <li><a href="https://www.tikr.com/blog/salesforce-vs-servicenow-which-enterprise-software-stock-wins-over-the-next-5-years" target="_blank">Salesforce vs ServiceNow: Which Stock Wins? — tikr.com</a></li>
-    <li><a href="https://247wallst.com/investing/2026/04/24/cheap-salesforce-vs-expensive-servicenow-which-stock-is-a-better-buy-today/" target="_blank">Cheap Salesforce vs Expensive ServiceNow — 247wallst.com</a></li>
-    <li><a href="https://www.gurufocus.com/term/forward-pe-ratio/CRM" target="_blank">Salesforce Forward P/E — gurufocus.com</a></li>
-    <li><a href="https://www.gurufocus.com/term/forward-pe-ratio/NOW" target="_blank">ServiceNow Forward P/E — gurufocus.com</a></li>
-    <li><a href="https://www.macrotrends.net/stocks/charts/CRM/salesforce/free-cash-flow" target="_blank">Salesforce Historical Free Cash Flow — macrotrends.net</a></li>
-    <li><a href="https://cyntexa.com/blog/servicenow-statistics/" target="_blank">ServiceNow Statistics 2026 — cyntexa.com</a></li>
-    <li><a href="https://www.macrotrends.net/stocks/charts/NOW/servicenow/revenue" target="_blank">ServiceNow Historical Revenue — macrotrends.net</a></li>
-  </ul></div>
-
-</div>`
+        initCharts: function(p) {
+          if (!window.Chart) return;
+          if (!window._activeCharts) window._activeCharts = [];
+          var labels = ['FY2021','FY2022','FY2023','FY2024','FY2025','FY2026E','FY2027E'];
+          var crmRev = [21.25,26.49,31.35,34.86,37.90,41.5,45.4];
+          var nowRev = [5.90,7.25,8.97,10.98,13.28,15.7,18.6];
+          var crmMargin = [2.1,2.1,3.3,14.4,19.0,21,23];
+          var nowMargin = [5,8,13,12.4,13.7,16,19];
+          var crmFcf = [3.7,5.0,6.3,9.5,12.4,14.5,17.0];
+          var nowFcf = [1.3,1.9,2.7,3.4,4.6,5.8,7.2];
+          var ctx = document.getElementById(p + '-finChart');
+          if (!ctx) return;
+          var chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {label:'CRM Revenue ($B)',data:crmRev,borderColor:'#00bcd4',backgroundColor:'rgba(0,188,212,0.08)',borderWidth:2.5,fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#00bcd4'},
+                {label:'NOW Revenue ($B)',data:nowRev,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:2.5,fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#10b981'}
+              ]
+            },
+            options: {
+              responsive:true, maintainAspectRatio:false,
+              interaction:{mode:'index',intersect:false},
+              plugins:{
+                legend:{position:'top',labels:{font:{family:"'Segoe UI',sans-serif",size:11}}},
+                tooltip:{titleFont:{family:"'Segoe UI',sans-serif"},bodyFont:{family:"'Segoe UI',sans-serif"}}
+              },
+              scales:{
+                y:{grid:{color:'#e5eef3'},ticks:{font:{size:10}}},
+                x:{grid:{display:false},ticks:{font:{size:10}}}
+              }
+            }
+          });
+          window._activeCharts.push(chart);
+          window[p + '_chart'] = chart;
+          window[p + '_data'] = {labels:labels,crmRev:crmRev,nowRev:nowRev,crmMargin:crmMargin,nowMargin:nowMargin,crmFcf:crmFcf,nowFcf:nowFcf};
+          // SWOT data
+          var swotData = {
+            crm: {
+              s:['Undisputed CRM leader — 20.7% global share, #1 for 12 years; 9/10 Fortune 500 customers','Explosive margin expansion — operating margin 2% (FY22) to 19% (FY25); FCF of $12.4B','Agentforce AI momentum — $1.4B ARR, +114% YoY on combined AI + Data Cloud'],
+              w:['Revenue growth decelerating — from 25% (FY22) to 9% (FY25); maturation concerns rising','Fragmented product portfolio — Slack, MuleSoft, Tableau integrations remain complex','High sales & marketing spend (~44% of revenue) with intensifying competition'],
+              o:['Agentforce upsell — massive AI monetization potential across 150,000 existing customers','Data Cloud — proprietary customer data platform as a durable AI competitive moat','ITSM expansion — entering IT workflow market, directly challenging ServiceNow'],
+              t:['Microsoft (MSFT) Dynamics + Copilot — AI CRM bundled into existing enterprise contracts','Growth expectations gap — 15%+ revenue acceleration requires Agentforce to scale quickly','ServiceNow (NOW) encroachment into customer-facing workflows and service automation']
+            },
+            now: {
+              s:['Exceptional stickiness — gross retention >99%; replacing Now Platform requires enterprise-wide re-implementation','Superior growth — 20–21% annual revenue growth; 2,109 accounts with ACV >$1M','AI-native position — 150% QoQ growth in AI deals; surpassed 1,000 AI customers in 2025'],
+              w:['Valuation premium — trailing P/E ~55x; any growth miss could cause severe multiple compression','Narrow enterprise focus — 85%+ revenue from 10,000+ employee firms; no SMB penetration','Net margin lag — 13.2% vs CRM\'s 16% despite similar gross margins (~77%)'],
+              o:['TAM expansion — financial workflows, legal, supply chain, manufacturing all under-penetrated','AI pricing power — Now Assist sold as premium add-on with strong customer willingness to pay','Government & regulated sectors — growing U.S. federal and European public sector footprint'],
+              t:['Salesforce (CRM) and Microsoft (MSFT) entering ITSM — reducing platform switching incentives','Execution risk — CEO\'s $30B by 2030 target requires sustained 20%+ growth; macro vulnerability','Concentration risk — loss of a few large government or financial services contracts is material']
+            }
+          };
+          window[p + '_swot'] = swotData;
+          crSwot(p, 'crm');
+        }
+      }
     }
   ],
 
@@ -1287,234 +1244,278 @@ const DB = {
     { id:"Enterprise Networking",  name:"Enterprise Networking",  fullReport:"" },
     { id:"EV Batteries",           name:"EV Batteries",           fullReport:"" },
     { id:"Neocloud",               name:"Neocloud",               fullReport:"" },
-    { id:"Nuclear Energy",         name:"Nuclear Energy",         fullReport:
-`STRATEGIC REVALUATION OF THE GLOBAL NUCLEAR ENERGY SECTOR
-A Comprehensive Industrial and Capital Markets Analysis
-Source: Institutional Industry Research — May 2026
+    { id:"Nuclear Energy", name:"Nuclear Energy", richReport: {
+      getHtml: function(p, coList, color) {
+        var trackedTickers = coList.map(function(c){return c.ticker;}).join(', ');
+        var coLabel = coList.length + ' tracked ' + (coList.length===1?'company':'companies') + (trackedTickers?': '+trackedTickers:'');
+        return '<div class="ir-wrap">' +
+        '<div class="ir-hero">' +
+          '<div class="ir-hero-title">Nuclear Energy — The Renaissance</div>' +
+          '<div class="ir-hero-sub">Deep vertical stack analysis: value chain economics, supply chain dependencies, and catalysts driving the next era of baseload power. Sector: Utilities & Energy Infrastructure | May 2026</div>' +
+          '<div class="ir-hero-stats">' +
+            '<div class="ir-hero-stat"><div class="ir-hero-stat-lbl">Global Installed Capacity</div><div class="ir-hero-stat-val">~390 GWe</div></div>' +
+            '<div class="ir-hero-stat"><div class="ir-hero-stat-lbl">U3O8 Spot Price (2025)</div><div class="ir-hero-stat-val">~$92/lb</div></div>' +
+            '<div class="ir-hero-stat"><div class="ir-hero-stat-lbl">Capacity Factor</div><div class="ir-hero-stat-val">92.6%</div></div>' +
+          '</div>' +
+          '<div style="font-size:11px;color:#4a7a8a;margin-top:10px">' + coLabel + '</div>' +
+        '</div>' +
 
-━━ EXECUTIVE SUMMARY ━━
-The global nuclear energy industry is navigating a period of structural re-emergence, transitioning
-from a marginalized component of the energy mix to a central pillar of sovereign industrial policy
-and digital infrastructure development. This shift is driven by three primary forces: the escalating
-baseload requirements of AI and hyperscale data centres, geopolitical necessity of decoupling from
-adversarial energy supply chains, and the physical limitations of intermittent renewables in meeting
-24/7 industrial loads. The nuclear renaissance represents a multi-trillion-dollar capital deployment
-opportunity, characterized by a shift from regulated cost-recovery to competitive, high-margin,
-"behind-the-meter" power purchase agreements.
+        '<div class="ir-section-hdr">How the Industry Works — The Nuclear Fuel Cycle</div>' +
+        '<div class="ir-card">' +
+          '<p style="font-size:12.5px;color:#374151;line-height:1.65;margin-bottom:14px">The nuclear energy industry operates on a highly specialized, tightly regulated supply chain known as the nuclear fuel cycle. Nuclear power generation relies on <strong>fission</strong> — splitting uranium atoms in a reactor to release immense heat, which boils water into steam that spins turbines to generate carbon-free baseload power.<br><br>Distinct phases: <strong>Upstream</strong> — mining and milling of uranium ore into U3O8 ("yellowcake"). <strong>Midstream</strong> — conversion (yellowcake to UF6 gas) and enrichment (increasing fissile U-235 concentration), then fuel fabrication into pellets and rods. <strong>Downstream</strong> — power generation by utilities, followed by spent fuel management. Small Modular Reactors (SMRs) are now entering the downstream phase.</p>' +
+          '<div class="ir-flow">' +
+            '<div class="ir-flow-box" style="background:#8b5cf620;border:1px solid #8b5cf6"><div style="font-size:18px;margin-bottom:6px">⛏</div><div style="font-size:11.5px;font-weight:700;color:#7c3aed">1. Mining & Milling</div><div style="font-size:11px;color:#6b7280">Uranium Ore → U3O8</div></div>' +
+            '<div class="ir-flow-arrow">→</div>' +
+            '<div class="ir-flow-box" style="background:#f472b620;border:1px solid #f472b6"><div style="font-size:18px;margin-bottom:6px">⚗</div><div style="font-size:11.5px;font-weight:700;color:#be185d">2. Conversion & Enrichment</div><div style="font-size:11px;color:#6b7280">U3O8 → UF6 → LEU</div></div>' +
+            '<div class="ir-flow-arrow">→</div>' +
+            '<div class="ir-flow-box" style="background:#f59e0b20;border:1px solid #f59e0b"><div style="font-size:18px;margin-bottom:6px">🔩</div><div style="font-size:11.5px;font-weight:700;color:#b45309">3. Fuel Fabrication</div><div style="font-size:11px;color:#6b7280">Gas → Solid Fuel Rods</div></div>' +
+            '<div class="ir-flow-arrow">→</div>' +
+            '<div class="ir-flow-box" style="background:#00bcd420;border:1px solid #00bcd4"><div style="font-size:18px;margin-bottom:6px">⚡</div><div style="font-size:11.5px;font-weight:700;color:#0f1c2e">4. Power Generation</div><div style="font-size:11px;color:#6b7280">Fission → Steam → Grid</div></div>' +
+          '</div>' +
+        '</div>' +
 
-━━ 1. INDUSTRIAL MECHANICS AND ECONOMIC FOUNDATIONS ━━
-Commercial nuclear energy operates on controlled nuclear fission of Uranium-235 (²³⁵U), governed
-by the mass-energy equivalence principle: E = Δmc²
+        '<div class="ir-section-hdr">Value Chain & Key Players</div>' +
+        '<div class="ir-grid-2">' +
+          // CCJ
+          '<div class="ir-co-card" style="border-top-color:#00bcd4">' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#00bcd4">Cameco Corp.</div><div class="ir-co-role">Upstream: Mining & Milling</div></div><span class="ir-ticker">NYSE: CCJ</span></div>' +
+            '<div class="ir-co-desc">One of the world\'s largest uranium providers. Tier-one mining assets at Cigar Lake and McArthur River in Canada. Recently expanded downstream via 49% stake in Westinghouse, gaining exposure to reactor services and equipment.</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val" style="color:#00bcd4">$21.4B USD</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Rev / Profit Growth YoY</div><div class="ir-co-metric-val" style="color:#16a34a">+38% / +115%</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail"><strong style="color:#00bcd4">Largest Customers:</strong> Constellation Energy (~14%), Duke Energy (~9%), KEPCO (~7%).<br><strong style="color:#00bcd4">Largest Suppliers:</strong> Caterpillar (heavy mining equip), Orica (explosives), regional chemical suppliers.</div>' +
+          '</div>' +
+          // LEU
+          '<div class="ir-co-card" style="border-top-color:#f472b6">' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#be185d">Centrus Energy</div><div class="ir-co-role">Midstream: Enrichment</div></div><span class="ir-ticker" style="background:#fce7f3;color:#9d174d">NYSE: LEU</span></div>' +
+            '<div class="ir-co-desc">The only U.S.-licensed producer of HALEU (High-Assay Low-Enriched Uranium) — required for next-gen advanced reactors and SMRs. Critical to national energy independence as Western sanctions restrict Russian enriched uranium (Tenex).</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val" style="color:#be185d">$1.8B USD</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Rev / Profit Growth YoY</div><div class="ir-co-metric-val" style="color:#16a34a">+22% / +54%</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail"><strong style="color:#be185d">Largest Customers:</strong> U.S. Dept of Energy (~35%), Constellation (~20%), TerraPower (HALEU off-take).<br><strong style="color:#be185d">Largest Suppliers:</strong> Orano (UF6 conversion), Honeywell (UF6 feed).</div>' +
+          '</div>' +
+          // NuScale
+          '<div class="ir-co-card" style="border-top-color:#8b5cf6">' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#7c3aed">NuScale Power</div><div class="ir-co-role">Downstream: SMR Technology</div></div><span class="ir-ticker" style="background:#ede9fe;color:#6d28d9">NYSE: SMR</span></div>' +
+            '<div class="ir-co-desc">Holds the first-ever SMR design certification from the U.S. NRC. Factory-fabricated modules (77 MWe each) that can be linked together, targeting industrial decarbonization and AI data centers. Speculative pure-play on modular nuclear commercialization.</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val" style="color:#7c3aed">$1.2B USD</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Revenue Stage</div><div class="ir-co-metric-val" style="color:#dc2626">Pre-Revenue</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail"><strong style="color:#7c3aed">Largest Customers:</strong> Standard Power (Data Centers ~30% backlog), RoPower (Romania).<br><strong style="color:#7c3aed">Largest Suppliers:</strong> Doosan Enerbility (heavy forging), Framatome (fuel design).</div>' +
+          '</div>' +
+          // CEG
+          '<div class="ir-co-card" style="border-top-color:#f59e0b">' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#b45309">Constellation Energy</div><div class="ir-co-role">Downstream: Power Generation</div></div><span class="ir-ticker" style="background:#fef3c7;color:#92400e">NASDAQ: CEG</span></div>' +
+            '<div class="ir-co-desc">Largest U.S. nuclear operator — produces ~10% of America\'s clean energy. Business model transformed by hyperscalers (Amazon, Microsoft) seeking behind-the-meter Power Purchase Agreements (PPAs) for 24/7 clean energy to power AI data centers.</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val" style="color:#b45309">$72.5B USD</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Rev / Profit Growth YoY</div><div class="ir-co-metric-val" style="color:#16a34a">+14% / +42%</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail"><strong style="color:#b45309">Largest Customers:</strong> PJM Interconnection (wholesale ~28%), Microsoft (Direct PPA ~12%).<br><strong style="color:#b45309">Largest Suppliers:</strong> Cameco (uranium), Urenco/Centrus (enrichment), Westinghouse (outage services).</div>' +
+          '</div>' +
+        '</div>' +
 
-In a pressurized water reactor (PWR) — the most common design globally — heat generated by fission
-is transferred to a primary coolant loop. High-pressure water remains liquid above 300°C; heat is
-transferred via steam generators to a secondary loop, producing steam that drives turbine-generators.
+        '<div class="ir-section-hdr">Market Trends & Data</div>' +
+        '<div class="ir-grid-2">' +
+          '<div class="ir-card"><div class="ir-card-title">Uranium Spot Price — The AI Data Center Catalyst</div><div class="ir-card-sub">Hyperscalers require 24/7 zero-carbon power. Intermittent renewables cannot guarantee uptime, driving utilities to lock in long-term uranium supply at multi-decade-high prices.</div><div class="ir-chart-box"><canvas id="' + p + '-uPrice"></canvas></div></div>' +
+          '<div class="ir-card"><div class="ir-card-title">Capacity Factor by Energy Source (%)</div><div class="ir-card-sub">Nuclear runs at &gt;92% capacity — the highest of any source. This reliability is the primary reason it is being selected for grid baseload replacement and data center PPAs.</div><div class="ir-chart-box"><canvas id="' + p + '-capFactor"></canvas></div></div>' +
+        '</div>' +
+        '<div class="ir-card" style="margin-top:12px"><div class="ir-card-title">Global Nuclear Capacity Forecast (GWe) — Asia Leading Build-Outs</div><div class="ir-card-sub">Asia is driving aggressive physical build-outs while North America focuses on life extensions, uprates, and SMR commercialization.</div><div class="ir-chart-box" style="height:220px"><canvas id="' + p + '-capForecast"></canvas></div></div>' +
 
-Industrial value proposition:
-  • Energy density: 1 kg enriched uranium ≈ 2–3 million times the energy of 1 kg of coal
-  • Capacity factor: 92%–95% — unique among zero-carbon sources for 24/7 reliability
-  • Asset life: 60–80 years vs. 20–25 years for solar/wind
+        '<div class="ir-section-hdr">Catalysts to Watch (Next 12 Months)</div>' +
+        '<div class="ir-catalyst-grid">' +
+          '<div class="ir-catalyst" style="border-left-color:#00bcd4"><div class="ir-catalyst-hdr">Policy & Regulatory Approvals <span class="ir-catalyst-badge" style="background:#e0f4f8;color:#006b80">Policy</span></div><p><strong>ADVANCE Act Execution:</strong> NRC streamlining environmental reviews and lowering licensing fees for next-gen reactors. <strong>HALEU Funding Deployment:</strong> U.S. DOE distributing billions in grants for domestic enrichment, directly benefiting Centrus (LEU). <strong>EU Taxonomy:</strong> Institutional capital flows increasing into nuclear following its "green" designation.</p></div>' +
+          '<div class="ir-catalyst" style="border-left-color:#f472b6"><div class="ir-catalyst-hdr">Hyperscaler Direct Investments <span class="ir-catalyst-badge" style="background:#fce7f3;color:#9d174d">Demand Spike</span></div><p>Expect Amazon, Google, Meta to announce direct equity stakes in nuclear generation assets or commit massive upfront financing for SMR build-outs. Public acceptance of nuclear at highest levels since the 1970s — easing friction for life extensions (Three Mile Island restart, Palisades).</p></div>' +
+          '<div class="ir-catalyst" style="border-left-color:#f59e0b"><div class="ir-catalyst-hdr">Geopolitical Supply Shocks <span class="ir-catalyst-badge" style="background:#fef3c7;color:#92400e">Risk</span></div><p><strong>Russian Uranium Ban:</strong> Strict enforcement of the Prohibiting Russian Uranium Imports Act could push U3O8 spot prices above $120/lb. <strong>Kazakhstan Policies:</strong> Any changes in Kazatomprom export quotas trigger immediate downstream margin pressures on utilities.</p></div>' +
+          '<div class="ir-catalyst" style="border-left-color:#8b5cf6"><div class="ir-catalyst-hdr">M&amp;A &amp; Vertical Integration <span class="ir-catalyst-badge" style="background:#ede9fe;color:#6d28d9">M&A</span></div><p><strong>Upstream consolidation:</strong> Mid-tier miners combining to achieve scale for tier-one utility contracts. <strong>Vertical integration:</strong> Large utilities potentially acquiring SMR design firms or dedicated fuel fabrication facilities to de-risk their 2030+ project pipelines.</p></div>' +
+        '</div>' +
 
-Comparative Technology Metrics:
-Technology               Capacity Factor    Energy Density (MJ/kg)    Asset Life (Yrs)    Land Use / MW
-Nuclear Energy           90% – 95%          ~80,000,000               60 – 80             Lowest
-Solar PV                 15% – 25%          N/A                       20 – 25             High
-Wind Energy              30% – 40%          N/A                       20 – 25             High
+        '</div>'; // end ir-wrap
+      },
+      initCharts: function(p) {
+        if (!window.Chart) return;
+        if (!window._activeCharts) window._activeCharts = [];
+        Chart.defaults.font.family = "'Segoe UI',sans-serif";
+        Chart.defaults.color = '#6b7280';
+        var gridColor = '#e5eef3';
 
-Economic structure is bifurcated:
-  Front End:  Uranium mining → conversion → enrichment → fuel fabrication (capital-intensive)
-  Generation: Historically regulated baseload; now evolving to merchant risk and co-location PPAs
-  Back End:   Waste management and decommissioning
+        // Uranium price chart
+        var ctx1 = document.getElementById(p + '-uPrice');
+        if (ctx1) {
+          var c1 = new Chart(ctx1, {
+            type: 'line',
+            data: {
+              labels: ['2020','2021','2022','2023','2024','2025','2026E'],
+              datasets: [{label:'U3O8 Spot Price ($/lb)',data:[30,42,48,85,105,92,115],borderColor:'#00bcd4',backgroundColor:'rgba(0,188,212,0.1)',borderWidth:2.5,fill:true,tension:0.4,pointRadius:4,pointBackgroundColor:'#00bcd4'}]
+            },
+            options: {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor}}}}
+          });
+          window._activeCharts.push(c1);
+        }
 
-Three commercial models currently in operation:
-  1. Regulated utility (rate-case recovery over 40–60 years)
-  2. Merchant / IPP (competitive market pricing)
-  3. Behind-the-Meter co-location (20+ year direct PPAs with tech hyperscalers — dominant new model)
+        // Capacity factor chart
+        var ctx2 = document.getElementById(p + '-capFactor');
+        if (ctx2) {
+          var c2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+              labels: ['Nuclear','Geothermal','Natural Gas','Coal','Hydropower','Wind','Solar'],
+              datasets: [{label:'Capacity Factor (%)',data:[92.6,73.9,56.7,40.2,37.4,35.9,24.4],backgroundColor:['#00bcd4','#64748b','#64748b','#64748b','#64748b','#64748b','#64748b'],borderRadius:4}]
+            },
+            options: {indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{max:100,grid:{color:gridColor}},y:{grid:{display:false}}}}
+          });
+          window._activeCharts.push(c2);
+        }
 
-Total addressable market: ~$3.6 trillion in financing required over 25–50 years to double global
-capacity from ~420 GWe to ~820 GWe.
+        // Capacity forecast chart
+        var ctx3 = document.getElementById(p + '-capForecast');
+        if (ctx3) {
+          var c3 = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+              labels: ['2024','2030','2040','2050'],
+              datasets: [
+                {label:'Asia (China, India)',data:[140,190,280,390],backgroundColor:'#f472b6'},
+                {label:'North America',data:[115,120,140,165],backgroundColor:'#00bcd4'},
+                {label:'Europe',data:[100,95,110,130],backgroundColor:'#f59e0b'},
+                {label:'Rest of World',data:[35,45,65,90],backgroundColor:'#8b5cf6'}
+              ]
+            },
+            options: {responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10}}}},scales:{x:{stacked:true,grid:{display:false}},y:{stacked:true,grid:{color:gridColor},title:{display:true,text:'GWe'}}}}
+          });
+          window._activeCharts.push(c3);
+        }
+      }
+    }}
+    { id:"Helium", name:"Helium", richReport: {
+      getHtml: function(p, coList, color) {
+        var trackedTickers = coList.map(function(c){return c.ticker;}).join(', ');
+        var coLabel = coList.length + ' tracked ' + (coList.length===1?'company':'companies') + (trackedTickers?': '+trackedTickers:'');
+        return '<div class="ir-wrap">' +
+        '<div class="ir-hero">' +
+          '<div class="ir-hero-title">Global Helium — Scarcity &amp; Strategy</div>' +
+          '<div class="ir-hero-sub">Critical, non-renewable element essential to MRI machines, semiconductor manufacturing, and aerospace. Supply constrained by natural gas market dynamics and geological availability. Industry operates through a highly concentrated capital-intensive oligopoly. | May 2026</div>' +
+          '<div class="ir-hero-stats">' +
+            '<div class="ir-hero-stat"><div class="ir-hero-stat-lbl">Global Market Size (2024)</div><div class="ir-hero-stat-val">~$5.2B</div></div>' +
+            '<div class="ir-hero-stat" style="border-left-color:#f97316"><div class="ir-hero-stat-lbl">Annual Growth (CAGR)</div><div class="ir-hero-stat-val">4.8%</div></div>' +
+            '<div class="ir-hero-stat"><div class="ir-hero-stat-lbl">Boiling Point</div><div class="ir-hero-stat-val">-268.9°C</div></div>' +
+          '</div>' +
+          (coLabel.startsWith('0') ? '' : '<div style="font-size:11px;color:#4a7a8a;margin-top:10px">' + coLabel + '</div>') +
+        '</div>' +
 
-━━ 2. FULL VALUE CHAIN ANALYSIS ━━
+        '<div class="ir-section-hdr">End-Use Distribution &amp; Market Share</div>' +
+        '<div class="ir-grid-2">' +
+          '<div class="ir-card"><div class="ir-card-title">Global Helium End-Use Distribution</div><div class="ir-card-sub">Dominance of critical technology and healthcare infrastructure in helium demand.</div><div class="ir-chart-box"><canvas id="' + p + '-endUse"></canvas></div></div>' +
+          '<div class="ir-card"><div class="ir-card-title">Midstream Capacity Managed (%)</div><div class="ir-card-sub">Air Products maintains a slight edge in bulk liquid helium volume despite Linde\'s larger corporate scale.</div><div class="ir-chart-box"><canvas id="' + p + '-mktShare"></canvas></div></div>' +
+        '</div>' +
 
-━━ 2.1 UPSTREAM — Uranium Mining and Resource Development ━━
-The upstream segment is in transition from decades-long supply surplus to structural deficit, with
-demand outstripping production by millions of pounds annually.
+        '<div class="ir-section-hdr">Value Chain Flow</div>' +
+        '<div class="ir-card">' +
+          '<p style="font-size:12.5px;color:#374151;line-height:1.65;margin-bottom:14px">Helium is rarely mined directly — primarily recovered as a <strong>byproduct of natural gas extraction</strong>. The industry operates across three distinct tiers: upstream extraction, midstream refining/transport (the critical bottleneck), and downstream distribution to end-users.</p>' +
+          '<div class="ir-flow">' +
+            '<div class="ir-flow-box" style="background:#f1f5f9;border:1px solid #94a3b8"><div style="font-size:20px;margin-bottom:6px">⚓</div><div style="font-size:11.5px;font-weight:700;color:#475569">1. Upstream (Extraction)</div><div style="font-size:11px;color:#6b7280;margin-top:4px">Crude helium 50–80% purity as byproduct of natural gas</div><div style="font-size:10.5px;color:#374151;margin-top:6px"><strong>Key players:</strong> ExxonMobil (USA), QatarEnergy, Sonatrach (Algeria), Gazprom (Russia)</div></div>' +
+            '<div class="ir-flow-arrow">→</div>' +
+            '<div class="ir-flow-box" style="background:#e0f4f8;border:1px solid #00bcd4"><div style="font-size:20px;margin-bottom:6px">🏭</div><div style="font-size:11.5px;font-weight:700;color:#0f1c2e">2. Midstream (Refining)</div><div style="font-size:11px;color:#6b7280;margin-top:4px">Purification to Grade A (99.995%+), liquefaction at -269°C, ISO container transport</div><div style="font-size:10.5px;color:#374151;margin-top:6px"><strong>Key players:</strong> Air Products (APD), Linde (LIN), Air Liquide (AI), Matheson</div></div>' +
+            '<div class="ir-flow-arrow">→</div>' +
+            '<div class="ir-flow-box" style="background:#fff7ed;border:1px solid #f97316"><div style="font-size:20px;margin-bottom:6px">🚛</div><div style="font-size:11.5px;font-weight:700;color:#9a3412">3. Downstream (End Users)</div><div style="font-size:11px;color:#6b7280;margin-top:4px">Regional distribution in tube trailers, cylinders, and dewars</div><div style="font-size:10.5px;color:#374151;margin-top:6px"><strong>Key customers:</strong> Healthcare (MRI OEMs), Semiconductor Fabs, NASA/SpaceX, Research Labs</div></div>' +
+          '</div>' +
+        '</div>' +
 
-CAMECO CORPORATION ($CCJ)  |  NYSE/TSX  |  Mkt Cap: $53.90B
-World's preeminent tier-one uranium producer. Operates McArthur River and Cigar Lake mines —
-the most productive uranium assets globally. In 2024, acquired 49% stake in Westinghouse Electric,
-vertically integrating from mining into reactor services and technology.
-  Revenue (2025):    $3.48B (+11% YoY)
-  Gross Profit:      $970M (+24% YoY)
-  Net Earnings:      $590M (+>100% YoY)
-  Customers:         33 nuclear utilities worldwide (Europe 40%, Americas 38%, Asia 22%)
+        '<div class="ir-section-hdr">Key Midstream Players</div>' +
+        '<div class="ir-grid-3">' +
+          '<div class="ir-co-card" style="border-top-color:#00bcd4">' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#0f1c2e">Linde plc</div><div class="ir-co-role">Global #1 Industrial Gas Co.</div></div><span class="ir-ticker">NYSE: LIN</span></div>' +
+            '<div class="ir-co-desc">Largest global industrial gas company post-Praxair merger. Massive distribution network but slightly trails APD in pure bulk liquid helium capacity.</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val">~$215B</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Rev / Profit Growth</div><div class="ir-co-metric-val" style="color:#16a34a">+5.2% / +9.1%</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail" style="font-size:10.5px"><strong>Top Suppliers:</strong> ExxonMobil, QatarEnergy<br><strong>Top He Customers:</strong> Siemens Healthineers (~12%), Samsung Electronics (~8%)</div>' +
+          '</div>' +
+          '<div class="ir-co-card" style="border-top-color:#f97316;position:relative">' +
+            '<div style="position:absolute;top:-8px;right:10px;background:#00bcd4;color:#fff;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:5px">#1 Helium Volume</div>' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#0f1c2e">Air Products</div><div class="ir-co-role">Largest Bulk He Capacity</div></div><span class="ir-ticker">NYSE: APD</span></div>' +
+            '<div class="ir-co-desc">Manages the largest volumetric share of global bulk helium supply, bolstered by legacy BLM ties and massive capacities in Qatar and Algeria.</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val">~$62B</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Rev / Profit Growth</div><div class="ir-co-metric-val" style="color:#16a34a">+4.1% / +7.5%</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail" style="font-size:10.5px"><strong>Top Suppliers:</strong> BLM Reserve, QatarEnergy<br><strong>Top He Customers:</strong> NASA (~15%), Philips Healthcare (~10%)</div>' +
+          '</div>' +
+          '<div class="ir-co-card" style="border-top-color:#6366f1">' +
+            '<div class="ir-co-hdr"><div><div class="ir-co-name" style="color:#0f1c2e">Air Liquide</div><div class="ir-co-role">Electronics & Healthcare</div></div><span class="ir-ticker" style="background:#e0e7ff;color:#4338ca">EPA: AI</span></div>' +
+            '<div class="ir-co-desc">Dominant global player with strong technological capabilities. Heavily invested in electronics and healthcare applications, particularly in Asia-Pacific markets.</div>' +
+            '<div class="ir-co-metrics">' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Market Cap</div><div class="ir-co-metric-val">~$105B</div></div>' +
+              '<div class="ir-co-metric"><div class="ir-co-metric-lbl">Rev / Profit Growth</div><div class="ir-co-metric-val" style="color:#16a34a">+6.0% / +8.2%</div></div>' +
+            '</div>' +
+            '<div class="ir-co-detail" style="font-size:10.5px"><strong>Top Suppliers:</strong> Sonatrach, QatarEnergy<br><strong>Top He Customers:</strong> Intel (~11%), GE Healthcare (~9%)</div>' +
+          '</div>' +
+        '</div>' +
 
-URANIUM ENERGY CORP. ($UEC)  |  NYSE American  |  Mkt Cap: $7.73B
-Largest domestic uranium miner in the United States. Uses in-situ recovery (ISR) technology —
-more cost-effective and faster to permit than traditional underground mining. Focused on U.S.
-domestic market and DOE strategic reserve programs. Debt-free balance sheet with significant
-physical uranium holdings. Production restarted: ~45,800 lbs yellowcake recently reported.
+        '<div class="ir-section-hdr">Historical Supply Crisis — Price Index</div>' +
+        '<div class="ir-card"><div class="ir-card-title">Helium Relative Price Index (2019 = 100)</div><div class="ir-card-sub">"Helium Shortage 4.0" (2021–2023) caused massive price spikes due to facility outages in the U.S. and geopolitical tensions affecting Russian supply. Prices remain elevated but stabilizing on Qatar North Field expansion.</div><div class="ir-chart-box"><canvas id="' + p + '-price"></canvas></div></div>' +
 
-━━ 2.2 MIDSTREAM — Conversion, Enrichment, and Reactor Components ━━
-Most critical bottleneck in the current global nuclear expansion. Requires highly specialized
-engineering and is subject to intense regulatory and geopolitical scrutiny.
+        '<div class="ir-section-hdr">Macro Trends &amp; Catalysts</div>' +
+        '<div class="ir-catalyst-grid">' +
+          '<div class="ir-catalyst" style="border-left-color:#dc2626"><div class="ir-catalyst-hdr">BLM Reserve Depletion <span class="ir-catalyst-badge" style="background:#fee2e2;color:#991b1b">Negative/Volatile</span></div><p>The Federal Helium Reserve system is undergoing forced privatization and depletion. Transition to private hands creates immediate supply uncertainty and pricing volatility for domestic customers.</p></div>' +
+          '<div class="ir-catalyst" style="border-left-color:#16a34a"><div class="ir-catalyst-hdr">Qatar North Field Expansion <span class="ir-catalyst-badge" style="background:#d1fae5;color:#065f46">Positive Supply</span></div><p>Qatar is actively expanding its North Field LNG project, yielding significant byproduct helium — the primary stabilizing force for global supply over the next decade.</p></div>' +
+          '<div class="ir-catalyst" style="border-left-color:#f59e0b"><div class="ir-catalyst-hdr">Amur Facility (Russia) Ramp-Up <span class="ir-catalyst-badge" style="background:#fef3c7;color:#92400e">Geopolitical Risk</span></div><p>Gazprom\'s Amur facility was expected to supply ~30% of global demand. Western sanctions restrict routing via traditional midstream partners (Linde, APD), forcing complex secondary market logistics through Asian distributors.</p></div>' +
+          '<div class="ir-catalyst" style="border-left-color:#00bcd4"><div class="ir-catalyst-hdr">CHIPS Act Spurred Demand <span class="ir-catalyst-badge" style="background:#e0f4f8;color:#006b80">Demand Spike</span></div><p>Localization of semiconductor fabs in the U.S. and Europe will drastically increase regionalized demand for ultra-high purity helium, testing local distribution networks and driving long-term price support.</p></div>' +
+        '</div>' +
 
-CENTRUS ENERGY CORP. ($LEU)  |  NYSE American  |  Mkt Cap: $4.55B
-Only American company licensed to produce High-Assay Low-Enriched Uranium (HALEU), enriched
-to nearly 20% ²³⁵U — the vital fuel for next-generation SMRs. Re-establishing domestic commercial-
-scale enrichment via American Centrifuge technology in Ohio.
-  Q3 2025 Revenue:   $74.9M | Net Income: $3.9M (vs. net loss $5.0M in Q3 2024)
-  LEU Segment Backlog: $3.0B (as of Sep 30, 2025)
-  Key Risk:          Previously relied on Russian TENEX; now transitioning to domestic production
-                     following 2024 import ban. U.S. government waivers in place through 2027.
+        '</div>'; // end ir-wrap
+      },
+      initCharts: function(p) {
+        if (!window.Chart) return;
+        if (!window._activeCharts) window._activeCharts = [];
+        Chart.defaults.font.family = "'Segoe UI',sans-serif";
+        Chart.defaults.color = '#6b7280';
+        var gridColor = '#e5eef3';
 
-BWX TECHNOLOGIES, INC. ($BWXT)  |  NYSE  |  Mkt Cap: $19.73B
-Sole manufacturer of nuclear reactors for the U.S. Navy's submarine and aircraft carrier fleets
-("sole-source" defense position). Also manufactures heavy components for large commercial reactors
-and is a leading developer of microreactors and medical isotopes.
-  Revenue (2025):    $3.20B (+18% YoY)
-  Adj. EBITDA:       $574M (+15% YoY)
-  Backlog (2025):    $7.3B (record high; +50% YoY)
-  Key Customers:     U.S. DoE, DoD (Naval Nuclear Propulsion Program), NASA; commercial: Westinghouse, GE Vernova
+        var ctx1 = document.getElementById(p + '-endUse');
+        if (ctx1) {
+          var c1 = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+              labels: ['MRI (Healthcare)','Semiconductors','Aerospace & Lifting','Welding & Fiber Optics','Analytical & Research','Other'],
+              datasets: [{data:[30,22,12,10,10,16],backgroundColor:['#0f1c2e','#00bcd4','#f97316','#64748b','#94a3b8','#e2e8f0'],borderWidth:2,borderColor:'#fff'}]
+            },
+            options: {responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{position:'right',labels:{font:{size:10}}}}}
+          });
+          window._activeCharts.push(c1);
+        }
 
-━━ 2.3 DOWNSTREAM — Power Generation, Utilities, and Infrastructure ━━
+        var ctx2 = document.getElementById(p + '-mktShare');
+        if (ctx2) {
+          var c2 = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+              labels: ['Air Products','Linde plc','Air Liquide','Matheson','Others'],
+              datasets: [{label:'Global Bulk Supply Managed (%)',data:[26,23,18,10,23],backgroundColor:['#00bcd4','#0f1c2e','#64748b','#94a3b8','#cbd5e1'],borderRadius:4}]
+            },
+            options: {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{beginAtZero:true,grid:{color:gridColor}}}}
+          });
+          window._activeCharts.push(c2);
+        }
 
-CONSTELLATION ENERGY ($CEG)  |  Nasdaq  |  Mkt Cap: $101.13B
-Largest operator of carbon-free nuclear power in the U.S. (~22,000 MW across 21 reactors).
-Completed $26.6B acquisition of Calpine in 2025, integrating natural gas and geothermal to
-complement nuclear baseload.
-  Revenue (2025):    $26.85B (projected $30B in 2026)
-  Adj. Earnings:     $9.39/share (vs. $8.67 in 2024)
-  Key PPAs:          Microsoft — 20-year, 835 MW (Three Mile Island restart)
-                     Meta Platforms — 20-year, 1.1 GW (Clinton reactor)
-
-VISTRA CORP. ($VST)  |  NYSE  |  Mkt Cap: $53.56B
-Leading integrated retail electricity and power generation company. Second-largest competitive
-nuclear fleet in the U.S. (Comanche Peak). Returned $4.9B+ to shareholders since 2021.
-  Adj. EBITDA:       $5.66B (2024 record) → $5.91B (2025)
-  Net Income (2025): $944M (impacted by unrealized commodity hedge losses)
-  Key PPAs:          Amazon Web Services — ~3,800 MW nuclear PPA
-                     Meta — nuclear energy and capacity agreements
-
-━━ 2.4 ADVANCED TECHNOLOGY — SMR and Microreactor Developers ━━
-
-NUSCALE POWER CORP. ($SMR)  |  NYSE  |  Mkt Cap: $4.64B
-First company to receive NRC Standard Design Approval for an SMR. Licensing model: NuScale
-Power Modules (NPMs) licensed to utility partners who own and operate the facilities.
-  Revenue (2025):    $31.5M (down from $37.0M in 2024 — timing of license agreements)
-  Cash/Investments:  $1.3B (strong liquidity position)
-  Key Partners:      ENTRA1 (global commercialization), TVA (potential 6 GW), RoPower (Romania)
-  Majority Owner:    Fluor Corporation (51%) — primary EPC partner
-
-OKLO INC. ($OKLO)  |  NYSE  |  Mkt Cap: $11.3B (fully diluted)
-Developing "fast" reactors using liquid-metal cooling on recycled nuclear fuel. "Power as a Service"
-model targeting AI data centres and industrial co-location. Zero revenue (pre-commercial stage).
-  First deployment target:  2027–2028
-  Key Partners:      Centrus (HALEU fuel supply), Argonne National Laboratory (R&D)
-                     Meta (partnership for Southern Ohio builds)
-
-Sector Comparison Table:
-Company          Ticker    Mkt Cap       2025 Revenue    2025 Profit
-Constellation    CEG       $101.13B      $26.85B         $9.39B (Adj. Earnings/share basis)
-Cameco           CCJ       $53.90B       $3.48B          $970M (Gross Profit)
-Vistra           VST       $53.56B       $13.15B (9-mo)  $5.91B (Adj. EBITDA)
-BWXT             BWXT      $19.73B       $3.20B          $574M (Adj. EBITDA)
-Fluor            FLR       $8.51B        $15.50B (est.)  $334M (EBITDA)
-Centrus          LEU       $4.55B        $448.7M         $60.0M (EBITDA)
-NuScale          SMR       $4.64B        $31.5M          ($355.8M) net loss
-Oklo             OKLO      $11.3B        $0              N/A
-
-━━ 3. KEY INDUSTRY TRENDS ━━
-
-━━ 3.1 The AI-Nuclear Nexus ━━
-AI training clusters demand continuous, high-density power — often 100 MW per single cluster
-(≈ needs of 80,000 homes). Intermittent renewables are insufficient for 99.9% uptime requirements.
-
-"Behind-the-Meter" co-location: data centre campuses built adjacent to nuclear plants.
-  • Microsoft + Constellation: Three Mile Island restart (835 MW, 20-year PPA) — flagship deal
-  • Google + TVA/Kairos:       Advanced reactor offtake agreement
-  • Amazon + Energy Northwest/X-energy: SMR development partnership
-  • Meta + PJM uprates:        Nuclear capacity agreements in PJM region
-
-━━ 3.2 Geopolitical Supply Chain De-risking ━━
-2024 "Prohibiting Russian Uranium Imports Act" triggered reshoring of nuclear fuel cycle.
-Russia historically controlled ~40% of global enrichment services — a critical Western vulnerability.
-
-"Allied supply" beneficiaries: Cameco (Canada), Centrus + UEC (U.S.), Urenco (Europe/UK/Germany)
-
-HALEU specifically: commercial supply was previously a Russian monopoly. DOE now aggressively
-funding domestic HALEU production through Centrus and BWXT to ensure the next-gen fleet runs
-on American-made fuel.
-
-━━ 3.3 Modularization — "Nuclear as a Product" ━━
-Shift away from one-off megaprojects prone to multi-year delays and multi-billion-dollar cost
-overruns. SMRs treated as standardized, factory-manufactured products.
-
-Benefits of modular approach:
-  Incremental Capacity:        Add power modules as compute needs grow
-  Factory Quality Control:     Reduce on-site construction variables → fewer delays
-  Lower Upfront Cost:          Accessible to private industrial companies and mid-sized utilities
-                               (vs. $30B+ for a large-scale plant)
-
-━━ 3.4 Digitalization and AI-Enabled Operations ━━
-Argonne National Laboratory and companies like NuScale using AI and digital twins to:
-  • Optimize nuclear fuel management
-  • Accelerate NRC licensing timelines
-  • Transition to fully digital I&C systems (prerequisite for automated SMR operation)
-
-Expected outcomes: lower operational costs, shorter maintenance outages, reduced earnings volatility
-for downstream operators.
-
-━━ 4. CATALYSTS — NEXT 12 MONTHS ROADMAP ━━
-
-━━ 4.1 Regulatory: NRC Part 53 Framework ━━
-Most significant regulatory shift in 40 years. Finalised in early 2026.
-Old framework (Part 50/52): written for large light-water reactors; forced SMR designers to seek
-hundreds of costly exemptions. Part 53 is "technology-inclusive" and "risk-informed" — allows
-advanced reactor designs (liquid-metal, molten salt, gas-cooled) to license based on actual safety
-performance rather than outdated prescriptive rules.
-Milestone to watch: First "Fast Follower" applications under Part 53 (H2 2026).
-
-━━ 4.2 Policy: ADVANCE Act and DOE Funding ━━
-ADVANCE Act mandates NRC to reduce fees for advanced reactor applicants and consider societal
-benefits of nuclear. DOE expected to announce "Tier 2: Fast Follower Deployment Support" grant
-winners — $900M per task order for LEU and HALEU production.
-Primary beneficiaries: Centrus ($LEU) and BWXT ($BWXT).
-
-━━ 4.3 M&A and Consolidation Activity ━━
-  SMR Partnerships:   Further hyperscaler equity investments into X-energy, Kairos for FOAK projects
-  Utility Mergers:    Regulated utilities may acquire merchant nuclear assets for AI-focused portfolios
-  Supply Chain M&A:   BWXT or Fluor acquiring specialized manufacturing/service firms
-
-━━ 4.4 Market Catalysts and Risk Factors ━━
-Catalyst / Risk            Event                               Timing      Impact
-Regulatory (Positive)      First Part 53 SMR application       H2 2026     High Positive
-Financial (Positive)       Centrus HALEU Task Order Award       Q3 2026     High Positive (LEU, BWXT)
-Operational (Positive)     TMI-1 Unit Restart Milestones        2026-2027   Moderate Positive (CEG)
-Market (Risk)              PJM Grid Interconnection Update      Q4 2026     High Risk (downstream utilities)
-Strategic (Positive)       Close of VST-Cogentrix Deal          Mid-2026    Moderate Positive (VST)
-
-KEY RISK: PJM Grid Interconnection Delays — March 2026 reports indicate PJM (largest U.S.
-Mid-Atlantic grid operator) facing significant delays connecting large-scale data centre projects.
-Could push back near-term revenue expectations for CEG and VST.
-
-━━ 5. STRATEGIC CONCLUSIONS ━━
-Nuclear energy has transitioned from "utility-bond" investment to "tech-infrastructure" growth engine.
-
-Upstream (CCJ, UEC):    Capture "uranium price squeeze" as utilities secure supply in a deficit market
-Midstream (BWXT, LEU):  $900M+ government contracts to re-establish the U.S. nuclear fuel cycle
-Downstream (CEG, VST):  Maximize premium on carbon-free, 24/7 power through hyperscaler direct PPAs
-
-Outlook: The "easy money" from the 2024-2025 resurgence has likely been made. The market is entering
-a phase where "real business" must be proven — measured by SMR licensing milestones under Part 53
-and large-scale operators navigating grid congestion and refueling volatility.
-
-Nuclear energy is no longer a peripheral energy story. It is the engine of the modern digital economy.
-
-━━ SOURCES ━━
-Institutional Industry Research — May 2026 | NRC Regulatory Framework | DOE Funding Announcements
-Cameco FY2025 | BWXT FY2025 | Constellation FY2025 | Vistra FY2025 | NuScale FY2025 | Oklo filings`
-    },
+        var ctx3 = document.getElementById(p + '-price');
+        if (ctx3) {
+          var c3 = new Chart(ctx3, {
+            type: 'line',
+            data: {
+              labels: ['2019','2020','2021','2022','2023','2024','2025(E)','2026(E)'],
+              datasets: [{label:'Helium Price Index (2019=100)',data:[100,115,135,290,320,285,270,255],borderColor:'#f97316',backgroundColor:'rgba(249,115,22,0.08)',borderWidth:2.5,fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#f97316'}]
+            },
+            options: {responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:gridColor}}}}
+          });
+          window._activeCharts.push(c3);
+        }
+      }
+    }},
     { id:"Oilfield Services",      name:"Oilfield Services",      fullReport:"" },
   ],
 
@@ -6052,6 +6053,7 @@ const INDUSTRY_COLORS = {
   "EV Batteries": "#66bb6a",   // green       — clean energy / batteries
   "Crude Tankers":     "#0288d1",   // ocean blue   — maritime crude oil shipping
   "Oilfield Services":        "#ffb300",   // amber gold   — oilfield services / drilling
+  "Helium":                    "#06b6d4",   // cyan         — helium / industrial gases
   "Electronic Instruments":   "#00acc1",   // teal/cyan    — precision instruments & industrial tech
   "Enterprise Networking":    "#5c6bc0",   // indigo       — networking, cybersecurity, cloud infrastructure
   "Nuclear Energy":           "#42a5f5",   // sky blue     — Cherenkov radiation / atomic energy
@@ -6264,11 +6266,22 @@ function renderIndustryContent(id) {
   const panel = document.getElementById('ind-content-panel');
   if (!panel) return;
 
-  const rep   = DB.industryReports.find(r => r.id === id);
-  const color = INDUSTRY_COLORS[id] || '#888';
+  const rep    = DB.industryReports.find(r => r.id === id);
+  const color  = INDUSTRY_COLORS[id] || '#888';
   const coList = DB.companies.filter(c => c.industries.includes(id));
-  const hasReport = rep && rep.fullReport && rep.fullReport.trim().length > 0;
 
+  // Destroy old charts
+  if (window._activeCharts) { window._activeCharts.forEach(c => { try{c.destroy();}catch(e){} }); }
+  window._activeCharts = [];
+
+  if (rep && rep.richReport) {
+    const pfx = 'ind' + id.replace(/[^a-z0-9]/gi,'');
+    panel.innerHTML = rep.richReport.getHtml(pfx, coList, color);
+    if (rep.richReport.initCharts) rep.richReport.initCharts(pfx);
+    return;
+  }
+
+  const hasReport = rep && rep.fullReport && rep.fullReport.trim().length > 0;
   if (!hasReport) {
     panel.innerHTML = `
       <div class="ind-content-title" style="color:${color}">${id}</div>
@@ -7030,43 +7043,55 @@ function selectMarketing(id) {
   renderMarketingContent(id);
 }
 
-// Wrap HTML marketing reports into SPX-style cards, splitting on .r-section divs
-function wrapHtmlInCards(html) {
-  const temp = document.createElement('div');
-  temp.innerHTML = html.trim();
-
-  // Unwrap single outer container (report-wrap / mkt-report div)
-  const root = temp.children.length === 1 ? temp.firstElementChild : temp;
-  const children = Array.from(root.children);
-
-  let result = '';
-  let cardBody = '';
-  let inCard = false;
-
-  children.forEach(el => {
-    if (el.classList.contains('r-section')) {
-      // Close previous card
-      if (inCard && cardBody.trim()) {
-        result += `<div class="ind-card-body mkt-card-body">${cardBody}</div></div>`;
-      }
-      // Open new card with dark header
-      result += `<div class="ind-report-card"><div class="ind-card-hdr">${el.textContent.trim()}</div>`;
-      cardBody = '';
-      inCard = true;
-    } else if (inCard) {
-      cardBody += el.outerHTML;
-    } else {
-      // Content before first section header (shouldn't normally exist)
-      result += el.outerHTML;
-    }
-  });
-
-  // Close final card
-  if (inCard && cardBody.trim()) {
-    result += `<div class="ind-card-body mkt-card-body">${cardBody}</div></div>`;
+// ── Chart tab switcher (Competition Research) ─────────────────────
+window.crFinTab = function(p, metric, btn) {
+  document.querySelectorAll('#' + p + '-t1, #' + p + '-t2, #' + p + '-t3').forEach(b => b.classList.remove('act'));
+  btn.classList.add('act');
+  var chart = window[p + '_chart'];
+  var d = window[p + '_data'];
+  if (!chart || !d) return;
+  var sets;
+  if (metric === 'rev') {
+    chart.config.type = 'line';
+    sets = [
+      {label:'CRM Revenue ($B)',data:d.crmRev,borderColor:'#00bcd4',backgroundColor:'rgba(0,188,212,0.08)',borderWidth:2.5,fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#00bcd4'},
+      {label:'NOW Revenue ($B)',data:d.nowRev,borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.08)',borderWidth:2.5,fill:true,tension:0.3,pointRadius:4,pointBackgroundColor:'#10b981'}
+    ];
+  } else if (metric === 'margin') {
+    chart.config.type = 'line';
+    sets = [
+      {label:'CRM Op Margin (%)',data:d.crmMargin,borderColor:'#00bcd4',backgroundColor:'transparent',borderWidth:2.5,borderDash:[5,4],tension:0.3,pointRadius:4,pointBackgroundColor:'#00bcd4'},
+      {label:'NOW Op Margin (%)',data:d.nowMargin,borderColor:'#10b981',backgroundColor:'transparent',borderWidth:2.5,borderDash:[5,4],tension:0.3,pointRadius:4,pointBackgroundColor:'#10b981'}
+    ];
+  } else {
+    chart.config.type = 'bar';
+    sets = [
+      {label:'CRM FCF ($B)',data:d.crmFcf,backgroundColor:'#00bcd4',borderRadius:4},
+      {label:'NOW FCF ($B)',data:d.nowFcf,backgroundColor:'#10b981',borderRadius:4}
+    ];
   }
-  return result;
-}
+  chart.data.datasets = sets;
+  chart.update();
+};
+
+// ── SWOT toggle (Competition Research) ────────────────────────────
+window.crSwot = function(p, co) {
+  var btnCrm = document.getElementById(p + '-sb-crm');
+  var btnNow = document.getElementById(p + '-sb-now');
+  var container = document.getElementById(p + '-swot-container');
+  var data = window[p + '_swot'];
+  if (!container || !data) return;
+  [btnCrm, btnNow].forEach(b => { if(b) b.classList.remove('act'); });
+  if (co === 'crm') { if(btnCrm) btnCrm.classList.add('act'); }
+  else              { if(btnNow) btnNow.classList.add('act'); }
+  var d = data[co];
+  var accentCrm = co === 'crm' ? '#00bcd4' : '#10b981';
+  container.innerHTML =
+    '<div class="cr-swot-cell s"><div class="cr-swot-hdr"><span class="cr-swot-badge">S</span> Strengths</div><ul>' + d.s.map(i=>'<li>'+i+'</li>').join('') + '</ul></div>' +
+    '<div class="cr-swot-cell w"><div class="cr-swot-hdr"><span class="cr-swot-badge">W</span> Weaknesses</div><ul>' + d.w.map(i=>'<li>'+i+'</li>').join('') + '</ul></div>' +
+    '<div class="cr-swot-cell o"><div class="cr-swot-hdr"><span class="cr-swot-badge">O</span> Opportunities</div><ul>' + d.o.map(i=>'<li>'+i+'</li>').join('') + '</ul></div>' +
+    '<div class="cr-swot-cell t"><div class="cr-swot-hdr"><span class="cr-swot-badge">T</span> Threats</div><ul>' + d.t.map(i=>'<li>'+i+'</li>').join('') + '</ul></div>';
+};
 
 function renderMarketingContent(id) {
   const panel = document.getElementById('mkt-content-panel');
@@ -7074,19 +7099,24 @@ function renderMarketingContent(id) {
   const rep = DB.marketingReports.find(r => r.id === id);
   if (!rep) return;
 
-  const isHtml = rep.fullReport.trimStart().startsWith('<');
-  const body = isHtml
-    ? wrapHtmlInCards(rep.fullReport)
-    : wrapInCards(enhanceForDisplay(formatReport(rep.fullReport)));
+  // Destroy old charts
+  if (window._activeCharts) { window._activeCharts.forEach(c => { try{c.destroy();}catch(e){} }); }
+  window._activeCharts = [];
 
-  panel.innerHTML = `
-    <div class="report-wrap">
-      <div class="ind-report-header-card">
-        <div class="ind-content-title" style="color:#7dd4e8">${rep.label}</div>
-        <div class="ind-content-subtitle">${rep.tickers.join(' vs ')} &bull; ${rep.date}</div>
-      </div>
-      ${body}
-    </div>`;
+  if (rep.richReport) {
+    const pfx = 'cr' + id.replace(/[^a-z0-9]/gi,'');
+    panel.innerHTML = rep.richReport.getHtml(pfx);
+    if (rep.richReport.initCharts) rep.richReport.initCharts(pfx);
+    return;
+  }
+
+  // Legacy fallback (plain-text reports)
+  const body = wrapInCards(enhanceForDisplay(formatReport(rep.fullReport || '')));
+  panel.innerHTML = `<div class="report-wrap">
+    <div class="ind-report-header-card">
+      <div class="ind-content-title" style="color:#7dd4e8">${rep.label}</div>
+      <div class="ind-content-subtitle">${rep.tickers.join(' vs ')} &bull; ${rep.date}</div>
+    </div>${body}</div>`;
 }
 </script>
 </body>
