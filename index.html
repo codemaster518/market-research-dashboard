@@ -306,12 +306,12 @@ body {
 }
 .modal-bg.on { display:flex; }
 .modal {
-  background:#fff;
+  background:#f0f7fb;
   border-radius:14px;
-  width:100%; max-width:820px;
-  max-height:85vh;
+  width:100%; max-width:1060px;
+  max-height:90vh;
   overflow-y:auto;
-  padding:36px 40px;
+  padding:0;
   position:relative;
 }
 .m-close {
@@ -326,7 +326,7 @@ body {
 .m-meta { font-size:13px; color:#6b7280; margin-bottom:22px; }
 .m-body {
   font-size:13.5px; line-height:1.82; color:#374151;
-  white-space:pre-wrap; font-family:'Segoe UI',sans-serif;
+  font-family:'Segoe UI',sans-serif;
 }
 
 /* ── Info label ───────────────────────────────────── */
@@ -660,6 +660,149 @@ body {
   animation:spin 0.8s linear infinite;
 }
 @keyframes spin { to { transform:rotate(360deg); } }
+
+/* ── Company Modal (ETN-style) ────────────────────────── */
+.co-modal-hdr {
+  background:#0f1c2e; color:#fff;
+  padding:24px 32px; border-radius:14px 14px 0 0;
+}
+.co-modal-name { font-size:22px; font-weight:800; margin-bottom:6px; }
+.co-modal-ticker {
+  font-size:12px; font-weight:700;
+  background:#00bcd4; color:#fff;
+  padding:3px 10px; border-radius:10px; margin-right:6px;
+}
+.co-modal-ind {
+  font-size:11px; font-weight:600;
+  background:rgba(255,255,255,0.15); color:#b0d8e8;
+  padding:2px 8px; border-radius:8px; margin-right:4px;
+}
+.co-modal-metrics {
+  display:grid; grid-template-columns:repeat(5,1fr); gap:10px;
+  padding:16px 24px; background:#e8f4f8;
+  border-bottom:1px solid #d5e8ef;
+}
+.co-metric-card {
+  background:#fff; border-radius:8px;
+  padding:12px 14px; border-left:4px solid #00bcd4;
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+}
+.co-metric-label { font-size:10px; color:#6b7280; font-weight:600; text-transform:uppercase; letter-spacing:0.04em; }
+.co-metric-val { font-size:16px; font-weight:800; color:#0f1c2e; margin-top:3px; }
+.co-modal-report { padding:16px 24px 24px; }
+.co-modal-report .ind-report-card { margin-bottom:12px; }
+
+/* ── Rich Report Base ──────────────────────────────────── */
+.cr-wrap { font-family:'Segoe UI',sans-serif; background:#f0f7fb; padding:20px; color:#374151; }
+.cr-page-hdr { background:#0f1c2e; color:#fff; padding:26px 30px; border-radius:12px; margin-bottom:18px; }
+.cr-title { font-size:20px; font-weight:800; margin-bottom:5px; }
+.cr-subtitle { font-size:12px; color:#7eb8cc; line-height:1.5; }
+.cr-section-hdr { font-size:15px; font-weight:800; color:#0f1c2e; border-bottom:2px solid #d5e8ef; padding-bottom:7px; margin:22px 0 12px; }
+.cr-section-desc { font-size:12px; color:#6b7280; margin-bottom:14px; max-width:800px; }
+.cr-card { background:#fff; border-radius:10px; padding:18px; border:1px solid #d5e8ef; box-shadow:0 2px 5px rgba(0,0,0,0.04); }
+.cr-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.cr-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.cr-co-card { background:#fff; border-radius:10px; padding:18px; border:1px solid #d5e8ef; border-top-width:4px; box-shadow:0 2px 5px rgba(0,0,0,0.04); }
+.cr-co-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+.cr-co-name { font-size:15px; font-weight:700; color:#0f1c2e; }
+.cr-ticker-badge { font-size:11px; font-weight:700; padding:2px 8px; border-radius:10px; }
+.cr-co-body { font-size:12px; color:#374151; line-height:1.65; }
+.cr-compare-table { width:100%; border-collapse:collapse; font-size:12px; }
+.cr-compare-table th { background:#0f1c2e; color:#fff; padding:9px 12px; text-align:left; font-weight:600; }
+.cr-compare-table td { padding:8px 12px; border-bottom:1px solid #e5eef3; vertical-align:top; }
+.cr-compare-table tr:hover td { background:#f0f7fb; }
+.cr-compare-table td:first-child { font-weight:600; color:#0f1c2e; background:#f8fbfd; width:20%; }
+.cr-fin-tabs { display:flex; gap:6px; border-bottom:2px solid #d5e8ef; margin-bottom:14px; }
+.cr-fin-tab { padding:7px 14px; font-size:12px; font-weight:600; cursor:pointer; border:none; border-bottom:2px solid transparent; margin-bottom:-2px; color:#6b7280; background:transparent; border-radius:4px 4px 0 0; transition:all 0.15s; }
+.cr-fin-tab.act { color:#00bcd4; border-bottom-color:#00bcd4; }
+.cr-fin-tab:hover:not(.act) { color:#0f1c2e; }
+.cr-chart-box { position:relative; width:100%; height:260px; }
+.cr-swot-toggle { display:flex; background:#e0f4f8; border-radius:8px; padding:3px; margin-bottom:14px; width:fit-content; }
+.cr-swot-btn { padding:6px 20px; border-radius:6px; font-size:12.5px; font-weight:600; cursor:pointer; border:none; background:transparent; color:#666; transition:all 0.15s; }
+.cr-swot-btn.act { background:#fff; box-shadow:0 1px 4px rgba(0,0,0,0.12); color:#0f1c2e; }
+.cr-swot-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.cr-swot-cell { background:#fff; border-radius:9px; padding:14px; border:1px solid #d5e8ef; }
+.cr-swot-cell.s { border-top:3px solid #00bcd4; }
+.cr-swot-cell.w { border-top:3px solid #94a3b8; }
+.cr-swot-cell.o { border-top:3px solid #10b981; }
+.cr-swot-cell.t { border-top:3px solid #ef4444; }
+.cr-swot-hdr { font-size:11.5px; font-weight:700; margin-bottom:7px; display:flex; align-items:center; gap:5px; }
+.cr-swot-badge { font-size:10px; padding:1px 6px; border-radius:5px; font-weight:700; }
+.cr-swot-cell.s .cr-swot-badge { background:#e0f4f8; color:#006b80; }
+.cr-swot-cell.w .cr-swot-badge { background:#f1f5f9; color:#475569; }
+.cr-swot-cell.o .cr-swot-badge { background:#d1fae5; color:#065f46; }
+.cr-swot-cell.t .cr-swot-badge { background:#fee2e2; color:#991b1b; }
+.cr-swot-cell ul { font-size:11.5px; color:#374151; padding-left:14px; line-height:1.65; margin:0; }
+.cr-thesis-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.cr-thesis-co { border-radius:10px; overflow:hidden; border:1px solid #d5e8ef; }
+.cr-thesis-hdr { padding:12px 18px; font-weight:700; font-size:13px; }
+.cr-thesis-body { background:#fff; padding:14px 18px; }
+.cr-case { margin-bottom:12px; }
+.cr-case-hdr { font-size:12px; font-weight:700; margin-bottom:5px; display:flex; align-items:center; gap:5px; }
+.cr-case-hdr.bull { color:#16a34a; }
+.cr-case-hdr.bear { color:#dc2626; }
+.cr-case p { font-size:11.5px; color:#374151; line-height:1.65; margin:0; }
+.cr-score-table { width:100%; border-collapse:collapse; font-size:12px; }
+.cr-score-table th { background:#0f1c2e; color:#fff; padding:8px 12px; text-align:left; font-weight:600; }
+.cr-score-table td { padding:7px 12px; border-bottom:1px solid #e5eef3; }
+.cr-score-table tr:hover td { background:#f0f7fb; }
+.cr-score-table td:first-child { font-weight:600; color:#0f1c2e; }
+.cr-data-table { width:100%; border-collapse:collapse; font-size:12px; margin-top:8px; }
+.cr-data-table th { background:#f0f7fb; color:#0f1c2e; padding:7px 10px; font-weight:600; border-bottom:2px solid #d5e8ef; text-align:left; }
+.cr-data-table td { padding:6px 10px; border-bottom:1px solid #e5eef3; }
+.cr-co-badge { font-size:12px; font-weight:700; padding:3px 9px; border-radius:6px; display:inline-block; margin-bottom:8px; }
+.cr-note { font-size:11px; color:#6b7280; margin-top:6px; font-style:italic; }
+.cr-sources { margin-top:12px; padding:12px 16px; background:#f8fbfd; border-radius:8px; border:1px solid #d5e8ef; }
+.cr-sources-title { font-size:10.5px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; }
+.cr-sources ul { padding-left:14px; margin:0; }
+.cr-sources li { font-size:11.5px; color:#374151; margin-bottom:3px; line-height:1.5; }
+.cr-sources a { color:#00bcd4; text-decoration:none; }
+.cr-sources a:hover { text-decoration:underline; }
+.cr-stat-cards { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:16px; }
+.cr-stat { background:#fff; border-radius:8px; padding:12px 14px; border:1px solid #d5e8ef; }
+.cr-stat-lbl { font-size:10px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.04em; }
+.cr-stat-crm { font-size:14px; font-weight:800; color:#00bcd4; margin-top:3px; }
+.cr-stat-now { font-size:14px; font-weight:800; color:#10b981; }
+/* ── Industry Rich Reports ─────────────────────────────── */
+.ir-wrap { font-family:'Segoe UI',sans-serif; background:#f0f7fb; padding:20px; color:#374151; }
+.ir-hero { background:#0f1c2e; color:#fff; padding:26px 30px; border-radius:12px; margin-bottom:18px; position:relative; overflow:hidden; }
+.ir-hero-title { font-size:22px; font-weight:800; margin-bottom:8px; line-height:1.3; }
+.ir-hero-sub { font-size:12.5px; color:#7eb8cc; margin-bottom:14px; line-height:1.55; }
+.ir-hero-stats { display:flex; gap:12px; flex-wrap:wrap; }
+.ir-hero-stat { background:rgba(255,255,255,0.1); border-left:3px solid #00bcd4; padding:10px 16px; border-radius:6px; }
+.ir-hero-stat-lbl { font-size:10px; color:#7eb8cc; text-transform:uppercase; letter-spacing:.05em; font-weight:600; margin-bottom:2px; }
+.ir-hero-stat-val { font-size:18px; font-weight:800; color:#fff; }
+.ir-section-hdr { font-size:15px; font-weight:800; color:#0f1c2e; border-bottom:2px solid #d5e8ef; padding-bottom:7px; margin:20px 0 12px; }
+.ir-card { background:#fff; border-radius:10px; padding:18px; border:1px solid #d5e8ef; box-shadow:0 2px 5px rgba(0,0,0,0.04); }
+.ir-card-title { font-size:13px; font-weight:700; color:#0f1c2e; margin-bottom:4px; }
+.ir-card-sub { font-size:11.5px; color:#6b7280; margin-bottom:12px; }
+.ir-chart-box { position:relative; width:100%; height:240px; }
+.ir-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ir-grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.ir-co-card { background:#fff; border-radius:10px; padding:16px; border:1px solid #d5e8ef; border-top-width:4px; }
+.ir-co-hdr { display:flex; justify-content:space-between; align-items:start; margin-bottom:8px; }
+.ir-co-name { font-size:14px; font-weight:700; }
+.ir-co-role { font-size:10.5px; color:#6b7280; margin-top:1px; }
+.ir-ticker { font-size:10.5px; font-weight:700; background:#e0f4f8; color:#006b80; padding:2px 7px; border-radius:8px; }
+.ir-co-desc { font-size:11.5px; color:#374151; line-height:1.6; margin-bottom:10px; }
+.ir-co-metrics { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:8px; }
+.ir-co-metric { background:#f8fbfd; border-radius:6px; padding:6px 9px; font-size:11px; }
+.ir-co-metric-lbl { color:#6b7280; }
+.ir-co-metric-val { font-weight:700; color:#0f1c2e; }
+.ir-co-detail { font-size:10.5px; color:#374151; background:#f0f7fb; border-radius:6px; padding:8px 10px; line-height:1.6; }
+.ir-flow { display:flex; align-items:stretch; gap:0; margin:12px 0; flex-wrap:wrap; }
+.ir-flow-box { flex:1; padding:14px; border-radius:8px; text-align:center; min-width:120px; }
+.ir-flow-arrow { display:flex; align-items:center; font-size:18px; color:#00bcd4; padding:0 4px; }
+.ir-catalyst-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.ir-catalyst { background:#fff; border-radius:9px; padding:14px 16px; border-left:4px solid #00bcd4; }
+.ir-catalyst-hdr { font-size:12.5px; font-weight:700; color:#0f1c2e; margin-bottom:5px; display:flex; justify-content:space-between; align-items:center; }
+.ir-catalyst-badge { font-size:10px; font-weight:700; padding:2px 6px; border-radius:5px; }
+.ir-catalyst p { font-size:11.5px; color:#374151; line-height:1.6; margin:0; }
+.ir-sources { margin-top:12px; padding:12px 16px; background:#f8fbfd; border-radius:8px; border:1px solid #d5e8ef; }
+.ir-sources-title { font-size:10.5px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:.05em; margin-bottom:6px; }
+.ir-sources ul { padding-left:14px; margin:0; }
+.ir-sources li { font-size:11.5px; color:#374151; margin-bottom:3px; }
+.ir-sources a { color:#00bcd4; text-decoration:none; }
 </style>
 </head>
 
@@ -679,7 +822,7 @@ body {
 <div class="chrome-bar" id="chrome-bar">
   <div class="chrome-tab c-active" id="ctab-company" onclick="switchMainTab('company')">Company Supply Chains</div>
   <div class="chrome-tab" id="ctab-industry" onclick="switchMainTab('industry')">Industry Research</div>
-  <div class="chrome-tab" id="ctab-marketing" onclick="switchMainTab('marketing')">Marketing Research</div>
+  <div class="chrome-tab" id="ctab-marketing" onclick="switchMainTab('marketing')">Competition Research</div>
 </div>
 
 <!-- ═══ VIEW: Company Supply Chains ═══════════════════════ -->
@@ -793,6 +936,7 @@ body {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════════
 //  DATABASE  — auto-updated by Claude each time new research is added
@@ -6776,13 +6920,43 @@ function formatReport(text) {
 }
 
 // ═══════════════════════════════════════════════════════════════════
-//  MODAL (full report)
+//  MODAL (full report) — ETN-style redesign
 // ═══════════════════════════════════════════════════════════════════
 function showModal(co) {
-  document.getElementById('m-co').textContent   = co.name;
-  document.getElementById('m-meta').textContent =
-    co.ticker + '  ·  Industries: ' + co.industries.join(', ') + '  ·  Research Date: Apr 2026';
-  document.getElementById('m-body').innerHTML = formatReport(co.fullReport || 'Full research report not yet available.');
+  // Hide legacy header elements — content is now fully inside m-body
+  document.getElementById('m-co').textContent   = '';
+  document.getElementById('m-meta').textContent = '';
+
+  const rawReport = co.fullReport || '';
+  const reportHtml = rawReport
+    ? wrapInCards(enhanceForDisplay(formatReport(rawReport)))
+    : '<div style="padding:24px;text-align:center;color:#6b7280">Full research report not yet available.</div>';
+
+  const metricColor = ['#00bcd4','#10b981','#8b5cf6','#f59e0b','#ef4444'];
+  const metrics = [
+    {lbl:'Revenue',       val: co.revenue      || '—'},
+    {lbl:'Net Profit',    val: co.netProfit     || '—'},
+    {lbl:'Debt / Equity', val: co.debtEquity    || '—'},
+    {lbl:'Current Ratio', val: co.currentRatio  || '—'},
+    {lbl:'Free Cash Flow',val: co.fcf           || '—'},
+  ];
+
+  document.getElementById('m-body').innerHTML = `
+    <div class="co-modal-hdr">
+      <div class="co-modal-name">${co.name}</div>
+      <div style="margin-top:6px">
+        <span class="co-modal-ticker">${co.ticker}</span>
+        ${co.industries.map(i => `<span class="co-modal-ind">${i}</span>`).join('')}
+      </div>
+    </div>
+    <div class="co-modal-metrics">
+      ${metrics.map((m,i) => `<div class="co-metric-card" style="border-left-color:${metricColor[i]}">
+        <div class="co-metric-label">${m.lbl}</div>
+        <div class="co-metric-val">${m.val}</div>
+      </div>`).join('')}
+    </div>
+    <div class="co-modal-report">${reportHtml}</div>`;
+
   document.getElementById('mbg').classList.add('on');
 }
 
