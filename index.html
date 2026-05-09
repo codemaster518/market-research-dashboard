@@ -508,6 +508,16 @@ body {
 .ind-card-body .r-table  { margin:8px 0; }
 .ind-card-body .r-sources { margin:10px 0 0; }
 .ind-report-intro .ind-card-body { color:#4a6a7a; font-style:italic; }
+
+/* ── Marketing report cards (HTML reports — no justify) ── */
+.mkt-card-body {
+  text-align:left;
+  padding:18px 20px;
+}
+.mkt-card-body .r-compare      { margin-top:4px; }
+.mkt-card-body .swot-company-wrap { margin-top:4px; }
+.mkt-card-body .r-subsection   { margin-top:14px; }
+.mkt-card-body > p:first-child  { margin-top:0; }
 .ind-placeholder {
   display:flex;
   align-items:center;
@@ -6846,23 +6856,62 @@ function selectMarketing(id) {
   renderMarketingContent(id);
 }
 
+// Wrap HTML marketing reports into SPX-style cards, splitting on .r-section divs
+function wrapHtmlInCards(html) {
+  const temp = document.createElement('div');
+  temp.innerHTML = html.trim();
+
+  // Unwrap single outer container (report-wrap / mkt-report div)
+  const root = temp.children.length === 1 ? temp.firstElementChild : temp;
+  const children = Array.from(root.children);
+
+  let result = '';
+  let cardBody = '';
+  let inCard = false;
+
+  children.forEach(el => {
+    if (el.classList.contains('r-section')) {
+      // Close previous card
+      if (inCard && cardBody.trim()) {
+        result += `<div class="ind-card-body mkt-card-body">${cardBody}</div></div>`;
+      }
+      // Open new card with dark header
+      result += `<div class="ind-report-card"><div class="ind-card-hdr">${el.textContent.trim()}</div>`;
+      cardBody = '';
+      inCard = true;
+    } else if (inCard) {
+      cardBody += el.outerHTML;
+    } else {
+      // Content before first section header (shouldn't normally exist)
+      result += el.outerHTML;
+    }
+  });
+
+  // Close final card
+  if (inCard && cardBody.trim()) {
+    result += `<div class="ind-card-body mkt-card-body">${cardBody}</div></div>`;
+  }
+  return result;
+}
+
 function renderMarketingContent(id) {
   const panel = document.getElementById('mkt-content-panel');
   if (!panel) return;
   const rep = DB.marketingReports.find(r => r.id === id);
   if (!rep) return;
 
-  // If fullReport is HTML (starts with '<'), render directly; otherwise use formatReport
   const isHtml = rep.fullReport.trimStart().startsWith('<');
   const body = isHtml
-    ? rep.fullReport
-    : enhanceForDisplay(formatReport(rep.fullReport));
+    ? wrapHtmlInCards(rep.fullReport)
+    : wrapInCards(enhanceForDisplay(formatReport(rep.fullReport)));
 
   panel.innerHTML = `
     <div class="report-wrap">
-      <div class="ind-content-title" style="color:#00bcd4">${rep.label}</div>
-      <div class="ind-content-subtitle">${rep.tickers.join(' vs ')} &bull; ${rep.date}</div>
-      <div class="ind-content-body">${body}</div>
+      <div class="ind-report-header-card">
+        <div class="ind-content-title" style="color:#7dd4e8">${rep.label}</div>
+        <div class="ind-content-subtitle">${rep.tickers.join(' vs ')} &bull; ${rep.date}</div>
+      </div>
+      ${body}
     </div>`;
 }
 </script>

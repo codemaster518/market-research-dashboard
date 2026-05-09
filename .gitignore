@@ -1,0 +1,4 @@
+.DS_Store
+.github-token
+*.log
+auto-push.log
