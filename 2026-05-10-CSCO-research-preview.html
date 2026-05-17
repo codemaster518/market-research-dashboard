@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cisco Systems (CSCO) Fundamental Research Report</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f8fafc; color: #1e293b; }
+.chart-container { position: relative; width: 100%; max-width: 100%; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
+@media (min-width: 768px) { .chart-container { height: 400px; } }
+.card { background: #ffffff; border-radius: 0.75rem; padding: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+.border-t-accent { border-top: 4px solid #2563eb; }
+.border-t-warning { border-top: 4px solid #f59e0b; }
+.border-t-success { border-top: 4px solid #10b981; }
+.border-t-danger { border-top: 4px solid #ef4444; }
+.icon-text { font-size: 1.5rem; display: inline-block; margin-right: 0.5rem; vertical-align: middle; }
+</style>
+</head>
+<body class="p-4 md:p-8 lg:px-16 max-w-7xl mx-auto">
+
+<!-- ── HEADER ── -->
+<header class="mb-10 text-center md:text-left flex flex-col md:flex-row justify-between items-center bg-blue-900 text-white p-8 rounded-xl shadow-lg">
+  <div>
+    <h1 class="text-4xl font-extrabold tracking-tight mb-2">Cisco Systems, Inc. (NASDAQ: CSCO)</h1>
+    <p class="text-xl text-blue-200">Fundamental Research &amp; Equity Analysis</p>
+  </div>
+  <div class="mt-4 md:mt-0 text-right">
+    <div class="text-3xl font-bold text-amber-400">Accumulate</div>
+    <div class="text-sm text-blue-100">Target Horizon: 12-18 Months</div>
+  </div>
+</header>
+
+<!-- ── SECTION 1: Business Overview ── -->
+<section class="mb-10">
+  <h2 class="text-2xl font-bold mb-4 text-slate-800 border-b-2 border-blue-500 pb-2"><span class="icon-text">&#127981;</span>Business Overview &amp; Revenue Model</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="card border-t-accent">
+      <h3 class="text-lg font-semibold mb-3">Operating Model &amp; Growth Drivers</h3>
+      <p class="mb-4 text-slate-600 leading-relaxed">
+        Cisco is the dominant global provider of networking infrastructure — switches, routers, and wireless access points — used by enterprises, governments, and service providers to run the internet backbone and corporate networks. The $28B acquisition of Splunk in 2024 transformed Cisco into a security and observability software platform. Core growth drivers are <strong>AI-driven network infrastructure</strong>, <strong>software &amp; subscription transition</strong>, and <strong>cybersecurity consolidation</strong>. Recurring revenue now exceeds 55% of total sales, steadily re-rating Cisco from a hardware cyclical toward a software platform.
+      </p>
+      <h4 class="font-semibold text-slate-700 mt-4 mb-2">Key Supply Chain Dynamics</h4>
+      <ul class="list-disc pl-5 text-sm text-slate-600 space-y-1">
+        <li><strong>Customers:</strong> Highly diversified across enterprises, federal governments, and service providers. No single customer exceeds 10% of revenue. Sold primarily through channel partners (resellers, systems integrators) and direct enterprise accounts.</li>
+        <li><strong>Suppliers:</strong> Heavily semiconductor-dependent — relies on TSMC and Broadcom for custom ASICs powering switches and routers. Uses contract manufacturers (Foxconn, Flextronics) for hardware assembly. Component lead times and chip supply remain a key input risk.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-2 text-center">Revenue by Operating Segment</h3>
+      <p class="text-sm text-center text-slate-500 mb-4">Networking remains the core, with Splunk accelerating the shift to software &amp; observability.</p>
+      <div class="chart-container">
+        <canvas id="segmentChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KEY RATIOS ── -->
+<section class="mb-10">
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <div class="card bg-blue-50 border-l-4 border-blue-600">
+      <h4 class="text-sm font-semibold text-blue-800 uppercase tracking-wider">Trailing P/E Ratio</h4>
+      <p class="text-3xl font-bold text-blue-900 mt-2">15.4x</p>
+      <p class="text-xs text-blue-700 mt-1">Discount to peers reflects near-term product order cycle headwinds.</p>
+    </div>
+    <div class="card bg-emerald-50 border-l-4 border-emerald-600">
+      <h4 class="text-sm font-semibold text-emerald-800 uppercase tracking-wider">Forward P/E Ratio</h4>
+      <p class="text-3xl font-bold text-emerald-900 mt-2">13.1x</p>
+      <p class="text-xs text-emerald-700 mt-1">Based on FY2025 EPS consensus estimates including Splunk synergies.</p>
+    </div>
+    <div class="card bg-purple-50 border-l-4 border-purple-600">
+      <h4 class="text-sm font-semibold text-purple-800 uppercase tracking-wider">Debt-to-Equity Ratio</h4>
+      <p class="text-3xl font-bold text-purple-900 mt-2">0.65</p>
+      <p class="text-xs text-purple-700 mt-1">Rose after Splunk acquisition; FCF generation supports rapid deleveraging.</p>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: Financial Analysis ── -->
+  <h2 class="text-2xl font-bold mb-4 text-slate-800 border-b-2 border-emerald-500 pb-2"><span class="icon-text">&#128200;</span>Financial Statement Analysis</h2>
+  <p class="mb-6 text-slate-600">
+    Cisco's financial profile is transitioning. Revenue dipped ~6% in FY2024 as customers digested COVID-era over-ordering, but software &amp; subscription ARR grew &gt;20% YoY. The Income Statement reflects improving gross margins (~65%+) driven by software mix. The Balance Sheet, while carrying higher debt post-Splunk, is supported by Cisco's exceptional free cash flow engine. The Statement of Cash Flows shows consistent FCF of $14–16B annually, funding dividends, buybacks, and debt paydown simultaneously.
+  </p>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-2 text-center">Revenue &amp; Net Income Growth (5Y + Est)</h3>
+      <p class="text-sm text-center text-slate-500 mb-4">Revenue dip in FY2024 reflects order digestion; recovery expected FY2025+ (in USD Billions).</p>
+      <div class="chart-container">
+        <canvas id="financialChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-2 text-center">Free Cash Flow Generation</h3>
+      <p class="text-sm text-center text-slate-500 mb-4">One of the strongest FCF profiles in enterprise tech — consistently $14–16B annually (in USD Billions).</p>
+      <div class="chart-container">
+        <canvas id="fcfChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 3: Geographic & Competitive ── -->
+<section class="mb-10">
+  <h2 class="text-2xl font-bold mb-4 text-slate-800 border-b-2 border-purple-500 pb-2"><span class="icon-text">&#127758;</span>Geographic &amp; Competitive Landscape</h2>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-2 text-center">Geographic Revenue Distribution</h3>
+      <p class="text-sm text-center text-slate-500 mb-4">Americas dominate; Asia Pacific growth is constrained by China-related headwinds.</p>
+      <div class="chart-container">
+        <canvas id="geoChart"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <h3 class="text-lg font-semibold mb-3">Market Position &amp; Peers</h3>
+      <p class="mb-4 text-sm text-slate-600">
+        Cisco holds ~40–50% global enterprise switching market share, making it the undisputed leader. Arista Networks has taken meaningful data center share, particularly among hyperscalers. In security, Cisco competes with Palo Alto Networks and Fortinet. The Splunk acquisition makes Cisco a direct competitor to Datadog and Dynatrace in observability.
+      </p>
+      <div class="chart-container" style="height: 250px;">
+        <canvas id="compChart"></canvas>
+      </div>
+      <div class="mt-4 pt-4 border-t border-gray-100">
+        <h4 class="font-semibold text-sm mb-2 text-slate-700">Frequently Associated Stocks:</h4>
+        <ul class="text-sm space-y-2 text-slate-600">
+          <li><strong class="text-blue-600">ANET (Arista Networks):</strong> Direct data center switching rival; frequently paired with CSCO as the incumbent vs. challenger trade in AI networking infrastructure.</li>
+          <li><strong class="text-blue-600">PANW (Palo Alto Networks):</strong> Cybersecurity peer and increasingly a direct competitor following Cisco's security platform expansion through acquisitions.</li>
+          <li><strong class="text-blue-600">JNPR (Juniper Networks):</strong> Legacy routing/switching peer now being acquired by HPE, leaving Cisco &amp; Arista as the primary enterprise networking duopoly.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 4: Catalysts, Risks & News ── -->
+<section class="mb-10">
+  <h2 class="text-2xl font-bold mb-4 text-slate-800 border-b-2 border-amber-500 pb-2"><span class="icon-text">&#9889;</span>Catalysts, Risks &amp; News</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="card border-t-success bg-emerald-50/30">
+      <h3 class="text-xl font-bold text-emerald-800 mb-3"><span class="icon-text">&#128640;</span>12-Month Catalysts</h3>
+      <ul class="space-y-3 text-slate-700">
+        <li class="flex items-start"><span class="mr-2 mt-1 font-bold text-emerald-500">&#10003;</span><div><strong>AI Networking Buildout:</strong> Cisco's "Ethernet for AI" strategy positions its high-speed switches as the preferred fabric for AI compute clusters — a multi-billion dollar opportunity as hyperscalers and enterprises build out AI infrastructure.</div></li>
+        <li class="flex items-start"><span class="mr-2 mt-1 font-bold text-emerald-500">&#10003;</span><div><strong>Splunk Integration &amp; ARR Growth:</strong> Full Splunk integration drives cross-sell of security and observability into Cisco's massive installed networking base, accelerating ARR toward $35B+ and justifying a higher software multiple.</div></li>
+        <li class="flex items-start"><span class="mr-2 mt-1 font-bold text-emerald-500">&#10003;</span><div><strong>Enterprise Refresh Cycle:</strong> As the post-COVID inventory digestion ends in FY2025, a natural hardware refresh cycle should re-accelerate product order growth, particularly in campus switching and Wi-Fi 7 deployments.</div></li>
+      </ul>
+    </div>
+    <div class="card border-t-danger bg-red-50/30">
+      <h3 class="text-xl font-bold text-red-800 mb-3"><span class="icon-text">&#9888;</span>Key Risk Factors</h3>
+      <ul class="space-y-3 text-slate-700">
+        <li class="flex items-start"><span class="mr-2 mt-1 font-bold text-red-500">&#10005;</span><div><strong>Product Order Digestion:</strong> Enterprises are still absorbing oversized purchases from 2021–2023. If the normalization takes longer than expected, product revenue could decline further into FY2025, pressuring EPS.</div></li>
+        <li class="flex items-start"><span class="mr-2 mt-1 font-bold text-red-500">&#10005;</span><div><strong>Arista &amp; AI Networking Competition:</strong> Arista Networks is winning AI switching deals at a faster pace, establishing deep relationships with hyperscalers. Cisco's response platform is still proving itself at scale.</div></li>
+        <li class="flex items-start"><span class="mr-2 mt-1 font-bold text-red-500">&#10005;</span><div><strong>Macro IT Spending Compression:</strong> A prolonged high-rate environment continues to delay enterprise technology refresh decisions, keeping Cisco's short-cycle product business under pressure beyond original expectations.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-6 card">
+    <h3 class="font-bold text-lg mb-3">Recent Major News (Past 3-6 Months)</h3>
+    <div class="space-y-4">
+      <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+        <span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded">Reuters</span>
+        <p class="font-semibold mt-2">Cisco closes $28B Splunk acquisition, accelerating AI-driven security and observability platform</p>
+        <p class="text-sm text-slate-500">The deal makes Cisco the world's largest software-defined security and observability provider, with combined ARR now exceeding $30B and meaningful cross-sell synergies expected over 24 months.</p>
+      </div>
+      <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+        <span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded">Bloomberg</span>
+        <p class="font-semibold mt-2">Cisco unveils Ethernet AI fabric solutions targeting hyperscaler data center spending</p>
+        <p class="text-sm text-slate-500">At its annual Live event, Cisco positioned its 400G/800G Nexus switching portfolio as the open-standard alternative to InfiniBand for AI training clusters, citing customer wins at major cloud providers.</p>
+      </div>
+      <div class="p-3 bg-gray-50 rounded-lg border border-gray-200">
+        <span class="text-xs font-bold bg-blue-100 text-blue-800 px-2 py-1 rounded">CNBC</span>
+        <p class="font-semibold mt-2">Cisco beats Q2 estimates on software growth momentum, raises full-year guidance</p>
+        <p class="text-sm text-slate-500">Subscription &amp; software revenue grew 22% YoY, offsetting product weakness. Management raised FY2025 guidance, citing improving order trends in enterprise switching and robust Splunk renewal rates above 90%.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION 5: Investment Thesis ── -->
+<section class="mb-10">
+  <div class="card bg-slate-800 text-white shadow-xl">
+    <h2 class="text-2xl font-bold mb-4 text-white border-b-2 border-amber-400 pb-2"><span class="icon-text">&#128176;</span>Final Investment Thesis</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+      <div>
+        <h3 class="text-xl font-bold text-emerald-400 mb-2">The Bull Case</h3>
+        <p class="text-slate-300 leading-relaxed text-sm">
+          Cisco is undergoing a quiet but significant transformation. The market still prices CSCO as a legacy hardware company, but recurring software revenue now exceeds 55% of total sales and is growing at double-digit rates. The Splunk acquisition adds a category-leading observability platform to an already formidable security stack. When the enterprise refresh cycle normalizes in FY2025–26, hardware growth will return on top of a compounding software base. At 13x forward earnings — a steep discount to pure-play software peers — the risk/reward is asymmetric for patient investors. The AI networking opportunity is an incremental catalyst, not yet priced in.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-xl font-bold text-red-400 mb-2">The Bear Case</h3>
+        <p class="text-slate-300 leading-relaxed text-sm">
+          The bear case rests on structural erosion, not just a cycle. Arista has permanently taken hyperscaler switching share that Cisco will not recover. Palo Alto and Fortinet are winning security consolidation deals that Cisco is also targeting — execution risk is high across multiple competitive fronts simultaneously. The Splunk integration carries meaningful operational complexity, and $28B of goodwill on the balance sheet creates impairment risk if integration synergies disappoint. With $16B+ of debt post-acquisition and ongoing buyback commitments, the financial flexibility that historically defined Cisco's defensive appeal is materially reduced.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const wrapLabel = (label) => {
+  if (label.length <= 16) return label;
+  const words = label.split(' ');
+  const lines = [];
+  let currentLine = '';
+  words.forEach(word => {
+    if ((currentLine + word).length > 16) {
+      if (currentLine) lines.push(currentLine.trim());
+      currentLine = word + ' ';
+    } else {
+      currentLine += word + ' ';
+    }
+  });
+  if (currentLine) lines.push(currentLine.trim());
+  return lines;
+};
+
+const tooltipConfig = {
+  callbacks: {
+    title: function(tooltipItems) {
+      const item = tooltipItems[0];
+      let label = item.chart.data.labels[item.dataIndex];
+      if (Array.isArray(label)) { return label.join(' '); } else { return label; }
+    }
+  }
+};
+
+const commonOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    tooltip: tooltipConfig,
+    legend: { position: 'bottom', labels: { font: { family: "'Segoe UI', sans-serif" } } }
+  }
+};
+
+/* Segment Donut */
+const segmentLabelsRaw = ["Networking", "Services", "Collaboration", "Security", "Observability (Splunk)"];
+const segmentLabels = segmentLabelsRaw.map(wrapLabel);
+const ctxSegment = document.getElementById('segmentChart').getContext('2d');
+new Chart(ctxSegment, {
+  type: 'doughnut',
+  data: {
+    labels: segmentLabels,
+    datasets: [{
+      data: [47, 28, 9, 8, 8],
+      backgroundColor: ['#1E3A8A', '#3B82F6', '#10B981', '#F59E0B', '#8B5CF6'],
+      borderWidth: 2,
+      borderColor: '#ffffff'
+    }]
+  },
+  options: { ...commonOptions, cutout: '60%' }
+});
+
+/* Geographic Bar */
+const geoLabelsRaw = ["Americas", "EMEA", "Asia Pacific"];
+const geoLabels = geoLabelsRaw.map(wrapLabel);
+const ctxGeo = document.getElementById('geoChart').getContext('2d');
+new Chart(ctxGeo, {
+  type: 'bar',
+  data: {
+    labels: geoLabels,
+    datasets: [{
+      label: 'Revenue Share (%)',
+      data: [57, 25, 18],
+      backgroundColor: '#3B82F6',
+      borderRadius: 4
+    }]
+  },
+  options: {
+    ...commonOptions,
+    scales: {
+      y: { beginAtZero: true, max: 100, ticks: { callback: function(value) { return value + "%" } } }
+    }
+  }
+});
+
+/* Revenue & Net Income Line */
+const finLabelsRaw = ["FY 2020", "FY 2021", "FY 2022", "FY 2023", "FY 2024", "FY 2025E"];
+const finLabels = finLabelsRaw.map(wrapLabel);
+const ctxFin = document.getElementById('financialChart').getContext('2d');
+new Chart(ctxFin, {
+  type: 'line',
+  data: {
+    labels: finLabels,
+    datasets: [
+      {
+        label: 'Revenue ($B)',
+        data: [49.3, 49.8, 51.6, 57.0, 53.8, 56.0],
+        borderColor: '#1E3A8A',
+        backgroundColor: 'rgba(30, 58, 138, 0.1)',
+        borderWidth: 3,
+        tension: 0.3,
+        fill: true,
+        yAxisID: 'y'
+      },
+      {
+        label: 'Net Income ($B)',
+        data: [11.2, 10.6, 11.8, 12.6, 10.3, 11.5],
+        borderColor: '#10B981',
+        backgroundColor: '#10B981',
+        borderWidth: 3,
+        borderDash: [5, 5],
+        tension: 0.3,
+        pointRadius: 5,
+        yAxisID: 'y1'
+      }
+    ]
+  },
+  options: {
+    ...commonOptions,
+    interaction: { mode: 'index', intersect: false },
+    scales: {
+      y: { type: 'linear', display: true, position: 'left', title: { display: true, text: 'Revenue' } },
+      y1: { type: 'linear', display: true, position: 'right', grid: { drawOnChartArea: false }, title: { display: true, text: 'Net Income' } }
+    }
+  }
+});
+
+/* FCF Bar */
+const fcfLabelsRaw = ["FY 2020", "FY 2021", "FY 2022", "FY 2023", "FY 2024"];
+const fcfLabels = fcfLabelsRaw.map(wrapLabel);
+const ctxFcf = document.getElementById('fcfChart').getContext('2d');
+new Chart(ctxFcf, {
+  type: 'bar',
+  data: {
+    labels: fcfLabels,
+    datasets: [{
+      label: 'Free Cash Flow ($B)',
+      data: [14.8, 15.5, 14.6, 16.5, 14.2],
+      backgroundColor: '#10B981',
+      borderRadius: 4
+    }]
+  },
+  options: {
+    ...commonOptions,
+    scales: { y: { beginAtZero: true } }
+  }
+});
+
+/* Competitor Horizontal Bar */
+const compLabelsRaw = ["Cisco Systems", "Palo Alto Networks", "Arista Networks", "Fortinet"];
+const compLabels = compLabelsRaw.map(wrapLabel);
+const ctxComp = document.getElementById('compChart').getContext('2d');
+new Chart(ctxComp, {
+  type: 'bar',
+  data: {
+    labels: compLabels,
+    datasets: [{
+      label: 'Approx. Market Cap ($B)',
+      data: [230, 110, 95, 55],
+      backgroundColor: ['#3B82F6', '#94A3B8', '#94A3B8', '#94A3B8'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    ...commonOptions,
+    indexAxis: 'y',
+    plugins: {
+      ...commonOptions.plugins,
+      legend: { display: false }
+    },
+    scales: { x: { beginAtZero: true } }
+  }
+});
+</script>
+</body>
+</html>
