@@ -937,6 +937,7 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════════════
 //  DATABASE  — auto-updated by Claude each time new research is added
@@ -944,7 +945,7 @@ body {
 // ═══════════════════════════════════════════════════════════════════
 const DB = {
 
-  industries: ["Neocloud", "Enterprise Software", "Agentic AI", "EV Batteries", "Crude Tankers", "Oilfield Services", "Electronic Instruments", "Enterprise Networking", "Nuclear Energy", "Helium", "Nitrogen Fertilizers"],
+  industries: ["Neocloud", "Enterprise Software", "Agentic AI", "EV Batteries", "Crude Tankers", "Oilfield Services", "Electronic Instruments", "Enterprise Networking", "Nuclear Energy", "Helium", "Nitrogen Fertilizers", "Quantum Computing"],
 
   // ── Marketing Research Comparisons ──────────────────────────────
   marketingReports: [
@@ -1243,6 +1244,370 @@ const DB = {
       }
     }},
     { id:"Oilfield Services",      name:"Oilfield Services",      fullReport:"" },
+    { id:"Quantum Computing", name:"Quantum Computing", richReport: {
+      getHtml: function(p) {
+        var C = 'background:#1e293b;border-radius:0.75rem;box-shadow:0 10px 15px -3px rgba(0,0,0,0.5);padding:1.5rem;border:1px solid #334155;';
+        var bCyan = 'display:inline-block;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;background:rgba(6,182,212,0.2);color:#06b6d4;border:1px solid rgba(6,182,212,0.4);';
+        var bMag  = 'display:inline-block;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;background:rgba(236,72,153,0.2);color:#ec4899;border:1px solid rgba(236,72,153,0.4);';
+        var bYel  = 'display:inline-block;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;background:rgba(234,179,8,0.2);color:#eab308;border:1px solid rgba(234,179,8,0.4);';
+        var bGrn  = 'display:inline-block;padding:0.25rem 0.75rem;border-radius:9999px;font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;background:rgba(16,185,129,0.2);color:#10b981;border:1px solid rgba(16,185,129,0.4);';
+        var sHdr  = 'font-size:1.875rem;font-weight:700;margin-bottom:1.5rem;padding-left:1rem;';
+        var muted = 'color:#94a3b8;';
+        var gray3 = 'color:#d1d5db;';
+        return '<div style="background:#0f172a;color:#f8fafc;font-family:Inter,system-ui,sans-serif;padding:2rem 1.5rem">' +
+
+        // ── HEADER ──
+        '<div style="text-align:center;margin-bottom:4rem">' +
+          '<h1 style="font-size:2.75rem;font-weight:800;letter-spacing:-0.025em;margin-bottom:1rem;text-transform:uppercase">The <span style="color:#06b6d4">Quantum</span> Computing Sector</h1>' +
+          '<p style="font-size:1.125rem;'+muted+'max-width:48rem;margin:0 auto">Investment Bank Industry Research Report &bull; Q3 2026</p>' +
+        '</div>' +
+
+        // ── SECTION 1: OVERVIEW ──
+        '<section style="margin-bottom:4rem">' +
+          '<h2 style="'+sHdr+'border-left:4px solid #06b6d4">1. Industry Overview: How Quantum Works</h2>' +
+          '<div style="'+C+'">' +
+            '<p style="margin-bottom:1rem;line-height:1.7;font-size:1.05rem">The quantum computing industry has transitioned from a theoretical, physics-dominated domain into a highly strategic, capital-intensive industrial sector. Its operational mechanics revolve around <strong>qubits</strong>—quantum bits that leverage <em>superposition</em> (existing in multiple states simultaneously) and <em>entanglement</em> (correlated states between distinct physical units) to navigate an exponentially vast computational space that classical binary computers cannot access.</p>' +
+            '<p style="margin-bottom:1rem;line-height:1.7;font-size:1.05rem">The primary technological hurdle remains <strong>decoherence</strong>—the loss of the fragile quantum state due to environmental noise. The industry\'s structural response is a migration toward <strong>Quantum Error Correction (QEC)</strong> schemes, which group thousands of noisy physical qubits into stable "logical qubits." Progress is now tracked by <strong>QuOps</strong> (error-free Quantum Operations) rather than raw qubit counts.</p>' +
+            '<p style="margin-bottom:1.5rem;line-height:1.7;font-size:1.05rem">Four competing qubit modalities dominate: <strong>Superconducting</strong> (IBM, Rigetti, D-Wave), <strong>Trapped Ion</strong> (IonQ, Quantinuum), <strong>Photonic</strong> (Xanadu, PsiQuantum), and <strong>Silicon Spin</strong> (Diraq). Compute is delivered via cloud-based QCaaS and on-premises hybrid deployments co-located with HPC facilities.</p>' +
+            '<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem">' +
+              '<div style="background:#0f172a;padding:1.5rem;border-radius:0.5rem;border:1px solid rgba(236,72,153,0.3);text-align:center">' +
+                '<div style="font-size:3.5rem;font-weight:700;color:#ec4899;margin-bottom:0.5rem">$8.6B</div>' +
+                '<div style="'+muted+'text-transform:uppercase;letter-spacing:0.05em;font-size:0.875rem;font-weight:700">Projected Market Size (2028)</div>' +
+              '</div>' +
+              '<div style="background:#0f172a;padding:1.5rem;border-radius:0.5rem;border:1px solid rgba(6,182,212,0.3);text-align:center">' +
+                '<div style="font-size:3.5rem;font-weight:700;color:#06b6d4;margin-bottom:0.5rem">38.3%</div>' +
+                '<div style="'+muted+'text-transform:uppercase;letter-spacing:0.05em;font-size:0.875rem;font-weight:700">Industry CAGR (2023–2028)</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+
+        // ── SECTION 2: VALUE CHAIN ──
+        '<section style="margin-bottom:4rem">' +
+          '<h2 style="'+sHdr+'border-left:4px solid #eab308">2. Value Chain &amp; Key Players</h2>' +
+          '<p style="'+muted+'margin-bottom:2rem;font-size:1.05rem">The quantum stack spans three vertical tiers: <strong style="color:#f8fafc">Upstream</strong> suppliers (cryogenics, materials, photonics, control electronics), <strong style="color:#f8fafc">Midstream</strong> QPU developers, and <strong style="color:#f8fafc">Downstream</strong> cloud hyperscalers, software SDKs, and enterprise end-users.</p>' +
+          '<div style="display:grid;gap:2rem;margin-bottom:3rem">' +
+
+            // IBM card
+            '<div style="'+C+'border-left:4px solid #06b6d4">' +
+              '<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem">IBM <span style="'+bCyan+'">NYSE: IBM</span></h3>' +
+              '<div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">' +
+                '<div>' +
+                  '<p style="font-size:0.875rem;line-height:1.65;'+gray3+'margin-bottom:1rem">IBM is the undisputed leader in full-stack superconducting quantum computing, providing access to its fleet of systems via the IBM Quantum Network. IBM has achieved significant milestones in qubit scaling (the 1,121-qubit Condor processor) and error mitigation techniques. Its business model blends classical enterprise IT with quantum cloud access.</p>' +
+                  '<div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.875rem;margin-top:1rem">' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Market Cap</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">$158.4B</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Quantum Rev Growth</span><span style="font-weight:700;font-size:1.05rem;color:#4ade80">+35% YoY</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Profit Margin</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">16.2%</span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div style="background:#0f172a;padding:1rem;border-radius:0.5rem;font-size:0.875rem;border:1px solid #374151">' +
+                  '<strong style="color:#06b6d4;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Largest Customers</strong>' +
+                  '<ul style="list-style:none;margin:0 0 0.75rem;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Cleveland Clinic (~12% Q-Rev)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Keio University (~8% Q-Rev)</li>' +
+                  '</ul>' +
+                  '<strong style="color:#06b6d4;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Suppliers</strong>' +
+                  '<ul style="list-style:none;margin:0;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Bluefors (Cryogenics)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Keysight Tech (Control Systems)</li>' +
+                  '</ul>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+            // IonQ card
+            '<div style="'+C+'border-left:4px solid #ec4899">' +
+              '<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem">IonQ <span style="'+bMag+'">NYSE: IONQ</span></h3>' +
+              '<div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">' +
+                '<div>' +
+                  '<p style="font-size:0.875rem;line-height:1.65;'+gray3+'margin-bottom:1rem">IonQ is a full-stack quantum platform developer utilizing trapped-ion technology. Migrating toward a semiconductor-based roadmap with its 256-qubit IonQ Tempo system. To secure onshore foundry access, IonQ announced a pending <strong>$1.8B acquisition of SkyWater Technology</strong> (mid-2026 close). High customer concentration: three customers generated 53% of FY2025 revenue.</p>' +
+                  '<div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.875rem;margin-top:1rem">' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Market Cap</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">~$21.99B</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">FY2025 Revenue</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">$130.0M</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Rev Growth YoY</span><span style="font-weight:700;font-size:1.05rem;color:#4ade80">+202%</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Adj. EBITDA Loss</span><span style="font-weight:700;font-size:1.05rem;color:#f87171">($186.8M)</span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div style="background:#0f172a;padding:1rem;border-radius:0.5rem;font-size:0.875rem;border:1px solid #374151">' +
+                  '<strong style="color:#ec4899;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Customers</strong>' +
+                  '<ul style="list-style:none;margin:0 0 0.75rem;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Sovereign &amp; Public Sector (~40%)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; QuantumBasel ($60M contract)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; EPB Chattanooga ($22M)</li>' +
+                  '</ul>' +
+                  '<strong style="color:#ec4899;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Suppliers</strong>' +
+                  '<ul style="list-style:none;margin:0;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; SkyWater Technology (pending acq.)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; GlobalFoundries (cryo-CMOS)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Monarch Quantum (photonics)</li>' +
+                  '</ul>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+            // Rigetti card
+            '<div style="'+C+'border-left:4px solid #eab308">' +
+              '<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem">Rigetti Computing <span style="'+bYel+'">NASDAQ: RGTI</span></h3>' +
+              '<div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">' +
+                '<div>' +
+                  '<p style="font-size:0.875rem;line-height:1.65;'+gray3+'margin-bottom:1rem">Vertically integrated superconducting QPU developer. Primary advantage is <strong>Fab-1</strong>, a captive quantum semiconductor manufacturing facility in California. Revenue highly concentrated in public, defense, and international academic sectors. Key contracts: $8.4M C-DAC India order and $5.8M AFRL contract. Ended FY2025 with $589.8M in cash — a multi-year runway.</p>' +
+                  '<div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.875rem;margin-top:1rem">' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Market Cap</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">~$7.33B</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">FY2025 Revenue</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">$7.1M</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Rev Growth YoY</span><span style="font-weight:700;font-size:1.05rem;color:#f87171">-34.3%</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Cash Reserves</span><span style="font-weight:700;font-size:1.05rem;color:#4ade80">$589.8M</span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div style="background:#0f172a;padding:1rem;border-radius:0.5rem;font-size:0.875rem;border:1px solid #374151">' +
+                  '<strong style="color:#eab308;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Customers</strong>' +
+                  '<ul style="list-style:none;margin:0 0 0.75rem;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; C-DAC India ($8.4M system)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; US Air Force Research Lab ($5.8M)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Vanguard Group (10.89% equity)</li>' +
+                  '</ul>' +
+                  '<strong style="color:#eab308;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Suppliers</strong>' +
+                  '<ul style="list-style:none;margin:0;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Bluefors Oy (dilution refrigeration)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Riverlane (QEC decoders)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; NVIDIA (CUDA-Q integration)</li>' +
+                  '</ul>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+            // D-Wave card
+            '<div style="'+C+'border-left:4px solid #06b6d4">' +
+              '<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem">D-Wave Quantum <span style="'+bCyan+'">NYSE: QBTS</span></h3>' +
+              '<div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">' +
+                '<div>' +
+                  '<p style="font-size:0.875rem;line-height:1.65;'+gray3+'margin-bottom:1rem">Specializes in quantum annealing systems for combinatorial optimization, logistics, and machine learning. In January 2026, D-Wave acquired <strong>Quantum Circuits Inc. for $538.5M</strong> to absorb its dual-rail gate-model qubit technology. Most diversified customer base in the sector: 135+ clients including two dozen Forbes Global 2000 companies.</p>' +
+                  '<div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.875rem;margin-top:1rem">' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Market Cap</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">~$8.40B</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">FY2025 Revenue</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">$24.6M</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Rev Growth YoY</span><span style="font-weight:700;font-size:1.05rem;color:#4ade80">+179%</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">GAAP Net Loss</span><span style="font-weight:700;font-size:1.05rem;color:#f87171">($355.1M)*</span></div>' +
+                  '</div>' +
+                  '<p style="font-size:0.75rem;'+muted+'margin-top:0.5rem">*Driven by $270.5M in non-cash warrant liability charges.</p>' +
+                '</div>' +
+                '<div style="background:#0f172a;padding:1rem;border-radius:0.5rem;font-size:0.875rem;border:1px solid #374151">' +
+                  '<strong style="color:#06b6d4;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Customers</strong>' +
+                  '<ul style="list-style:none;margin:0 0 0.75rem;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Florida Atlantic Univ. ($20M)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Fortune 100 ($10M, 2-yr QCaaS)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; 135+ global enterprise clients</li>' +
+                  '</ul>' +
+                  '<strong style="color:#06b6d4;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Backers</strong>' +
+                  '<ul style="list-style:none;margin:0;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; QCI (acquired — gate-model tech)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Canada SIF (C$40M loan)</li>' +
+                  '</ul>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+            // Quantinuum card
+            '<div style="'+C+'border-left:4px solid #10b981">' +
+              '<h3 style="font-size:1.4rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem">Quantinuum <span style="'+bGrn+'">NASDAQ: QNT (IPO Pending)</span></h3>' +
+              '<div style="display:grid;grid-template-columns:2fr 1fr;gap:1.5rem">' +
+                '<div>' +
+                  '<p style="font-size:0.875rem;line-height:1.65;'+gray3+'margin-bottom:1rem">Formed in 2021 via merger of Honeywell Quantum Solutions and Cambridge Quantum Computing. Honeywell retains 54% majority. <strong>Nasdaq IPO filed May 2026 (symbol QNT)</strong>, targeting &gt;$20B valuation — a 600x revenue multiple. Its trapped-ion "Helios" system is operational; fault-tolerant "Apollo" machine targeted for 2029. Funded by $300M (Jan 2024) and $600M (Sep 2025) rounds led by JPMorgan and Honeywell.</p>' +
+                  '<div style="display:flex;flex-wrap:wrap;gap:1rem;font-size:0.875rem;margin-top:1rem">' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">IPO Target Val.</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">&gt;$20.0B</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">FY2025 Revenue</span><span style="font-weight:700;font-size:1.05rem;color:#f8fafc">$30.9M</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">Rev Growth YoY</span><span style="font-weight:700;font-size:1.05rem;color:#4ade80">+34.3%</span></div>' +
+                    '<div><span style="'+muted+'display:block;font-size:0.75rem;text-transform:uppercase">GAAP Net Loss</span><span style="font-weight:700;font-size:1.05rem;color:#f87171">($192.6M)</span></div>' +
+                  '</div>' +
+                '</div>' +
+                '<div style="background:#0f172a;padding:1rem;border-radius:0.5rem;font-size:0.875rem;border:1px solid #374151">' +
+                  '<strong style="color:#10b981;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Customers</strong>' +
+                  '<ul style="list-style:none;margin:0 0 0.75rem;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; JPMorgan Chase (investor + TKET)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; BMW Group (materials research)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Airbus (hydrogen simulation)</li>' +
+                  '</ul>' +
+                  '<strong style="color:#10b981;display:block;margin-bottom:0.5rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em">Key Suppliers</strong>' +
+                  '<ul style="list-style:none;margin:0;padding:0;'+gray3+'">' +
+                    '<li style="margin-bottom:0.25rem">&#9642; GlobalFoundries (cryo-CMOS)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Monarch Quantum (photonics)</li>' +
+                    '<li style="margin-bottom:0.25rem">&#9642; Honeywell (54% parent)</li>' +
+                  '</ul>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+
+          '</div>' +
+
+          // Plotly bubble chart
+          '<div style="'+C+'">' +
+            '<h4 style="font-size:1.125rem;font-weight:700;margin-bottom:0.5rem;text-align:center">Financial Landscape: Revenue Growth vs. Valuation (Pure-Plays)</h4>' +
+            '<p style="text-align:center;font-size:0.875rem;'+muted+'margin-bottom:1.5rem">Bubble size = FY2025 absolute revenue. Valuations as of May 2026. Quantinuum at IPO target.</p>' +
+            '<div id="'+p+'-plotly" style="width:100%;height:400px"></div>' +
+          '</div>' +
+        '</section>' +
+
+        // ── SECTION 3: TRENDS ──
+        '<section style="margin-bottom:4rem">' +
+          '<h2 style="'+sHdr+'border-left:4px solid #ec4899">3. Important Industry Trends</h2>' +
+          '<p style="'+muted+'margin-bottom:2rem;font-size:1.05rem">The sector is moving rapidly from theoretical physics into engineering execution. Hardware modalities are locked in a deep tech arms race, while software abstraction layers are lowering the barrier to entry for enterprise developers.</p>' +
+
+          '<div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem">' +
+            '<div style="'+C+'display:flex;flex-direction:column">' +
+              '<h4 style="font-size:1.125rem;font-weight:700;margin-bottom:0.5rem">Qubit Scaling Progression</h4>' +
+              '<p style="font-size:0.875rem;'+muted+'margin-bottom:1rem">Historical and projected roadmap for physical superconducting qubits. The real trend is the pivot from raw counts toward Logical Qubits via QEC, targeting the MegaQuOp milestone by 2029.</p>' +
+              '<div style="position:relative;flex:1;min-height:280px"><canvas id="'+p+'-qubit"></canvas></div>' +
+            '</div>' +
+            '<div style="'+C+'display:flex;flex-direction:column">' +
+              '<h4 style="font-size:1.125rem;font-weight:700;margin-bottom:0.5rem">VC/PE Funding by Modality (2025–2026)</h4>' +
+              '<p style="font-size:0.875rem;'+muted+'margin-bottom:1rem">Capital allocation indicates market confidence. Superconducting remains dominant due to Big Tech backing, but Trapped Ion and Neutral Atom architectures are seeing massive acceleration.</p>' +
+              '<div style="position:relative;flex:1;min-height:280px"><canvas id="'+p+'-funding"></canvas></div>' +
+            '</div>' +
+          '</div>' +
+
+          // Three new trend cards
+          '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem">' +
+            '<div style="'+C+'border-top:4px solid #06b6d4">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#9883;&#65039;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">QEC &amp; the QuOps Metric</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65">The industry is abandoning raw physical qubit counts as its benchmark. Real-time <strong>QEC decoders</strong>—integrated at the silicon level—group thousands of noisy physical qubits into stable logical qubits. The emerging gold standard is <strong>QuOps</strong> (error-free Quantum Operations). The <strong>MegaQuOp milestone</strong> (one million error-free operations) is the commercial utility threshold. IBM, Quantinuum, and QuEra are executing multi-year roadmaps targeting it.</p>' +
+            '</div>' +
+            '<div style="'+C+'border-top:4px solid #ec4899">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#127981;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">Foundry Migration &amp; Advanced Packaging</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65">Quantum hardware developers are migrating fabrication from custom lab-scale prototypes to high-volume commercial semiconductor foundries. Partnerships with established fabs unlock advanced photolithography, cryo-CMOS integration, and 2.5D/3D silicon packaging. This model is demonstrated by <strong>PsiQuantum and Quantinuum\'s partnerships with GlobalFoundries</strong>, and Diraq\'s reliance on standard CMOS lines.</p>' +
+            '</div>' +
+            '<div style="'+C+'border-top:4px solid #eab308">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#129302;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">HPC &amp; Generative AI Integration</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65">Standalone QPUs are increasingly viewed as obsolete. The industry is integrating quantum processors into HPC environments as co-processor accelerators alongside classical CPU/GPU clusters, enabled by <strong>NVIDIA\'s CUDA-Q</strong> framework. Simultaneously, machine learning is being used to optimize qubit calibration, act as pre-decoders for QEC, and generate synthetic AI training data.</p>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+
+        // ── SECTION 4: CATALYSTS ──
+        '<section style="margin-bottom:4rem">' +
+          '<h2 style="'+sHdr+'border-left:4px solid #06b6d4">4. 12-Month Catalysts &amp; Outlook</h2>' +
+          '<p style="'+muted+'margin-bottom:2rem;font-size:1.05rem">Investors and stakeholders must monitor several fast-moving vectors across policy, regulation, and corporate restructuring that can drastically alter equity valuations within the next 1–4 quarters.</p>' +
+          '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1rem">' +
+            '<div style="'+C+'border-top:4px solid #06b6d4">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#128220;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">Regulatory Shifts</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65"><strong>NIST Finalization:</strong> NIST is finalizing post-quantum cryptography (PQC) standards. Mandatory adoption mandates for federal agencies will instantly create a massive revenue windfall for quantum-safe cybersecurity vendors (SandboxAQ, Quantinuum) within the next 9 months.</p>' +
+            '</div>' +
+            '<div style="'+C+'border-top:4px solid #ec4899">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#127915;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">Policy &amp; Geopolitics</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65"><strong>Export Controls:</strong> The US Commerce Department is likely to tighten export restrictions on dilution refrigerators and specialized lasers. While protecting IP, this negatively impacts upstream suppliers like Bluefors selling into the Asian market, suppressing near-term revenue growth.</p>' +
+            '</div>' +
+            '<div style="'+C+'border-top:4px solid #eab308">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#128300;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">Societal &amp; Tech</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65"><strong>Logical Qubit Breakthroughs:</strong> Society approaches "Quantum Utility." If a company demonstrates a fully fault-tolerant logical qubit with error rates below 10⁻⁶ before Q4, expect a massive sector-wide valuation re-rating validating the commercial timeline for complex drug discovery.</p>' +
+            '</div>' +
+            '<div style="'+C+'border-top:4px solid #f8fafc">' +
+              '<div style="font-size:1.5rem;margin-bottom:0.75rem">&#129309;</div>' +
+              '<h4 style="font-weight:700;font-size:1.05rem;margin-bottom:0.5rem;color:#f8fafc">M&amp;A Activity</h4>' +
+              '<p style="font-size:0.875rem;'+gray3+'line-height:1.65"><strong>Consolidation:</strong> D-Wave\'s $538.5M acquisition of QCI and IonQ\'s pending $1.8B acquisition of SkyWater are the two largest active deals. Successful integration builds vertically integrated platforms. However, managing capital-intensive foundry assets could depress gross margins.</p>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+
+        '</div>';
+      },
+      initCharts: function(p) {
+        var _ac = window._activeCharts = window._activeCharts || [];
+        _ac.forEach(function(c){ try { c.destroy(); } catch(e) {} });
+        _ac.length = 0;
+
+        // Qubit Scaling Line Chart
+        var cc = document.getElementById(p+'-qubit');
+        if (cc) {
+          var ch = new Chart(cc, {
+            type: 'line',
+            data: {
+              labels: ['2020','2021','2022','2023','2025 (Est.)','2029 (Target)'],
+              datasets: [{
+                label: 'Physical Qubits per Processor',
+                data: [65, 127, 433, 1121, 4158, 10000],
+                borderColor: '#06b6d4',
+                backgroundColor: 'rgba(6,182,212,0.15)',
+                borderWidth: 3,
+                pointBackgroundColor: '#ec4899',
+                pointRadius: 6,
+                fill: true,
+                tension: 0.4
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { labels: { color: '#f8fafc' } } },
+              scales: {
+                x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+                y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
+              }
+            }
+          });
+          _ac.push(ch);
+        }
+
+        // Funding by Modality Bar Chart
+        var cc2 = document.getElementById(p+'-funding');
+        if (cc2) {
+          var ch2 = new Chart(cc2, {
+            type: 'bar',
+            data: {
+              labels: ['Superconducting','Trapped Ion','Neutral Atom','Silicon Spin','Photonic'],
+              datasets: [{
+                label: 'Capital Raised ($M USD)',
+                data: [1250, 850, 620, 410, 580],
+                backgroundColor: ['#06b6d4','#ec4899','#eab308','#8b5cf6','#10b981'],
+                borderWidth: 0,
+                borderRadius: 4
+              }]
+            },
+            options: {
+              indexAxis: 'y',
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: { legend: { labels: { color: '#f8fafc' } } },
+              scales: {
+                x: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
+                y: { ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
+              }
+            }
+          });
+          _ac.push(ch2);
+        }
+
+        // Plotly Bubble Chart
+        var plotlyDiv = document.getElementById(p+'-plotly');
+        if (plotlyDiv && window.Plotly) {
+          Plotly.newPlot(plotlyDiv, [{
+            x: [202, -34.3, 179, 34.3, 0],
+            y: [21990, 7330, 8400, 20000, 3630],
+            text: ['IonQ','Rigetti','D-Wave','Quantinuum','Xanadu'],
+            mode: 'markers+text',
+            type: 'scattergl',
+            textposition: 'top center',
+            textfont: { color: '#f8fafc', size: 13 },
+            marker: {
+              size: [42, 8, 16, 20, 6],
+              color: ['#ec4899','#eab308','#06b6d4','#10b981','#8b5cf6'],
+              line: { color: '#f8fafc', width: 1 },
+              opacity: 0.85
+            }
+          }], {
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)',
+            xaxis: { title: 'FY2025 Revenue Growth YoY (%)', color: '#94a3b8', gridcolor: '#334155', zerolinecolor: '#475569' },
+            yaxis: { title: 'Market Cap / Valuation ($M USD)', color: '#94a3b8', gridcolor: '#334155', type: 'log' },
+            margin: { l: 80, r: 30, t: 20, b: 60 },
+            showlegend: false,
+            font: { color: '#f8fafc' }
+          }, { displayModeBar: false, responsive: true });
+        }
+      }
+    }},
   ],
 
   companies: [
