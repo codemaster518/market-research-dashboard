@@ -1608,6 +1608,264 @@ const DB = {
         }
       }
     }},
+    { id:"Semiconductors", name:"Semiconductors", richReport: {
+      getHtml: function(p) {
+        return '<div style="margin:-22px -28px;padding:24px;background:#070912;font-family:\'JetBrains Mono\',\'Fira Mono\',\'Courier New\',monospace;color:#e8ecf5;">' +
+          '<h1 style="font-weight:500;font-size:18px;margin:0 0 6px;color:#e8ecf5;letter-spacing:0.5px;">Semiconductor supply chain (weighted by input expenditure, $B)</h1>' +
+          '<p style="font-size:12px;color:#8b94aa;margin:0 0 16px;max-width:900px;">Each ribbon shows roughly how money flows between layers: sub-components &amp; materials feed equipment makers, equipment + materials feed fabs, and fabs (plus EDA tools and substrates) feed the chip designers. Hover a company to highlight its connections.</p>' +
+          '<div style="overflow-x:auto;overflow-y:hidden;">' +
+            '<svg id="chipSankey" width="1500" height="980" viewBox="0 0 1500 980">' +
+              '<defs><radialGradient id="starGlow" cx="50%" cy="50%" r="50%">' +
+                '<stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>' +
+                '<stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>' +
+              '</radialGradient></defs>' +
+              '<rect width="1500" height="980" fill="#070912"/>' +
+              '<g id="stars"></g>' +
+              '<text x="750" y="36" text-anchor="middle" fill="#e8ecf5" font-size="20" font-weight="500" letter-spacing="1">Semiconductor Supply Chain (weighted by input expenditure, $B)</text>' +
+              '<text x="120" y="78" fill="#bcc4d8" font-size="14">Component Tools</text>' +
+              '<text x="560" y="78" fill="#bcc4d8" font-size="14">Advanced Tools</text>' +
+              '<text x="960" y="78" fill="#bcc4d8" font-size="14">Fabricators</text>' +
+              '<text x="1340" y="78" fill="#bcc4d8" font-size="14">Chip Designers</text>' +
+              '<g id="links"></g>' +
+              '<g id="nodes"></g>' +
+              '<g id="legend" transform="translate(40, 935)"></g>' +
+            '</svg>' +
+          '</div>' +
+        '</div>';
+      },
+      initCharts: function(p) {
+        function loadScript(src, cb) {
+          var s = document.createElement('script'); s.src = src;
+          s.onload = cb; document.head.appendChild(s);
+        }
+        function runViz() {
+          const svg = d3.select('#chipSankey');
+          const starG = svg.select('#stars');
+          const rng = (s => () => (s = (s*9301+49297)%233280) / 233280)(7);
+          for (let i = 0; i < 220; i++) {
+            const x = rng()*1500, y = 90 + rng()*820, r = rng()*1.2 + 0.2;
+            starG.append('circle').attr('cx',x).attr('cy',y).attr('r',r)
+              .attr('fill','#ffffff').attr('opacity', 0.15 + rng()*0.55);
+          }
+          for (let i = 0; i < 18; i++) {
+            const x = rng()*1500, y = 90 + rng()*820;
+            starG.append('circle').attr('cx',x).attr('cy',y).attr('r',3)
+              .attr('fill','url(#starGlow)').attr('opacity',0.45);
+          }
+          const cat = {
+            subcomponent: '#9b8cff', equipment: '#2bd3a8', materials: '#f0a23c',
+            eda: '#3aa8ff', substrate: '#c9cbd1', logicfab: '#ec4f8f',
+            memoryfab: '#39c7b7', designer: '#a5e84a'
+          };
+          const catLabel = {
+            subcomponent:'Sub-components', equipment:'Equipment makers',
+            materials:'Materials & chemicals', eda:'EDA & IP',
+            substrate:'Substrates', logicfab:'Logic fabs',
+            memoryfab:'Memory fabs', designer:'Designers / products'
+          };
+          const ticker = {
+            'Toto':'5332', 'Ajinomoto':'', 'NBS Corp':'',
+            'Zeiss SMT':'', 'Trumpf':'', 'Cymer':'',
+            'VAT Group':'VACN', 'Pfeiffer Vacuum':'', 'MKS Instruments':'MKSI',
+            'Brooks Automation':'', 'KLA Corp':'KLAC',
+            'Shin-Etsu':'4063', 'SUMCO':'3436', 'JSR Corp':'', 'Entegris':'ENTG',
+            'Air Liquide/Linde':'AI / LIN',
+            'Synopsys':'SNPS', 'Cadence':'CDNS', 'Arm Holdings':'ARM',
+            'ASML':'ASML', 'Applied Materials':'AMAT', 'Lam Research':'LRCX',
+            'Tokyo Electron':'8035', 'Screen Holdings':'7735',
+            'Ibiden':'4062', 'Unimicron':'3037', 'Shinko Electric':'6967',
+            'TSMC':'TSM', 'Samsung Foundry':'005930', 'GlobalFoundries':'GFS',
+            'Intel Fabs':'INTC', 'Samsung Memory':'005930', 'SK Hynix':'000660',
+            'Micron':'MU', 'Nvidia':'NVDA', 'Apple':'AAPL', 'MediaTek':'2454',
+            'AMD':'AMD', 'Broadcom':'AVGO', 'Qualcomm':'QCOM', 'Intel chips':'INTC'
+          };
+          const nodes = [
+            { name:'Toto',v:0.5,cat:'subcomponent',col:0 },
+            { name:'Ajinomoto',v:1.2,cat:'subcomponent',col:0 },
+            { name:'NBS Corp',v:0.8,cat:'subcomponent',col:0 },
+            { name:'Zeiss SMT',v:5.5,cat:'subcomponent',col:0 },
+            { name:'Trumpf',v:2.0,cat:'subcomponent',col:0 },
+            { name:'Cymer',v:2.0,cat:'subcomponent',col:0 },
+            { name:'VAT Group',v:1.0,cat:'subcomponent',col:0 },
+            { name:'Pfeiffer Vacuum',v:0.8,cat:'subcomponent',col:0 },
+            { name:'MKS Instruments',v:2.5,cat:'subcomponent',col:0 },
+            { name:'Brooks Automation',v:1.0,cat:'subcomponent',col:0 },
+            { name:'KLA Corp',v:11.0,cat:'equipment',col:0 },
+            { name:'Shin-Etsu',v:10.0,cat:'materials',col:0 },
+            { name:'SUMCO',v:3.0,cat:'materials',col:0 },
+            { name:'JSR Corp',v:1.5,cat:'materials',col:0 },
+            { name:'Entegris',v:3.2,cat:'materials',col:0 },
+            { name:'Air Liquide/Linde',v:3.5,cat:'materials',col:0 },
+            { name:'Synopsys',v:7.0,cat:'eda',col:0 },
+            { name:'Cadence',v:5.0,cat:'eda',col:0 },
+            { name:'Arm Holdings',v:3.5,cat:'eda',col:0 },
+            { name:'ASML',v:34.0,cat:'equipment',col:1 },
+            { name:'Applied Materials',v:28.0,cat:'equipment',col:1 },
+            { name:'Lam Research',v:18.0,cat:'equipment',col:1 },
+            { name:'Tokyo Electron',v:17.0,cat:'equipment',col:1 },
+            { name:'Screen Holdings',v:4.0,cat:'equipment',col:1 },
+            { name:'Ibiden',v:5.5,cat:'substrate',col:1 },
+            { name:'Unimicron',v:4.5,cat:'substrate',col:1 },
+            { name:'Shinko Electric',v:2.0,cat:'substrate',col:1 },
+            { name:'TSMC',v:100.0,cat:'logicfab',col:2 },
+            { name:'Samsung Foundry',v:14.0,cat:'logicfab',col:2 },
+            { name:'GlobalFoundries',v:7.5,cat:'logicfab',col:2 },
+            { name:'Intel Fabs',v:10.0,cat:'logicfab',col:2 },
+            { name:'Samsung Memory',v:72.0,cat:'memoryfab',col:2 },
+            { name:'SK Hynix',v:68.0,cat:'memoryfab',col:2 },
+            { name:'Micron',v:37.0,cat:'memoryfab',col:2 },
+            { name:'Nvidia',v:150.0,cat:'designer',col:3 },
+            { name:'Apple',v:25.0,cat:'designer',col:3 },
+            { name:'MediaTek',v:17.0,cat:'designer',col:3 },
+            { name:'AMD',v:25.0,cat:'designer',col:3 },
+            { name:'Broadcom',v:31.0,cat:'designer',col:3 },
+            { name:'Qualcomm',v:35.0,cat:'designer',col:3 },
+            { name:'Intel chips',v:36.0,cat:'designer',col:3 }
+          ];
+          const idx = Object.fromEntries(nodes.map((n,i)=>[n.name,i]));
+          const links = [];
+          const L = (s,t,v)=>links.push({source:idx[s], target:idx[t], value:v});
+
+          L('Zeiss SMT','ASML',5.5); L('Trumpf','ASML',2.0); L('Cymer','ASML',2.0);
+          ['VAT Group','Pfeiffer Vacuum','MKS Instruments','Brooks Automation'].forEach(c=>{
+            const v = nodes[idx[c]].v;
+            L(c,'ASML',v*0.30); L(c,'Applied Materials',v*0.25);
+            L(c,'Lam Research',v*0.20); L(c,'Tokyo Electron',v*0.18);
+            L(c,'Screen Holdings',v*0.07);
+          });
+          L('Toto','Ibiden',0.25); L('Toto','Unimicron',0.15); L('Toto','Shinko Electric',0.10);
+          L('Ajinomoto','Ibiden',0.55); L('Ajinomoto','Unimicron',0.40); L('Ajinomoto','Shinko Electric',0.25);
+          L('NBS Corp','Ibiden',0.35); L('NBS Corp','Unimicron',0.30); L('NBS Corp','Shinko Electric',0.15);
+          L('KLA Corp','TSMC',4.5); L('KLA Corp','Samsung Foundry',1.2);
+          L('KLA Corp','Intel Fabs',1.5); L('KLA Corp','GlobalFoundries',0.6);
+          L('KLA Corp','Samsung Memory',1.6); L('KLA Corp','SK Hynix',1.2); L('KLA Corp','Micron',0.4);
+
+          const matFlow = (m, tot) => {
+            L(m,'TSMC',tot*0.40); L(m,'Samsung Foundry',tot*0.07);
+            L(m,'GlobalFoundries',tot*0.04); L(m,'Intel Fabs',tot*0.07);
+            L(m,'Samsung Memory',tot*0.18); L(m,'SK Hynix',tot*0.16); L(m,'Micron',tot*0.08);
+          };
+          matFlow('Shin-Etsu',10.0); matFlow('SUMCO',3.0); matFlow('JSR Corp',1.5);
+          matFlow('Entegris',3.2); matFlow('Air Liquide/Linde',3.5);
+
+          const edaFlow = (e, tot) => {
+            L(e,'Nvidia',tot*0.28); L(e,'Apple',tot*0.10); L(e,'MediaTek',tot*0.08);
+            L(e,'AMD',tot*0.12); L(e,'Broadcom',tot*0.14); L(e,'Qualcomm',tot*0.15); L(e,'Intel chips',tot*0.13);
+          };
+          edaFlow('Synopsys',7.0); edaFlow('Cadence',5.0); edaFlow('Arm Holdings',3.5);
+
+          const eqFlow = (e, tot, w) => {
+            const fabs = ['TSMC','Samsung Foundry','GlobalFoundries','Intel Fabs','Samsung Memory','SK Hynix','Micron'];
+            fabs.forEach((f,i)=> L(e,f,tot*w[i]));
+          };
+          eqFlow('ASML',34.0,[0.45,0.07,0.04,0.07,0.16,0.15,0.06]);
+          eqFlow('Applied Materials',28.0,[0.34,0.06,0.04,0.06,0.22,0.20,0.08]);
+          eqFlow('Lam Research',18.0,[0.30,0.05,0.03,0.05,0.26,0.22,0.09]);
+          eqFlow('Tokyo Electron',17.0,[0.32,0.06,0.03,0.05,0.24,0.21,0.09]);
+          eqFlow('Screen Holdings',4.0,[0.34,0.06,0.04,0.06,0.22,0.20,0.08]);
+
+          const subFlow = (s, tot) => {
+            L(s,'Nvidia',tot*0.30); L(s,'Apple',tot*0.14); L(s,'MediaTek',tot*0.08);
+            L(s,'AMD',tot*0.14); L(s,'Broadcom',tot*0.12); L(s,'Qualcomm',tot*0.12); L(s,'Intel chips',tot*0.10);
+          };
+          subFlow('Ibiden',5.5); subFlow('Unimicron',4.5); subFlow('Shinko Electric',2.0);
+
+          L('TSMC','Nvidia',32); L('TSMC','Apple',18); L('TSMC','AMD',14);
+          L('TSMC','MediaTek',11); L('TSMC','Broadcom',13); L('TSMC','Qualcomm',12);
+          L('Samsung Foundry','Qualcomm',6); L('Samsung Foundry','Nvidia',4);
+          L('Samsung Foundry','Broadcom',2); L('Samsung Foundry','AMD',2);
+          L('GlobalFoundries','AMD',2.5); L('GlobalFoundries','Qualcomm',2);
+          L('GlobalFoundries','Broadcom',2); L('GlobalFoundries','MediaTek',1);
+          L('Intel Fabs','Intel chips',10);
+
+          const memFlow = (m, tot) => {
+            L(m,'Nvidia',tot*0.30); L(m,'Apple',tot*0.10); L(m,'MediaTek',tot*0.05);
+            L(m,'AMD',tot*0.07); L(m,'Broadcom',tot*0.06); L(m,'Qualcomm',tot*0.08); L(m,'Intel chips',tot*0.10);
+          };
+          memFlow('Samsung Memory',72); memFlow('SK Hynix',68); memFlow('Micron',37);
+
+          const sankey = d3.sankey()
+            .nodeId(d => d.index)
+            .nodeAlign(d3.sankeyJustify)
+            .nodeWidth(14)
+            .nodePadding(7)
+            .extent([[150, 95], [1340, 905]]);
+
+          const graph = sankey({
+            nodes: nodes.map((d,i)=>Object.assign({}, d, {index:i})),
+            links: links.map(l=>Object.assign({}, l))
+          });
+
+          const linkG = svg.select('#links');
+          linkG.selectAll('path')
+            .data(graph.links)
+            .join('path')
+            .attr('d', d3.sankeyLinkHorizontal())
+            .attr('fill','none')
+            .attr('stroke', d => cat[d.source.cat])
+            .attr('stroke-opacity', 0.32)
+            .attr('stroke-width', d => Math.max(0.6, d.width));
+
+          const nodeG = svg.select('#nodes');
+          const g = nodeG.selectAll('g.node').data(graph.nodes).join('g').attr('class','node');
+          g.append('rect')
+            .attr('x', d => d.x0).attr('y', d => d.y0)
+            .attr('height', d => Math.max(2, d.y1 - d.y0))
+            .attr('width', d => d.x1 - d.x0)
+            .attr('fill', d => cat[d.cat]).attr('stroke', d => cat[d.cat]).attr('opacity', 0.95);
+          g.append('text')
+            .attr('x', d => d.col === 3 ? d.x0 - 8 : d.x1 + 8)
+            .attr('y', d => (d.y0 + d.y1)/2)
+            .attr('dy','0.35em')
+            .attr('text-anchor', d => d.col === 3 ? 'end' : 'start')
+            .attr('fill','#e8ecf5').attr('font-size',12)
+            .style('font-family',"'JetBrains Mono','Fira Mono','Courier New',monospace")
+            .text(d => { const t = ticker[d.name]; return `${d.name}${t ? ' · ' + t : ''} ($${d.v.toFixed(1)}B)`; });
+
+          const legend = svg.select('#legend');
+          const order = ['subcomponent','equipment','materials','eda','substrate','logicfab','memoryfab','designer'];
+          let lx = 0;
+          order.forEach(k => {
+            const grp = legend.append('g').attr('transform',`translate(${lx},0)`);
+            grp.append('rect').attr('width',14).attr('height',14).attr('fill',cat[k]).attr('y',-11);
+            grp.append('text').attr('x',20).attr('y',0).attr('fill','#bcc4d8').attr('font-size',12)
+              .style('font-family',"'JetBrains Mono','Fira Mono','Courier New',monospace")
+              .text(catLabel[k]);
+            lx += 22 + catLabel[k].length*7.2;
+          });
+
+          g.on('mouseover', function(_,d){
+            linkG.selectAll('path').attr('stroke-opacity', l => (l.source===d || l.target===d) ? 0.75 : 0.08);
+          }).on('mouseout', function(){
+            linkG.selectAll('path').attr('stroke-opacity', 0.32);
+          });
+
+          // Centre column headers above their actual node groups
+          const colBounds = {};
+          graph.nodes.forEach(n => {
+            if (!colBounds[n.col]) colBounds[n.col] = { min: Infinity, max: -Infinity };
+            colBounds[n.col].min = Math.min(colBounds[n.col].min, n.x0);
+            colBounds[n.col].max = Math.max(colBounds[n.col].max, n.x1);
+          });
+          const hdrMap = {
+            'Component Tools': 0, 'Advanced Tools': 1,
+            'Fabricators': 2, 'Chip Designers': 3
+          };
+          svg.selectAll('text').each(function() {
+            const el = d3.select(this);
+            const txt = el.text().trim();
+            if (hdrMap[txt] !== undefined) {
+              const c = hdrMap[txt];
+              const cx = (colBounds[c].min + colBounds[c].max) / 2;
+              el.attr('x', cx).attr('text-anchor', 'middle');
+            }
+          });
+        }
+        if (window.d3 && window.d3.sankey) { runViz(); }
+        else if (window.d3) { loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js', runViz); }
+        else { loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js', function(){ loadScript('https://cdnjs.cloudflare.com/ajax/libs/d3-sankey/0.12.3/d3-sankey.min.js', runViz); }); }
+      }
+    }},
   ],
 
   companies: [
@@ -5307,6 +5565,7 @@ const INDUSTRY_COLORS = {
   "Electronic Instruments":   "#00acc1",   // teal/cyan    — precision instruments & industrial tech
   "Enterprise Networking":    "#5c6bc0",   // indigo       — networking, cybersecurity, cloud infrastructure
   "Nuclear Energy":           "#42a5f5",   // sky blue     — Cherenkov radiation / atomic energy
+  "Semiconductors":           "#9b8cff",   // purple       — semiconductor supply chain
 };
 const DEFAULT_DOT_COLOR = "#c62828"; // fallback red for industries without a colour entry
 
